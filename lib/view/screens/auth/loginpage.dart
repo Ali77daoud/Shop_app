@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
                   width: double.infinity,
-                  height: 350,
+                  height: 380,
                   decoration: BoxDecoration(
                     color: whiteColor,
                     borderRadius: BorderRadius.circular(30),
@@ -193,13 +193,88 @@ class LoginPage extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            const Text(
+                                      'أو تسجيل باستخدام',
+                                      style: TextStyle(
+                                      color: greyColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.normal
+                                    ),
+                                  ),
+                            const SizedBox(height:20,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 45,
+                                  height: 45,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(90),
+                                    color: mainColor
+                                  ),
+                                  child: const Center(
+                                    child:  Text(
+                                        'f',
+                                        style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width:20,),
+                                Container(
+                                  width: 45,
+                                  height: 45,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(90),
+                                    color: mainColor
+                                  ),
+                                  child:  const Center(
+                                    child:  Text(
+                                        'G',
+                                        style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                             ],
                           ),
                         ),
                       ),
                     ),
                 ),
-              )
+              ),
+              const SizedBox(height:30,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 60),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: buttomUtils(
+                      ontab: (){}, 
+                      childtext: const Text('إنشاء حساب',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: blackColor,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ), 
+                      maincolor: whiteColor, 
+                      radius: 18, 
+                      leftpadding: 0, 
+                      rightpadding:0, 
+                      toppadding: 5, 
+                      buttompadding: 5,
+                      c: mainColor
+                      ),
+                ),
+              ),
             ],
             ),
           ),
