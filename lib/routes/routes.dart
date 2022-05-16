@@ -7,6 +7,7 @@ class Routes{
   static const boardingScreen = '/boardingScreen';
   static const choosePage = '/choosePage';
   static const loginPage = '/loginPage';
+  // static const signupPage = '/signupPage';
 }
 
 class AppRoutes{
@@ -24,5 +25,9 @@ class AppRoutes{
       name: Routes.loginPage, 
       page: ()=>   LoginPage(),
       ),
+      // GetPage(
+      // name: Routes.loginPage, 
+      // page: ()=>   LoginPage(),
+      // ),
   ];
 }

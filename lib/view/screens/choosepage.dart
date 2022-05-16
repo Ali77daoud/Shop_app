@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 
@@ -58,7 +60,9 @@ class ChoosePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         buttomUtils(
-                          ontab: (){}, 
+                          ontab: (){
+                            Get.toNamed(Routes.loginPage);
+                          }, 
                           childtext: const Text('مشتري',
                                     style: TextStyle(
                                       fontSize: 18,
@@ -76,7 +80,9 @@ class ChoosePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 10,),
                           buttomUtils(
-                          ontab: (){}, 
+                          ontab: (){
+                            Get.toNamed(Routes.loginPage);
+                          }, 
                           childtext: const Text('بائع',
                                     style: TextStyle(
                                       fontSize: 18,

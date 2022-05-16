@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shop_app/model/boarding_model.dart';
-import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -12,6 +10,7 @@ Widget boarderItems(
   var context,
   var boarderController,
   int length,
+  var ontap
   ) => Stack(
     children: [
       Container(
@@ -94,15 +93,13 @@ Widget boarderItems(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.3 ),
         child: buttomUtils(
-          ontab: (){
-            
-          }, 
+          ontab: ontap,
           childtext: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.arrow_back),
-              Text('فلنبدأ ',
-                        style: TextStyle(
+            children:  [
+              const Icon(Icons.arrow_back),
+              Text(model.buttonName,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold
                         ),

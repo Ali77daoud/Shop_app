@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shop_app/model/boarding_model.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/boarding_items.dart';
 
@@ -17,13 +19,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List <OnBoardingModel> boardingItems=[
     OnBoardingModel(
       //
-      image: 'assets/images/6.jpg',body: 'مرحباً بك',title: 'متجر إلكتروني'
+      image: 'assets/images/1.jpg',body: 'مرحباً بك',title: 'متجر إلكتروني',buttonName: 'التالي'
     ),
     OnBoardingModel(
-        image: 'assets/images/background2.jpg',body: '',title: 'متجر إلكتروني'
+        image: 'assets/images/2.jpg',body: '',title: 'متجر إلكتروني',buttonName: 'التالي'
     ),
     OnBoardingModel(
-        image: 'assets/images/7.jpg',body:  ' ',title: 'متجر إلكتروني'
+        image: 'assets/images/3.jpg',body:  ' ',title: 'متجر إلكتروني',buttonName: 'فلنبدأ'
     ),
   ];
 
@@ -31,7 +33,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
 
   void skipBoarding(){
-    
+    Get.offNamed(Routes.choosePage);
   }
 
   @override
@@ -69,7 +71,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           boardingItems[index],
                           context,
                           boarderController,
-                          boardingItems.length,                        ),
+                          boardingItems.length,
+                          (){
+                              if(isLast){
+                                skipBoarding();
+                              }else{
+                                boarderController.nextPage(duration:Duration(milliseconds: 700) , curve: Curves.fastLinearToSlowEaseIn);
+                              }
+                          }                        
+                          ),
                         itemCount: boardingItems.length,
                       ),
                     ),
