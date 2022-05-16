@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.boardingScreen,
+      initialRoute: Routes.homePage,
       getPages: AppRoutes.routes,
 
     );

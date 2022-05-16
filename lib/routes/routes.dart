@@ -4,6 +4,7 @@ import 'package:shop_app/view/screens/auth/loginpage.dart';
 import 'package:shop_app/view/screens/auth/signuppage.dart';
 import 'package:shop_app/view/screens/auth/verificationpage.dart';
 import 'package:shop_app/view/screens/choosepage.dart';
+import 'package:shop_app/view/screens/homepage.dart';
 import 'package:shop_app/view/screens/on_boarding_screen.dart';
 
 class Routes{
@@ -13,6 +14,7 @@ class Routes{
   static const loginOTPPage = '/loginOTPPage';
   static const veriPage = '/veriPage';
   static const signupPage = '/signupPage';
+  static const homePage = '/homePage';
 }
 
 class AppRoutes{
@@ -41,6 +43,10 @@ class AppRoutes{
       GetPage(
       name: Routes.signupPage, 
       page: ()=>   const SignupPage(),
+      ),
+      GetPage(
+      name: Routes.homePage, 
+      page: ()=>   HomePage(),
       ),
   ];
 }

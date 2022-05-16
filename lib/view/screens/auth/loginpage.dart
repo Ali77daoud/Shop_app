@@ -143,7 +143,7 @@ class LoginPage extends StatelessWidget {
                               width: double.infinity,
                               child: buttomUtils(
                                     ontab: (){
-                                      
+                                      Get.toNamed(Routes.homePage);
                                       },
 
                                     childtext: const Text('تسجيل الدخول'),
