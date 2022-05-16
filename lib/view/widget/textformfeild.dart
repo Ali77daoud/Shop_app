@@ -40,13 +40,13 @@ Widget defualTextFormFeild({
     hintText: hint,
     hintStyle: TextStyle(
       color: Colors.grey.shade400,
-      fontSize: 13,
+      fontSize: 15,
     ),
     filled: true,
     fillColor: backgrouncolor,
 
     labelText: label,
-    labelStyle: TextStyle(color:labelcolor,fontSize: 15),
+    labelStyle: TextStyle(color:labelcolor,fontSize: 17),
     prefixIcon: prifixicon,
     suffixIcon: sufixicon,
     enabledBorder:  OutlineInputBorder(

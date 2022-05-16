@@ -1,3 +1,5 @@
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/routes/routes.dart';
@@ -6,14 +8,26 @@ import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 import 'package:shop_app/view/widget/textformfeild.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({ Key? key }) : super(key: key);
+class LoginOtpPage extends StatefulWidget {
+  LoginOtpPage({ Key? key }) : super(key: key);
+
+  @override
+  State<LoginOtpPage> createState() => _LoginOtpPageState();
+}
+
+class _LoginOtpPageState extends State<LoginOtpPage> {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController emailkey = TextEditingController();
-  final TextEditingController passwordkey = TextEditingController();
+
+  final TextEditingController phonekey = TextEditingController();
+
+  String countryName = 'السعودية';
+
+  String countryCode = '+966';
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -41,7 +55,7 @@ class LoginPage extends StatelessWidget {
                 ),
               SizedBox(height: h*0.15,),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 10),
                 child: Container(
                   width: double.infinity,
                   height: 400,
@@ -74,28 +88,81 @@ class LoginPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold
                               ),
                             ),
-                            const SizedBox(height:10,),
+                            SizedBox(height:h*0.012,),
+                            //////////////////////////////
+                            Container(
+                              height:47,
+                              width: double.infinity,
+                              decoration:BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(countryCode,
+                                    style: const TextStyle(
+                                    color: blackColor,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal
+                                ),
+                                    ),
+                                  ),
+                                  Text(countryName,
+                                  style: const TextStyle(
+                                  color: blackColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal
+                                ),
+                                  ),
+                                  Directionality(
+                                    textDirection: TextDirection.rtl,
+                                    child: CountryCodePicker(
+                                      initialSelection: 'SA',
+                                      padding: const EdgeInsets.only(left: 0),
+                                      flagWidth: 27,
+                                      onChanged:(value) {
+                                        setState(() {
+                                          countryName=value.name.toString();
+                                          countryCode=value.dialCode.toString();
+                                          print(countryCode);
+                                        });
+                                     
+                                      }, 
+                                      favorite: const ['+996','SA'],
+                                      showCountryOnly: false,
+                                      showFlagMain: true,
+                                      showDropDownButton: true,
+                                      hideMainText: true,
+                                      showOnlyCountryWhenClosed: false,
+                                      alignLeft: true,
+                                    ),
+                                  ),
+                                  
+                                ],
+                              ),
+                            ),
+                            SizedBox(height:h*0.02,),
                             /////////////////////////////
                             Directionality(
                               textDirection: TextDirection.rtl,
                               child: defualTextFormFeild(
-                                controller: emailkey, 
-                                inputtype: TextInputType.visiblePassword, 
+                                controller: phonekey, 
+                                inputtype: TextInputType.phone, 
                                 maxlines: 1, 
                                 ifobscure: false, 
                                 validate: (value){
                                   if(value.isEmpty){
-                                    return 'أدخل البريد من فضلك';
-                                  }
-                                  else if(!RegExp(validationEmail).hasMatch(value)){
-                                    return 'أدخل بريد صحيح من فضلك';
+                                    return 'أدخل الرقم من فضلك';
                                   }
                                 },  
-                                label:'البريد الإلكتروني',
+                                label:'رقم الهاتف',
                                 hint: '', 
                                 labelcolor: greyColor, 
                                 inputtextcolor: blackColor, 
-                                prifixicon:const Icon(Icons.person_pin,color: greyColor, ),
+                                prifixicon:const Icon(Icons.phone,color: greyColor, ),
                                 sufixicon: Container(width: 0,),
                                 ontab: (){},  
                                 cursorColor:mainColor, 
@@ -106,47 +173,16 @@ class LoginPage extends StatelessWidget {
                                 padding:  const EdgeInsets.only(top: 10),
                                 ),
                             ),
-                            SizedBox(height:h*0.02,),
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: defualTextFormFeild(
-                                controller: passwordkey, 
-                                inputtype: TextInputType.emailAddress, 
-                                maxlines: 1, 
-                                ifobscure: false, 
-                                validate: (value){
-                                  if(value.isEmpty){
-                                    return 'أدخل كلمة المرور من فضلك';
-                                  }
-                                  else if(value.length < 8){
-                                    return 'أدخل كلمة مرور من ثمانية حرف';
-                                  }
-                                },  
-                                label:'كلمة السر',
-                                hint: '', 
-                                labelcolor: greyColor, 
-                                inputtextcolor: blackColor, 
-                                prifixicon:const Icon(Icons.lock,color: greyColor, ),
-                                sufixicon: Container(width: 0,),
-                                ontab: (){},  
-                                cursorColor:mainColor, 
-                                backgrouncolor: whiteColor,
-                                borderraduis: 20,
-                                bordercolor: Colors.grey.shade300,
-                                focusbordercolor: mainColor,
-                                padding:  const EdgeInsets.only(top: 10),
-                                ),
-                            ),
-                            /////////////////////
-                            SizedBox(height:h*0.02,),
+                            
+                            SizedBox(height:h*0.03,),
                             SizedBox(
-                              width: double.infinity,
+                              width: w*0.3,
                               child: buttomUtils(
                                     ontab: (){
-                                      
+                                      Get.toNamed(Routes.veriPage);
                                       },
 
-                                    childtext: const Text('تسجيل الدخول'),
+                                    childtext: const Text('التالي'),
                                     maincolor: mainColor,
                                     radius: 25, 
                                     leftpadding: 0, 
@@ -162,29 +198,12 @@ class LoginPage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                      ' هل نسيت كلمة السر؟',
-                                      style: TextStyle(
-                                      color: blackColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal
-                                    ),
-                                      ),
-                                    
-                                  const Text(
-                                      '|',
-                                      style: TextStyle(
-                                      color: blackColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal
-                                    ),
-                                      ),
                                   TextButton(
                                     onPressed: (){
-                                      Get.toNamed(Routes.loginOTPPage);
+                                      Get.toNamed(Routes.loginPage);
                                     },
                                     child: const Text(
-                                      'تسجيل OTP ',
+                                      'تسجيل الدخول بالبريد الإلكتروني',
                                       style: TextStyle(
                                       color: blackColor,
                                       fontSize: 15,
@@ -256,30 +275,6 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                ),
-              ),
-              const SizedBox(height:30,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: buttomUtils(
-                      ontab: (){}, 
-                      childtext: const Text('إنشاء حساب',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: blackColor,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              ), 
-                      maincolor: whiteColor, 
-                      radius: 18, 
-                      leftpadding: 0, 
-                      rightpadding:0, 
-                      toppadding: 5, 
-                      buttompadding: 5,
-                      c: mainColor
-                      ),
                 ),
               ),
             ],
