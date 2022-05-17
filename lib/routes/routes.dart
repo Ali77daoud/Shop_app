@@ -42,7 +42,7 @@ class AppRoutes{
       ),
       GetPage(
       name: Routes.signupPage, 
-      page: ()=>   const SignupPage(),
+      page: ()=>   SignupPage(),
       ),
       GetPage(
       name: Routes.homePage, 

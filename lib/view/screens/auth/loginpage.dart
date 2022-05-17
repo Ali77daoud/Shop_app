@@ -264,7 +264,9 @@ class LoginPage extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: buttomUtils(
-                      ontab: (){}, 
+                      ontab: (){
+                        Get.toNamed(Routes.signupPage);
+                      }, 
                       childtext: const Text('إنشاء حساب',
                                 style: TextStyle(
                                   fontSize: 18,

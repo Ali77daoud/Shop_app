@@ -19,13 +19,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List <OnBoardingModel> boardingItems=[
     OnBoardingModel(
       //
-      image: 'assets/images/1.jpg',body: 'مرحباً بك',title: 'متجر إلكتروني',buttonName: 'التالي'
+      image: 'assets/images/1.jpg',body: 'مرحباً بك',title: 'متجر إلكتروني',buttonName: 'فلنبدأ'
     ),
     OnBoardingModel(
-        image: 'assets/images/2.jpg',body: '',title: 'متجر إلكتروني',buttonName: 'التالي'
+        image: 'assets/images/2.jpg',body: 'مرحباً بك',title: 'متجر إلكتروني',buttonName: 'فلنبدأ'
     ),
     OnBoardingModel(
-        image: 'assets/images/3.jpg',body:  ' ',title: 'متجر إلكتروني',buttonName: 'فلنبدأ'
+        image: 'assets/images/3.jpg',body:  'مرحباً بك',title: 'متجر إلكتروني',buttonName: 'فلنبدأ'
     ),
   ];
 
@@ -73,11 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           boarderController,
                           boardingItems.length,
                           (){
-                              if(isLast){
-                                skipBoarding();
-                              }else{
-                                boarderController.nextPage(duration:Duration(milliseconds: 700) , curve: Curves.fastLinearToSlowEaseIn);
-                              }
+                              skipBoarding();
                           }                        
                           ),
                         itemCount: boardingItems.length,

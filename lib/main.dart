@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homePage,
+      // textDirection: TextDirection.rtl,
+      initialRoute: Routes.signupPage,
       getPages: AppRoutes.routes,
 
     );

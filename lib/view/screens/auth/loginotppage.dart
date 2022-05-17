@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/routes/routes.dart';
-import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 import 'package:shop_app/view/widget/textformfeild.dart';

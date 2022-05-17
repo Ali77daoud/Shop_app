@@ -17,13 +17,6 @@ class _VeriPageState extends State<VeriPage> {
 
   final TextEditingController _boxController4 = TextEditingController();
 
-  late List<TextEditingController> controllersList = [
-    _boxController1,
-    _boxController2,
-    _boxController3,
-    _boxController4,
-  ];
-
   late FocusNode _selectedFocus;
 
   final _boxFocus1 = FocusNode();
@@ -34,13 +27,26 @@ class _VeriPageState extends State<VeriPage> {
 
   final _boxFocus4 = FocusNode();
 
-  late List<FocusNode> focusNodes = [
+  late List<FocusNode> focusNodes;
+  late List<TextEditingController> controllersList;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controllersList = [
+    _boxController1,
+    _boxController2,
+    _boxController3,
+    _boxController4,
+  ];
+
+  focusNodes = [
         _boxFocus1,
         _boxFocus2,
         _boxFocus3,
         _boxFocus4,
       ];
-
+  }
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
