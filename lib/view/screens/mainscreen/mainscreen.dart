@@ -37,7 +37,6 @@ class MainScreen extends StatelessWidget {
                       ],
                     ),
             ),
-
             centerTitle: false,
             titleSpacing: 0.0, 
             actions:  [
@@ -68,7 +67,7 @@ class MainScreen extends StatelessWidget {
                       onTap: (index){
                         mainController.changeScreen(index);
                       },
-                      type: BottomNavigationBarType.shifting,
+                      type: BottomNavigationBarType.fixed,
                       fixedColor: Get.isDarkMode?blackColor:mainColor,
                       unselectedItemColor: Colors.grey,
             

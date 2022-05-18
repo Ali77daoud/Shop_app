@@ -61,7 +61,7 @@ class ChoosePage extends StatelessWidget {
                       children: [
                         buttomUtils(
                           ontab: (){
-                            Get.toNamed(Routes.loginPage);
+                            Get.offNamed(Routes.loginPage);
                           }, 
                           childtext: const Text('مشتري',
                                     style: TextStyle(
@@ -81,7 +81,7 @@ class ChoosePage extends StatelessWidget {
                           const SizedBox(height: 10,),
                           buttomUtils(
                           ontab: (){
-                            Get.toNamed(Routes.loginPage);
+                            Get.offNamed(Routes.loginPage);
                           }, 
                           childtext: const Text('بائع',
                                     style: TextStyle(

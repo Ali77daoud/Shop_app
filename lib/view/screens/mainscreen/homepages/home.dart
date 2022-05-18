@@ -1,23 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:shop_app/routes/routes.dart';
+import 'package:shop_app/logic/controller/navcontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/icon_container.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+class Home extends StatelessWidget {
+  Home({ Key? key }) : super(key: key);
 
-class HomePage extends StatefulWidget {
-  HomePage({ Key? key }) : super(key: key);
+  final navController = Get.find<NavController>();
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   CarouselController carouselController=CarouselController();
-  int currentPage = 0;
+  
   List<String> imageList = [
     'assets/images/1.jpg',
     'assets/images/2.jpg',
@@ -27,15 +22,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    return 
-      SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
               height: h*0.35,
               child: Stack(
                 children: [
-                  CarouselSlider.builder(
+                  GetBuilder<NavController>(
+                    builder: (_){
+                      return CarouselSlider.builder(
                     itemCount: 3, 
                     carouselController: carouselController,
                     options: CarouselOptions(
@@ -46,9 +42,7 @@ class _HomePageState extends State<HomePage> {
                       autoPlayInterval: const Duration(seconds: 2),
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
-                        setState(() {
-                          currentPage=index;
-                        });
+                        navController.carouselChande(index);
                       },
                     ),
                     itemBuilder: (context, index, realIndex){
@@ -62,22 +56,27 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }, 
+                    );
+                    }
                     ),
+                  
                   Positioned(
                     top: 20,
                     left: 20,
-                    child: AnimatedSmoothIndicator(
-                      activeIndex: currentPage, 
-                      count: 3,
-                      effect:  const SlideEffect(
-                          dotColor: whiteColor,
-                          activeDotColor: mainColor,
-                          dotHeight: 10,
-                          dotWidth: 10,
-                          spacing: 5, 
-                          paintStyle: PaintingStyle.stroke,
-                          ),
+                    child: 
+                      AnimatedSmoothIndicator(
+                          activeIndex: navController.currentPage, 
+                          count: 3,
+                          effect:  const SlideEffect(
+                              dotColor: whiteColor,
+                              activeDotColor: mainColor,
+                              dotHeight: 10,
+                              dotWidth: 10,
+                              spacing: 5, 
+                              paintStyle: PaintingStyle.stroke,
+                            ),
                       ),
+                    
                     ),
                 ],
               ),
@@ -114,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   InkWell(
                     onTap: (){
-                      Get.toNamed(Routes.categoryPage);
+                      navController.changePage(1);
                     },
                     child: iconContainer(
                       icon: Image.asset('assets/images/shopping-bags.png'),
@@ -126,32 +125,35 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-              child: SizedBox(
-                  width: double.infinity,
-                  height: 150,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 100,
-                        height:150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: AssetImage(imageList[index]),
-                            fit: BoxFit.cover,
-                            )
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context,index){
-                      return const SizedBox(width: 10,);
-                    },
-                    itemCount: imageList.length,
-                    ),
-                ),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                child: SizedBox(
+                    width: double.infinity,
+                    height: 150,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: 100,
+                          height:150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage(imageList[index]),
+                              fit: BoxFit.cover,
+                              )
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context,index){
+                        return const SizedBox(width: 10,);
+                      },
+                      itemCount: imageList.length,
+                      ),
+                  ),
+              ),
             ),
             const Text('لماذا يجب عليك اختيارنا؟',
                   style: TextStyle(
@@ -223,6 +225,5 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       );
-
   }
 }

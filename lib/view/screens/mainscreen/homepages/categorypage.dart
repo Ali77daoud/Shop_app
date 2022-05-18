@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/mainscreen_controller.dart';
+import 'package:shop_app/logic/controller/navcontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 
 class CategoryPage extends StatelessWidget {
   CategoryPage({ Key? key }) : super(key: key);
-  final mainController = Get.put(MainController());
+
+  final navController = Get.find<NavController>();
   List<String> categoryList=[
     'قمصان',
     'فساتين',
@@ -15,45 +16,8 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: whiteColor,
-          title: Transform(
-            transform:  Matrix4.translationValues(5.0, 0.0, 0.0),
-            child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(Icons.shopping_cart_rounded,size: 35,color:mainColor,),
-                        SizedBox(width: 10,),
-                        Text('Outletship',
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          ),
-                        )
-                       
-                    ],
-                  ),
-          ),
-
-          centerTitle: false,
-          titleSpacing: 0.0, 
-          actions:  [
-            IconButton(
-              onPressed:(){} ,
-              icon: const Icon( Icons.search,size: 25,color:blackColor,),
-              ),
-            const SizedBox(width: 5,),
-            const Padding(
-              padding: EdgeInsets.only(right: 5),
-              child: Icon(Icons.menu,size: 25,color:blackColor,),
-            ),
-          ],  
-          elevation: 1,
-        ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 40),
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -61,15 +25,20 @@ class CategoryPage extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text('الجديد في',
+                  children:[
+                    const Text('الجديد في',
                       style: TextStyle(
                         color: blackColor,
                         fontSize: 18,
                         fontWeight: FontWeight.bold
                       ),
                     ),
-                    Icon(Icons.menu)
+                    IconButton(
+                      onPressed: (){
+                        navController.changePage(0);
+                      }, 
+                      icon: const Icon(Icons.arrow_forward_rounded)
+                      ),
                   ],
                 ),
               ),
@@ -109,21 +78,21 @@ class CategoryPage extends StatelessWidget {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return GetBuilder<MainController>(
+                        return GetBuilder<NavController>(
                           builder:(_){
                             return SizedBox(
                             width: 100,
                             height:30,
                             child: InkWell(
                               onTap: (){
-                                mainController.changeColor(index);
+                                navController.changeCategoryColor(index);
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(categoryList[index],
                                     style: TextStyle(
-                                    color: mainController.selectedIndex == index?
+                                    color: navController.selectedIndex == index?
                                             blackColor:greyColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold
@@ -131,7 +100,7 @@ class CategoryPage extends StatelessWidget {
                                   ),
                                   Text('(12)',
                                     style: TextStyle(
-                                    color: mainController.selectedIndex == index?
+                                    color: navController.selectedIndex == index?
                                             blackColor:greyColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold
@@ -154,35 +123,39 @@ class CategoryPage extends StatelessWidget {
                 ),
               ),
               ///////////////////////////
-              SizedBox(
-                height: h*0.65 ,
-                width: double.infinity,
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        childAspectRatio: 0.75,
-                        mainAxisSpacing: 9.0,
-                        crossAxisSpacing: 6.0,
-                        maxCrossAxisExtent: 250,
-                      ), 
-                  itemBuilder: (context,index){
-                    return homeCard(
-                      elevation: 5,
-                      color: whiteColor, 
-                      radius: 10, 
-                      centertext:'قمصان', 
-                      img: 'assets/images/1.jpg', 
-                      price1: 30,
-                      price2: 20,
-                      );
-                  },
-                  itemCount: 4,
-                  ),
+              InkWell(
+                onTap: (){
+                  navController.changePage(2);
+                },
+                child: SizedBox(
+                  height: h*0.65 ,
+                  width: double.infinity,
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          childAspectRatio: 0.75,
+                          mainAxisSpacing: 9.0,
+                          crossAxisSpacing: 6.0,
+                          maxCrossAxisExtent: 250,
+                        ), 
+                    itemBuilder: (context,index){
+                      return homeCard(
+                        elevation: 5,
+                        color: whiteColor, 
+                        radius: 10, 
+                        centertext:'قمصان', 
+                        img: 'assets/images/1.jpg', 
+                        price1: 30,
+                        price2: 20,
+                        );
+                    },
+                    itemCount: 4,
+                    ),
+                ),
               ),
             ],
           ),
         ),
-      ),
     );
   }
 }

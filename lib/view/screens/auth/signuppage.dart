@@ -288,7 +288,7 @@ class SignupPage extends StatelessWidget {
                                 width: double.infinity,
                                 child: buttomUtils(
                                       ontab: (){
-                                        // Get.toNamed(Routes.homePage);
+                                        Get.offNamed(Routes.mainScreen);
                                         },
 
                                       childtext: const Text('إنشاء حساب'),
