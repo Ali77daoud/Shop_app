@@ -50,22 +50,6 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs {
-        debug {
-            v1SigningEnabled true
-            v2SigningEnabled true
-
-            // Add debug keystore credentials here
-        }
-
-        release {
-            v1SigningEnabled true
-            v2SigningEnabled true
-
-            // Add release keystore credentials here
-        }
-    }
-
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
