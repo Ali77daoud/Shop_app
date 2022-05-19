@@ -161,51 +161,54 @@ class _VeriPageState extends State<VeriPage> {
                       ),
                     ),
                 SizedBox(height: h*0.23,), 
-                Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              4,
-              (index) => Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 25,
-                ),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: SizedBox(
-                  width: 15,
-                  height: 25,
-                  child: TextField(
-                    controller: controllersList[index],
-                    focusNode: focusNodes[index],
-                    keyboardType: TextInputType.number,
-                    cursorColor: mainColor,
-                    decoration: const InputDecoration(
-                      filled: false,
-                      enabledBorder: UnderlineInputBorder(      
-                      borderSide: BorderSide(color: blackColor),   
-                    ),  
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: blackColor),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                              4,
+                              (index) => Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 25,
+                  ),
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SizedBox(
+                    width: 15,
+                    height: 25,
+                    child: TextField(
+                      controller: controllersList[index],
+                      focusNode: focusNodes[index],
+                      keyboardType: TextInputType.number,
+                      cursorColor: mainColor,
+                      decoration: const InputDecoration(
+                        filled: false,
+                        enabledBorder: UnderlineInputBorder(      
+                        borderSide: BorderSide(color: blackColor),   
+                      ),  
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: blackColor),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: blackColor),
+                      ),
                     ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: blackColor),
+                      autofocus: true,
+                      onChanged: (val) {
+                        _selectedFocus = focusNodes[index + 1];
+                        FocusScope.of(context).requestFocus(_selectedFocus);
+                      },
+                  
                     ),
                   ),
-                    autofocus: true,
-                    onChanged: (val) {
-                      _selectedFocus = focusNodes[index + 1];
-                      FocusScope.of(context).requestFocus(_selectedFocus);
-                    },
-                
-                  ),
+                              ),
+                            ),
+                            ),
                 ),
-              ),
-            ),
-            ),
               ],
             ),
           ),

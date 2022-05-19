@@ -4,6 +4,7 @@ class NavController extends GetxController{
   int i = 0;
   int currentPage1 = 0;
   int currentPage2 = 0;
+  int currentPage3 = 0;
   int selectedIndex = 0;
   int selectedColor = 0;
   int selectedSize = 0;
@@ -20,6 +21,11 @@ class NavController extends GetxController{
 
   void carouselChange2(int index){
     currentPage2=index;
+    update();
+  }
+
+  void carouselChange3(int index){
+    currentPage3=index;
     update();
   }
 

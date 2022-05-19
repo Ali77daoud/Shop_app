@@ -92,8 +92,8 @@ class ChoosePage extends StatelessWidget {
                                   ), 
                           maincolor: whiteColor, 
                           radius: 20, 
-                          leftpadding: 35, 
-                          rightpadding:35, 
+                          leftpadding: 45, 
+                          rightpadding:45, 
                           toppadding: 5, 
                           buttompadding: 5,
                           c: mainColor

@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
 
   final navController = Get.find<NavController>();
   CarouselController carouselController=CarouselController();
+  CarouselController carouselController2=CarouselController();
   
   List<String> imageList = [
     'assets/images/1.jpg',
@@ -218,9 +219,70 @@ class Home extends StatelessWidget {
                     h: 20,
                     ),
                   ),
+                  
                 ],
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                children: [
+                  GetBuilder<NavController>(
+                      builder: (_){
+                        return CarouselSlider.builder(
+                            itemCount: 3, 
+                            carouselController: carouselController2,
+                            options: CarouselOptions(
+                              initialPage: navController.currentPage1 ,
+                              height: 150,
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: false,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              viewportFraction: 1,
+                              onPageChanged: (index, reason) {
+                                navController.carouselChange3(index);
+                              },
+                            ),
+                            itemBuilder: (context, index, realIndex){
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0),
+                                  image: const DecorationImage(
+                                    image: AssetImage('assets/images/2.jpg'),
+                                    fit: BoxFit.cover
+                                    ),
+                                ),
+                              );
+                            }, 
+                      );
+                      }
+                  ),
+                  const SizedBox(height: 15,),
+                  AnimatedSmoothIndicator(
+                      activeIndex:navController.currentPage3, 
+                      count: 3,
+                      effect: const ExpandingDotsEffect(
+                        expansionFactor: 3,
+                         dotColor: greyColor,
+                         activeDotColor: darkBlueColor,
+                          dotHeight: 10,
+                          dotWidth: 10,
+                          spacing: 5, 
+                          paintStyle: PaintingStyle.fill,
+                      )  
+                ),
+                      
+                ],
+              ),
+            ),
+           const Text('مختارة فقط لأجلك',
+              style: TextStyle(
+                color: greyColor,
+                fontSize: 14,
+                fontWeight: FontWeight.bold
+              ),
+            ),
           ],
         ),
       );
