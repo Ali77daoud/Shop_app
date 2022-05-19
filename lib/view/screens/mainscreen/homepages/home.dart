@@ -10,7 +10,6 @@ class Home extends StatelessWidget {
   Home({ Key? key }) : super(key: key);
 
   final navController = Get.find<NavController>();
-
   CarouselController carouselController=CarouselController();
   
   List<String> imageList = [
@@ -35,14 +34,15 @@ class Home extends StatelessWidget {
                     itemCount: 3, 
                     carouselController: carouselController,
                     options: CarouselOptions(
+                      initialPage: navController.currentPage1 ,
                       height: 400,
                       autoPlay: true,
                       enlargeCenterPage: true,
                       enableInfiniteScroll: false,
-                      autoPlayInterval: const Duration(seconds: 2),
+                      autoPlayInterval: const Duration(seconds: 3),
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
-                        navController.carouselChande(index);
+                        navController.carouselChange1(index);
                       },
                     ),
                     itemBuilder: (context, index, realIndex){
@@ -65,7 +65,7 @@ class Home extends StatelessWidget {
                     left: 20,
                     child: 
                       AnimatedSmoothIndicator(
-                          activeIndex: navController.currentPage, 
+                          activeIndex:navController.currentPage1, 
                           count: 3,
                           effect:  const SlideEffect(
                               dotColor: whiteColor,
@@ -87,30 +87,6 @@ class Home extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  iconContainer(
-                    icon: Image.asset('assets/images/jeans.png'),
-                    text: 'جينز',
-                    color: blackColor,
-                    h: 5,
-                    ),
-                  iconContainer(
-                    icon: Image.asset('assets/images/high-heel.png'),
-                    text: 'أحذية',
-                    color: blackColor,
-                    h: 5,
-                    ),
-                  iconContainer(
-                    icon: Image.asset('assets/images/dress.png'),
-                    text: 'فساتين',
-                    color: blackColor,
-                    h: 5,
-                    ),
-                  iconContainer(
-                    icon: Image.asset('assets/images/tshirt.png'),
-                    text: 'قمصان',
-                    color: blackColor,
-                    h: 5,
-                    ),
                   InkWell(
                     onTap: (){
                       navController.changePage(1);
@@ -122,38 +98,60 @@ class Home extends StatelessWidget {
                       h: 5,
                       ),
                   ),
+                   iconContainer(
+                    icon: Image.asset('assets/images/tshirt.png'),
+                    text: 'قمصان',
+                    color: blackColor,
+                    h: 5,
+                    ),iconContainer(
+                    icon: Image.asset('assets/images/dress.png'),
+                    text: 'فساتين',
+                    color: blackColor,
+                    h: 5,
+                    ),
+                 
+                  iconContainer(
+                    icon: Image.asset('assets/images/high-heel.png'),
+                    text: 'أحذية',
+                    color: blackColor,
+                    h: 5,
+                    ),
+                  
+                  iconContainer(
+                    icon: Image.asset('assets/images/jeans.png'),
+                    text: 'جينز',
+                    color: blackColor,
+                    h: 5,
+                    ),
                 ],
               ),
             ),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                child: SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: 100,
-                          height:150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: AssetImage(imageList[index]),
-                              fit: BoxFit.cover,
-                              )
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context,index){
-                        return const SizedBox(width: 10,);
-                      },
-                      itemCount: imageList.length,
-                      ),
-                  ),
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+              child: SizedBox(
+                  width: double.infinity,
+                  height: 150,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 100,
+                        height:150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage(imageList[index]),
+                            fit: BoxFit.cover,
+                            )
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context,index){
+                      return const SizedBox(width: 10,);
+                    },
+                    itemCount: imageList.length,
+                    ),
+                ),
             ),
             const Text('لماذا يجب عليك اختيارنا؟',
                   style: TextStyle(
@@ -167,6 +165,7 @@ class Home extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  
                   Container(
                     width: 130,
                     height: 150,
@@ -187,8 +186,8 @@ class Home extends StatelessWidget {
                       ]
                         ),
                     child: iconContainer(
-                    icon: Image.asset('assets/images/cargo-truck.png'),
-                    text: 'الشحن مجاناً',
+                    icon: Image.asset('assets/images/money.png'),
+                    text: 'ضمان استعادة الأموال',
                     color: blackColor,
                     h: 20,
                     ),
@@ -213,8 +212,8 @@ class Home extends StatelessWidget {
                       ]
                         ),
                     child: iconContainer(
-                    icon: Image.asset('assets/images/money.png'),
-                    text: 'ضمان استعادة الأموال',
+                    icon: Image.asset('assets/images/cargo-truck.png'),
+                    text: 'الشحن مجاناً',
                     color: blackColor,
                     h: 20,
                     ),

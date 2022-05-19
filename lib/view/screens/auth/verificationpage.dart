@@ -59,23 +59,23 @@ class _VeriPageState extends State<VeriPage> {
             child: Column(
               children: [
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                      Text('Outletship',
+                        style: TextStyle(
+                          color: blackColor,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      SizedBox(width: 10,),
                       Padding(
-                        padding: EdgeInsets.all(2.0),
-                        child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
-                      ),
-                        SizedBox(width: 10,),
-                        Text('Outletship',
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold
-                          ),
-                        )
-                        
-                        ],
-                      ),
+                      padding: EdgeInsets.all(2.0),
+                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
+                    ),
+                     
+                  ],
+                ),
                 SizedBox(height: h*0.05,),
                 const Text('يرجى التحقق من هاتفك الخليوي',
                     style: TextStyle(
@@ -195,14 +195,10 @@ class _VeriPageState extends State<VeriPage> {
                       borderSide: BorderSide(color: blackColor),
                     ),
                   ),
+                    autofocus: true,
                     onChanged: (val) {
-                        if (index + 1 < focusNodes.length) {
-                            _selectedFocus = focusNodes[index + 1];
-                            FocusScope.of(context).requestFocus(_selectedFocus);
-                        // if user has gotten to last box close keyboard
-                        } else {
-                            FocusScope.of(context).unfocus();
-                        }
+                      _selectedFocus = focusNodes[index + 1];
+                      FocusScope.of(context).requestFocus(_selectedFocus);
                     },
                 
                   ),

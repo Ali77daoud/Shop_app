@@ -24,18 +24,18 @@ class LoginPage extends StatelessWidget {
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
-                    ),
-                      SizedBox(width: 10,),
                       Text('Outletship',
                         style: TextStyle(
                           color: blackColor,
                           fontSize: 25,
                           fontWeight: FontWeight.bold
                         ),
-                      )
+                      ),
+                      SizedBox(width: 10,),
+                      Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
+                    ),
                      
                   ],
                 ),
@@ -211,44 +211,44 @@ class LoginPage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(90),
-                                      color: mainColor
-                                    ),
-                                    child: const Center(
-                                      child:  Text(
-                                          'f',
-                                          style: TextStyle(
-                                          color: whiteColor,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(90),
+                                        color: mainColor
+                                      ),
+                                      child:  const Center(
+                                        child:  Text(
+                                            'G',
+                                            style: TextStyle(
+                                            color: whiteColor,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width:20,),
-                                  Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(90),
-                                      color: mainColor
-                                    ),
-                                    child:  const Center(
-                                      child:  Text(
-                                          'G',
-                                          style: TextStyle(
-                                          color: whiteColor,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold
+                                    const SizedBox(width:20,),
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(90),
+                                        color: mainColor
+                                      ),
+                                      child: const Center(
+                                        child:  Text(
+                                            'f',
+                                            style: TextStyle(
+                                            color: whiteColor,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
                               ),
                             ),
                             ],

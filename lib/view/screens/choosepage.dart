@@ -20,18 +20,18 @@ class ChoosePage extends StatelessWidget {
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
-                    ),
-                      SizedBox(width: 10,),
                       Text('Outletship',
                         style: TextStyle(
                           color: blackColor,
                           fontSize: 25,
                           fontWeight: FontWeight.bold
                         ),
-                      )
+                      ),
+                      SizedBox(width: 10,),
+                      Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
+                    ),
                      
                   ],
                 ),

@@ -18,61 +18,63 @@ class MainScreen extends StatelessWidget {
             return
             Scaffold(
             appBar: AppBar(
+
             backgroundColor: whiteColor,
-            title: Transform(
+            title: Row(
+              children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 5),
+                child: Icon(Icons.menu,size: 25,color:blackColor,),
+              ),
+              const SizedBox(width: 5,),
+              IconButton(
+                onPressed:(){} ,
+                icon: const Icon( Icons.search,size: 25,color:blackColor,),
+                ),
+              ],
+            ),
+            centerTitle: false,
+            titleSpacing: 0.0, 
+            actions:  [
+              Transform(
               transform:  Matrix4.translationValues(5.0, 0.0, 0.0),
               child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
-                        Icon(Icons.shopping_cart_rounded,size: 35,color:mainColor,),
-                          SizedBox(width: 10,),
                           Text('Outletship',
                             style: TextStyle(
                               color: blackColor,
                               fontSize: 18,
                               fontWeight: FontWeight.bold
                             ),
-                          )
-                         
+                          ),
+                        SizedBox(width: 10,),
+                        Icon(Icons.shopping_cart_rounded,size: 35,color:mainColor,),
                       ],
                     ),
             ),
-            centerTitle: false,
-            titleSpacing: 0.0, 
-            actions:  [
-              IconButton(
-                onPressed:(){} ,
-                icon: const Icon( Icons.search,size: 25,color:blackColor,),
-                ),
-              const SizedBox(width: 5,),
-              const Padding(
-                padding: EdgeInsets.only(right: 5),
-                child: Icon(Icons.menu,size: 25,color:blackColor,),
-              ),
+            
             ],  
             elevation: 1,
           ),
             bottomNavigationBar:
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: BottomNavigationBar(
-                      items: const [
-                            BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
-                            BottomNavigationBarItem(icon:Icon(Icons.shopping_cart_sharp),label: '' ),
-                            BottomNavigationBarItem(icon:Icon(Icons.assignment_returned),label: '' ),
-                            BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
-                          ],
-                      iconSize: 23,
-                      currentIndex: mainController.i,
-                      onTap: (index){
-                        mainController.changeScreen(index);
-                      },
-                      type: BottomNavigationBarType.fixed,
-                      fixedColor: Get.isDarkMode?blackColor:mainColor,
-                      unselectedItemColor: Colors.grey,
+            BottomNavigationBar(
+                    items: const [
+                          BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
+                          BottomNavigationBarItem(icon:Icon(Icons.shopping_cart_sharp),label: '' ),
+                          BottomNavigationBarItem(icon:Icon(Icons.assignment_returned),label: '' ),
+                          BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
+                        ],
+                    iconSize: 23,
+                    currentIndex: mainController.i,
+                    onTap: (index){
+                      mainController.changeScreen(index);
+                    },
+                    type: BottomNavigationBarType.fixed,
+                    fixedColor: Get.isDarkMode?blackColor:mainColor,
+                    unselectedItemColor: Colors.grey,
             
-                    ),
-            ) ,
+                  ) ,
             body: mainController.screens[mainController.i],
         
       );

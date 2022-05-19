@@ -27,23 +27,23 @@ class SignupPage extends StatelessWidget {
               child: Column(
               children: [
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.all(2.0),
-                        child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                      Text('Outletship',
+                        style: TextStyle(
+                          color: blackColor,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
-                        SizedBox(width: 10,),
-                        Text('Outletship',
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold
-                          ),
-                        )
-                       
-                    ],
-                  ),
+                      SizedBox(width: 10,),
+                      Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
+                    ),
+                     
+                  ],
+                ),
                 SizedBox(height: h*0.08,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -81,206 +81,188 @@ class SignupPage extends StatelessWidget {
                               ),
                               const SizedBox(height:10,),
                               ///////////////////////////// name
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextFormField(
-                                  keyboardType:TextInputType.text,
-                                  controller: namekey,
-                                  cursorColor: mainColor,
-                                  validator: (value){
-                                      if(value!.isEmpty){
-                                        return 'أدخل الاسم من فضلك';
-                                      }
-                                    },
-                                  decoration: InputDecoration(
-                                    hintText: 'الاسم',
-                                    contentPadding: const EdgeInsets.only(top: 10),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 15
-                                    ),
-                                    filled: false,
-                                    enabledBorder: UnderlineInputBorder(      
-                                    borderSide: BorderSide(color: lightGreyColor2),   
-                                  ),  
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
+                              TextFormField(
+                                keyboardType:TextInputType.text,
+                                controller: namekey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                    if(value!.isEmpty){
+                                      return 'أدخل الاسم من فضلك';
+                                    }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'الاسم',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
-                                  ),
-                                  ),
-                                )
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
                               ),
                               SizedBox(height:h*0.01,),
                               /////////////////////nickname
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextFormField(
-                                  keyboardType:TextInputType.text,
-                                  controller: nicknamekey,
-                                  cursorColor: mainColor,
-                                  validator: (value){
-                                      if(value!.isEmpty){
-                                        return 'أدخل اللقب من فضلك';
-                                      }
-                                    },
-                                  decoration: InputDecoration(
-                                    hintText: 'اللقب',
-                                    contentPadding: const EdgeInsets.only(top: 10),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 15
-                                    ),
-                                    filled: false,
-                                    enabledBorder: UnderlineInputBorder(      
-                                    borderSide: BorderSide(color: lightGreyColor2),   
-                                  ),  
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
+                              TextFormField(
+                                keyboardType:TextInputType.text,
+                                controller: nicknamekey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                    if(value!.isEmpty){
+                                      return 'أدخل اللقب من فضلك';
+                                    }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'اللقب',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
-                                  ),
-                                  ),
-                                )
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
                               ),
                               /////////////////////
                               SizedBox(height:h*0.01,),
                               /////////////////////email
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextFormField(
-                                  keyboardType:TextInputType.emailAddress,
-                                  controller: emailkey,
-                                  cursorColor: mainColor,
-                                  validator: (value){
-                                      if(value!.isEmpty){
-                                        return 'أدخل البريد الإلكتروني من فضلك';
-                                      }
-                                      else if(!RegExp(validationEmail).hasMatch(value)){
-                                      return 'أدخل بريد صحيح من فضلك';
+                              TextFormField(
+                                keyboardType:TextInputType.emailAddress,
+                                controller: emailkey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                    if(value!.isEmpty){
+                                      return 'أدخل البريد الإلكتروني من فضلك';
                                     }
-                                    },
-                                  decoration: InputDecoration(
-                                    hintText: 'البريد الإلكتروني',
-                                    contentPadding: const EdgeInsets.only(top: 10),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 15
-                                    ),
-                                    filled: false,
-                                    enabledBorder: UnderlineInputBorder(      
-                                    borderSide: BorderSide(color: lightGreyColor2),   
-                                  ),  
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
+                                    else if(!RegExp(validationEmail).hasMatch(value)){
+                                    return 'أدخل بريد صحيح من فضلك';
+                                  }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'البريد الإلكتروني',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
-                                  ),
-                                  ),
-                                )
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
                               ),
                               ////////////////////////////
                               SizedBox(height:h*0.01,),
                               /////////////////////password
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextFormField(
-                                  keyboardType:TextInputType.visiblePassword,
-                                  controller: emailkey,
-                                  cursorColor: mainColor,
-                                  validator: (value){
-                                     if(value!.isEmpty){
-                                      return 'أدخل كلمة المرور من فضلك';
-                                    }
-                                    else if(value.length < 8){
-                                      return 'أدخل كلمة مرور من ثمانية حرف';
-                                    }
-                                    },
-                                  decoration: InputDecoration(
-                                    hintText: 'كلمة السر',
-                                    contentPadding: const EdgeInsets.only(top: 10),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 15
-                                    ),
-                                    filled: false,
-                                    enabledBorder: UnderlineInputBorder(      
-                                    borderSide: BorderSide(color: lightGreyColor2),   
-                                  ),  
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
+                              TextFormField(
+                                keyboardType:TextInputType.visiblePassword,
+                                controller: emailkey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                   if(value!.isEmpty){
+                                    return 'أدخل كلمة المرور من فضلك';
+                                  }
+                                  else if(value.length < 8){
+                                    return 'أدخل كلمة مرور من ثمانية حرف';
+                                  }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'كلمة السر',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
-                                  ),
-                                  ),
-                                )
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
                               ),
                               ///////////////////////
                               ///////////////////////////////
                               SizedBox(height:h*0.01,),
                               /////////////////////phone
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextFormField(
-                                  keyboardType:TextInputType.phone,
-                                  controller: passkey,
-                                  cursorColor: mainColor,
-                                  validator: (value){
-                                     if(value!.isEmpty){
-                                      return 'أدخل رقم الهاتف  من فضلك';
-                                    }
-                                    },
-                                  decoration: InputDecoration(
-                                    hintText: 'رقم الخليوي',
-                                    contentPadding: const EdgeInsets.only(top: 10),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 15
-                                    ),
-                                    filled: false,
-                                    enabledBorder: UnderlineInputBorder(      
-                                    borderSide: BorderSide(color: lightGreyColor2),   
-                                  ),  
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
+                              TextFormField(
+                                keyboardType:TextInputType.phone,
+                                controller: passkey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                   if(value!.isEmpty){
+                                    return 'أدخل رقم الهاتف  من فضلك';
+                                  }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'رقم الخليوي',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
-                                  ),
-                                  ),
-                                )
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
                               ),
                               ///////////////////////
                               SizedBox(height:h*0.01,),
                               /////////////////////postal code
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: TextFormField(
-                                  keyboardType:TextInputType.text,
-                                  controller: postalkey,
-                                  cursorColor: mainColor,
-                                  validator: (value){
-                                     if(value!.isEmpty){
-                                      return 'أدخل رمز البريد  من فضلك';
-                                    }
-                                    },
-                                  decoration: InputDecoration(
-                                    hintText: 'الرمز البريدي',
-                                    contentPadding: const EdgeInsets.only(top: 10),
-                                    hintStyle: const TextStyle(
-                                      fontSize: 15
-                                    ),
-                                    filled: false,
-                                    enabledBorder: UnderlineInputBorder(      
-                                    borderSide: BorderSide(color: lightGreyColor2),   
-                                  ),  
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
+                              TextFormField(
+                                keyboardType:TextInputType.text,
+                                controller: postalkey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                   if(value!.isEmpty){
+                                    return 'أدخل رمز البريد  من فضلك';
+                                  }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'الرمز البريدي',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: lightGreyColor2),
-                                  ),
-                                  ),
-                                )
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
                               ),
                               ///////////////////////
                               SizedBox(height:h*0.02,),
@@ -324,9 +306,9 @@ class SignupPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(90),
                                         color: mainColor
                                       ),
-                                      child: const Center(
+                                      child:  const Center(
                                         child:  Text(
-                                            'f',
+                                            'G',
                                             style: TextStyle(
                                             color: whiteColor,
                                             fontSize: 22,
@@ -343,9 +325,9 @@ class SignupPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(90),
                                         color: mainColor
                                       ),
-                                      child:  const Center(
+                                      child: const Center(
                                         child:  Text(
-                                            'G',
+                                            'f',
                                             style: TextStyle(
                                             color: whiteColor,
                                             fontSize: 22,

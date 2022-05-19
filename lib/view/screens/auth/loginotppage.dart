@@ -37,18 +37,18 @@ class _LoginOtpPageState extends State<LoginOtpPage> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
-                    ),
-                      SizedBox(width: 10,),
                       Text('Outletship',
                         style: TextStyle(
                           color: blackColor,
                           fontSize: 25,
                           fontWeight: FontWeight.bold
                         ),
-                      )
+                      ),
+                      SizedBox(width: 10,),
+                      Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: Icon(Icons.shopping_cart_rounded,size: 45,color:mainColor,),
+                    ),
                      
                   ],
                 ),
@@ -99,6 +99,32 @@ class _LoginOtpPageState extends State<LoginOtpPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+                                  CountryCodePicker(
+                                    initialSelection: 'SA',
+                                    padding: const EdgeInsets.only(left: 0),
+                                    flagWidth: 27,
+                                    onChanged:(value) {
+                                      setState(() {
+                                        countryName=value.name.toString();
+                                        countryCode=value.dialCode.toString();
+                                      });
+                                    }, 
+                                    favorite: const ['+996','SA'],
+                                    showCountryOnly: false,
+                                    showFlagMain: true,
+                                    showDropDownButton: true,
+                                    hideMainText: true,
+                                    showOnlyCountryWhenClosed: false,
+                                    alignLeft: true,
+                                  ),
+                                  Text(countryName,
+                                  style: const TextStyle(
+                                  color: blackColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal
+                                ),
+                                  ),
+                                
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(countryCode,
@@ -109,69 +135,36 @@ class _LoginOtpPageState extends State<LoginOtpPage> {
                                 ),
                                     ),
                                   ),
-                                  Text(countryName,
-                                  style: const TextStyle(
-                                  color: blackColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.normal
-                                ),
-                                  ),
-                                  Directionality(
-                                    textDirection: TextDirection.rtl,
-                                    child: CountryCodePicker(
-                                      initialSelection: 'SA',
-                                      padding: const EdgeInsets.only(left: 0),
-                                      flagWidth: 27,
-                                      onChanged:(value) {
-                                        setState(() {
-                                          countryName=value.name.toString();
-                                          countryCode=value.dialCode.toString();
-                                          print(countryCode);
-                                        });
-                                     
-                                      }, 
-                                      favorite: const ['+996','SA'],
-                                      showCountryOnly: false,
-                                      showFlagMain: true,
-                                      showDropDownButton: true,
-                                      hideMainText: true,
-                                      showOnlyCountryWhenClosed: false,
-                                      alignLeft: true,
-                                    ),
-                                  ),
                                   
                                 ],
                               ),
                             ),
                             SizedBox(height:h*0.02,),
                             /////////////////////////////
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: defualTextFormFeild(
-                                controller: phonekey, 
-                                inputtype: TextInputType.phone, 
-                                maxlines: 1, 
-                                ifobscure: false, 
-                                validate: (value){
-                                  if(value.isEmpty){
-                                    return 'أدخل الرقم من فضلك';
-                                  }
-                                },  
-                                label:'رقم الهاتف',
-                                hint: '', 
-                                labelcolor: greyColor, 
-                                inputtextcolor: blackColor, 
-                                prifixicon:const Icon(Icons.phone,color: greyColor, ),
-                                sufixicon: Container(width: 0,),
-                                ontab: (){},  
-                                cursorColor:mainColor, 
-                                backgrouncolor: whiteColor,
-                                borderraduis: 20,
-                                bordercolor: Colors.grey.shade300,
-                                focusbordercolor: mainColor,
-                                padding:  const EdgeInsets.only(top: 10),
-                                ),
-                            ),
+                            defualTextFormFeild(
+                              controller: phonekey, 
+                              inputtype: TextInputType.phone, 
+                              maxlines: 1, 
+                              ifobscure: false, 
+                              validate: (value){
+                                if(value.isEmpty){
+                                  return 'أدخل الرقم من فضلك';
+                                }
+                              },  
+                              label:'رقم الهاتف',
+                              hint: '', 
+                              labelcolor: greyColor, 
+                              inputtextcolor: blackColor, 
+                              prifixicon:const Icon(Icons.phone,color: greyColor, ),
+                              sufixicon: Container(width: 0,),
+                              ontab: (){},  
+                              cursorColor:mainColor, 
+                              backgrouncolor: whiteColor,
+                              borderraduis: 20,
+                              bordercolor: Colors.grey.shade300,
+                              focusbordercolor: mainColor,
+                              padding:  const EdgeInsets.only(top: 10),
+                              ),
                             
                             SizedBox(height:h*0.03,),
                             SizedBox(
@@ -229,44 +222,44 @@ class _LoginOtpPageState extends State<LoginOtpPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(90),
-                                      color: mainColor
-                                    ),
-                                    child: const Center(
-                                      child:  Text(
-                                          'f',
-                                          style: TextStyle(
-                                          color: whiteColor,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(90),
+                                        color: mainColor
+                                      ),
+                                      child:  const Center(
+                                        child:  Text(
+                                            'G',
+                                            style: TextStyle(
+                                            color: whiteColor,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width:20,),
-                                  Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(90),
-                                      color: mainColor
-                                    ),
-                                    child:  const Center(
-                                      child:  Text(
-                                          'G',
-                                          style: TextStyle(
-                                          color: whiteColor,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold
+                                    const SizedBox(width:20,),
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(90),
+                                        color: mainColor
+                                      ),
+                                      child: const Center(
+                                        child:  Text(
+                                            'f',
+                                            style: TextStyle(
+                                            color: whiteColor,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
                               ),
                             ),
                             ],

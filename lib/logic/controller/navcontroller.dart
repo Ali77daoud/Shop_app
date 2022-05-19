@@ -2,7 +2,8 @@ import 'package:get/get.dart';
 
 class NavController extends GetxController{
   int i = 0;
-  int currentPage = 0;
+  int currentPage1 = 0;
+  int currentPage2 = 0;
   int selectedIndex = 0;
   int selectedColor = 0;
   int selectedSize = 0;
@@ -12,8 +13,13 @@ class NavController extends GetxController{
     update();
   }
 
-  void carouselChande(int index){
-    currentPage=index;
+  void carouselChange1(int index){
+    currentPage1=index;
+    update();
+  }
+
+  void carouselChange2(int index){
+    currentPage2=index;
     update();
   }
 
