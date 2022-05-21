@@ -3,6 +3,9 @@ import 'package:shop_app/utils/theme.dart';
 
 Widget homeCard(
   {
+    required double hight,
+    required double width,
+    required double widthBetweenPrice,
     required double elevation,
     required Color color,
     required double radius,
@@ -29,8 +32,8 @@ Widget homeCard(
             Padding(
               padding: const EdgeInsets.only(left: 0,right: 0,),
               child: Container(
-                width: double.infinity,
-                height: 150,
+                width: width,
+                height: hight,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(img),
@@ -52,18 +55,19 @@ Widget homeCard(
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text('$price1 \$',
-                  maxLines: 2,
-                  style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal
-                    ),
-                ),
                 Text('$price2 \$',
                   maxLines: 2,
                   style: const TextStyle(
                       color: greyColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal
+                    ),
+                ),
+                SizedBox(width: widthBetweenPrice,),
+                Text('$price1 \$',
+                  maxLines: 2,
+                  style: const TextStyle(
+                      color: Colors.red,
                       fontSize: 15,
                       fontWeight: FontWeight.normal
                     ),

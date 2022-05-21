@@ -131,6 +131,9 @@ class CategoryPage extends StatelessWidget {
                         ), 
                     itemBuilder: (context,index){
                       return homeCard(
+                        hight: 150,
+                        width: double.infinity,
+                        widthBetweenPrice: 0,
                         elevation: 5,
                         color: whiteColor, 
                         radius: 10, 

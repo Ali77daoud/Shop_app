@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/navcontroller.dart';
 import 'package:shop_app/utils/theme.dart';
+import 'package:shop_app/view/widget/gridviewcard.dart';
 import 'package:shop_app/view/widget/icon_container.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -219,7 +220,6 @@ class Home extends StatelessWidget {
                     h: 20,
                     ),
                   ),
-                  
                 ],
               ),
             ),
@@ -282,6 +282,57 @@ class Home extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.bold
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              child: SizedBox(
+                  width: double.infinity,
+                  height: 220,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        children: [
+                          homeCard(
+                          hight: 150,
+                          width: 150,
+                          widthBetweenPrice: 25,
+                          elevation: 5,
+                          color: whiteColor, 
+                          radius: 2, 
+                          centertext:'قمصان', 
+                          img: 'assets/images/1.jpg', 
+                          price1: 30,
+                          price2: 20,
+                          ),
+                           Positioned(
+                             top: 10,
+                             right: 15,
+                             child: Container(
+                              height: 25,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: mainColor,
+                                borderRadius: BorderRadius.circular(15)
+                              ),
+                              child: const Center(
+                                child: Text('30%',
+                                  style: TextStyle(
+                                    color: whiteColor
+                                  ),
+                                )
+                                ),
+                              ),
+                           ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context,index){
+                      return const SizedBox(width: 10,);
+                    },
+                    itemCount: 5,
+                    ),
+                ),
             ),
           ],
         ),

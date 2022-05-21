@@ -18,7 +18,6 @@ class MainScreen extends StatelessWidget {
             return
             Scaffold(
             appBar: AppBar(
-
             backgroundColor: whiteColor,
             title: Row(
               children: [
