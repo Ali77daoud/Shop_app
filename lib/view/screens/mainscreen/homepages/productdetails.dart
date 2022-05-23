@@ -78,7 +78,7 @@ class ProductDetails extends StatelessWidget {
                     right: 10,
                     child: IconButton(
                       onPressed:(){
-                        navController.changePage(1);
+                        navController.changeHomePage(1);
                       },
                       icon: const Icon(Icons.arrow_back,color: whiteColor,) 
                       ),

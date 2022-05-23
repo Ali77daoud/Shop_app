@@ -91,7 +91,7 @@ class Home extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: (){
-                      navController.changePage(1);
+                      navController.changeHomePage(1);
                     },
                     child: iconContainer(
                       icon: Image.asset('assets/images/shopping-bags.png'),

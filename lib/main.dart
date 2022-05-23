@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
       textDirection: TextDirection.rtl,
       initialRoute: Routes.boardingScreen,
       getPages: AppRoutes.routes,
-
     );
   }
 }

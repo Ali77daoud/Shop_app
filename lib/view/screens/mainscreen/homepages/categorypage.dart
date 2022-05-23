@@ -33,7 +33,7 @@ class CategoryPage extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: (){
-                      navController.changePage(0);
+                      navController.changeHomePage(0);
                     }, 
                     icon: const Icon(Icons.arrow_forward_rounded)
                     ),
@@ -116,7 +116,7 @@ class CategoryPage extends StatelessWidget {
               ///////////////////////////
               InkWell(
                 onTap: (){
-                  navController.changePage(2);
+                  navController.changeHomePage(2);
                 },
                 child: SizedBox(
                   height: h*0.65 ,

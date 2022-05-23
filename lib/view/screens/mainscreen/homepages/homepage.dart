@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
       builder: (_){
         return 
         IndexedStack(
-          index: navController.i,
+          index: navController.homePageIndex,
           children: [
             Home(),
             CategoryPage(),

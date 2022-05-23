@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:shop_app/view/screens/mainscreen/buypage.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/homepage.dart';
 import 'package:shop_app/view/screens/mainscreen/personpage.dart';
-import 'package:shop_app/view/screens/mainscreen/shoppage.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/shoppage.dart';
 
 class MainController extends GetxController{
   int i = 0;

@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 
 class NavController extends GetxController{
-  int i = 0;
+  int homePageIndex = 0;
+  int shopPageIndex = 0;
   int currentPage1 = 0;
   int currentPage2 = 0;
   int currentPage3 = 0;
@@ -9,8 +10,13 @@ class NavController extends GetxController{
   int selectedColor = 0;
   int selectedSize = 0;
 
-  void changePage(index){
-    i = index;
+  void changeHomePage(index){
+    homePageIndex = index;
+    update();
+  }
+
+  void changeShopPage(index){
+    shopPageIndex = index;
     update();
   }
 
