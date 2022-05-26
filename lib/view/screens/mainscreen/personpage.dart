@@ -27,36 +27,37 @@ class PersonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        Row(
-          children: [
-            IconButton(
-              onPressed:(){
-    
-              },
-              icon: const Icon(Icons.arrow_back,color: blackColor,) 
-              ),
-            SizedBox(width: w*0.35,),
-            const Text('حساب',
-                style: TextStyle(
-                    color: mainColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  ),
-              ),
-          ],
-        ),
-        PersonWidget(
-          imgHight: 100, 
-          imgWidth: 100, 
-          img: 'assets/images/1.jpg',
-          name: 'تركي السفياني',
-          email: 'aaa@gmail.com'
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed:(){
+      
+                },
+                icon: const Icon(Icons.arrow_back,color: blackColor,) 
+                ),
+              SizedBox(width: w*0.35,),
+              const Text('حساب',
+                  style: TextStyle(
+                      color: mainColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    ),
+                ),
+            ],
           ),
-        SizedBox(height: h*0.022,),
-        Expanded(
-          child: ListView.separated(
+          PersonWidget(
+            imgHight: 100, 
+            imgWidth: 100, 
+            img: 'assets/images/1.jpg',
+            name: 'تركي السفياني',
+            email: 'aaa@gmail.com'
+            ),
+          SizedBox(height: h*0.022,),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context,index){
               return Padding(
@@ -76,8 +77,8 @@ class PersonPage extends StatelessWidget {
             },
             itemCount: 6,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -44,12 +44,12 @@ class SignupPage extends StatelessWidget {
                      
                   ],
                 ),
-                SizedBox(height: h*0.08,),
+                SizedBox(height: h*0.07,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     width: double.infinity,
-                    height: 455,
+                    height: 550,
                     decoration: BoxDecoration(
                       color: whiteColor,
                       borderRadius: BorderRadius.circular(30),
@@ -175,7 +175,7 @@ class SignupPage extends StatelessWidget {
                               /////////////////////password
                               TextFormField(
                                 keyboardType:TextInputType.visiblePassword,
-                                controller: emailkey,
+                                controller: passkey,
                                 cursorColor: mainColor,
                                 validator: (value){
                                    if(value!.isEmpty){
@@ -209,7 +209,7 @@ class SignupPage extends StatelessWidget {
                               /////////////////////phone
                               TextFormField(
                                 keyboardType:TextInputType.phone,
-                                controller: passkey,
+                                controller: phonekey,
                                 cursorColor: mainColor,
                                 validator: (value){
                                    if(value!.isEmpty){
@@ -270,7 +270,13 @@ class SignupPage extends StatelessWidget {
                                 width: double.infinity,
                                 child: buttomUtils(
                                       ontab: (){
-                                        Get.offNamed(Routes.mainScreen);
+                                        if(formKey.currentState!.validate()){
+                                          Get.offNamed(Routes.mainScreen);
+                                        }
+                                        else{
+
+                                        }
+
                                         },
 
                                       childtext: const Text('إنشاء حساب'),
@@ -346,7 +352,7 @@ class SignupPage extends StatelessWidget {
                       ),
                   ),
                 ),
-                SizedBox(height:h*0.021,),
+                const SizedBox(height:20,),
                 const Text(
                     'هل لديك حساب ؟',
                     style: TextStyle(
@@ -355,9 +361,8 @@ class SignupPage extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                SizedBox(height:h*0.02,),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 60),
+                  padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 25),
                   child: SizedBox(
                     width: double.infinity,
                     child: buttomUtils(

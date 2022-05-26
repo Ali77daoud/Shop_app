@@ -56,5 +56,13 @@ Widget defualTextFormFeild({
       borderSide: BorderSide(color: focusbordercolor),
       borderRadius: BorderRadius.circular(borderraduis),
     ),
+    errorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.circular(borderraduis),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.circular(borderraduis),
+    ),
   ), 
 );

@@ -8,11 +8,7 @@ class CategoryPage extends StatelessWidget {
   CategoryPage({ Key? key }) : super(key: key);
 
   final navController = Get.find<NavController>();
-  List<String> categoryList=[
-    'قمصان',
-    'فساتين',
-    'احذية',
-  ];
+  
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -78,11 +74,13 @@ class CategoryPage extends StatelessWidget {
                           child: InkWell(
                             onTap: (){
                               navController.changeCategoryColor(index);
+                              navController.category =navController.categoryList[index];
+                              // print(navController.category);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(categoryList[index],
+                                Text(navController.categoryList[index],
                                   style: TextStyle(
                                   color: navController.selectedIndex == index?
                                           blackColor:greyColor,
@@ -109,44 +107,43 @@ class CategoryPage extends StatelessWidget {
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 6,);
                     },
-                    itemCount: categoryList.length,
+                    itemCount: navController.categoryList.length,
                     ),
                 ),
               ),
               ///////////////////////////
-              InkWell(
-                onTap: (){
-                  navController.changeHomePage(2);
-                },
-                child: SizedBox(
-                  height: h*0.65 ,
-                  width: double.infinity,
-                  child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                          childAspectRatio: 0.75,
-                          mainAxisSpacing: 9.0,
-                          crossAxisSpacing: 6.0,
-                          maxCrossAxisExtent: 250,
-                        ), 
-                    itemBuilder: (context,index){
-                      return homeCard(
-                        hight: 150,
-                        width: double.infinity,
-                        widthBetweenPrice: 0,
-                        elevation: 5,
-                        color: whiteColor, 
-                        radius: 10, 
-                        centertext:'قمصان', 
-                        img: 'assets/images/1.jpg', 
-                        price1: 30,
-                        price2: 20,
-                        );
+              GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      childAspectRatio: 0.75,
+                      mainAxisSpacing: 9.0,
+                      crossAxisSpacing: 6.0,
+                      maxCrossAxisExtent: 250,
+                    ), 
+                itemBuilder: (context,index){
+                  return InkWell(
+                    onTap: (){
+                      navController.changeHomePage(2);
+                      navController.productDetailsIndex = index;
+                      print(navController.productDetailsIndex);
                     },
-                    itemCount: 4,
-                    ),
+                    child: homeCard(
+                      hight: 150,
+                      width: double.infinity,
+                      widthBetweenPrice: 0,
+                      elevation: 5,
+                      color: whiteColor, 
+                      radius: 10, 
+                      centertext:navController.categoryMap[navController.category][index][0], 
+                      img: 'assets/images/1.jpg', 
+                      price1:navController.categoryMap[navController.category][index][1],
+                      price2: navController.categoryMap[navController.category][index][2],
+                      ),
+                  );
+                },
+                itemCount: navController.categoryMap[navController.category].length,
                 ),
-              ),
             ],
           ),
         ),

@@ -6,7 +6,9 @@ import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 
 Widget customDrawer(
-
+  {
+    required var menButton,
+  }
 ){
   final navController = Get.find<NavController>();
   return Column(
@@ -79,9 +81,7 @@ Widget customDrawer(
                   return Column(
                 children: [
                       InkWell(
-                          onTap: (){
-                            
-                          },
+                          onTap: menButton,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: const [

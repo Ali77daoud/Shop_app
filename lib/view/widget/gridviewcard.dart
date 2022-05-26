@@ -11,8 +11,8 @@ Widget homeCard(
     required double radius,
     required String centertext,
     required String img,
-    required double price1,
-    required double price2,
+    required String price1,
+    required String price2,
   }
 ){
   return Card(

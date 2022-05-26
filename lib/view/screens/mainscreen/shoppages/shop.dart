@@ -37,7 +37,8 @@ class Shop extends StatelessWidget {
                 width: double.infinity,
                 height: 235,
                 child: ListView.separated(
-                  // physics: const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemBuilder: (context,index){
                     return CartWidget();
                   },
@@ -142,31 +143,27 @@ class Shop extends StatelessWidget {
                 ),
               ),
           ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [ 
-              const SizedBox(width: 20,),
-              buttomUtils(
-                ontab: (){
-                  navController.changeShopPage(1);
-                }, 
-                childtext: const Text('الدفع',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: whiteColor,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ), 
-                maincolor: mainColor, 
-                radius: 20, 
-                leftpadding: 45, 
-                rightpadding:45, 
-                toppadding: 5, 
-                buttompadding: 5,
-                c: mainColor
-                ),
-            ],
+          const SizedBox(width: 20,),
+          Center(
+            child: buttomUtils(
+              ontab: (){
+                navController.changeShopPage(1);
+              }, 
+              childtext: const Text('الدفع',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: whiteColor,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ), 
+              maincolor: mainColor, 
+              radius: 20, 
+              leftpadding: 45, 
+              rightpadding:45, 
+              toppadding: 5, 
+              buttompadding: 5,
+              c: mainColor
+              ),
           )
           ],
         ),

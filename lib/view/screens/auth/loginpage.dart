@@ -143,7 +143,12 @@ class LoginPage extends StatelessWidget {
                               width: double.infinity,
                               child: buttomUtils(
                                     ontab: (){
-                                      Get.offNamed(Routes.mainScreen);
+                                      if(formKey.currentState!.validate()){
+                                        Get.offNamed(Routes.mainScreen);
+                                      }
+                                      else{
+
+                                      }
                                       },
 
                                     childtext: const Text('تسجيل الدخول'),
@@ -258,9 +263,8 @@ class LoginPage extends StatelessWidget {
                     ),
                 ),
               ),
-              const SizedBox(height:30,),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
+                padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 30),
                 child: SizedBox(
                   width: double.infinity,
                   child: buttomUtils(

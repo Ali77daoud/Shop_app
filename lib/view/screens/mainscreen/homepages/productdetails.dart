@@ -105,67 +105,71 @@ class ProductDetails extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+          GetBuilder<NavController>(
+            builder: (_){
+              return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('قمصان',
-                        maxLines: 2,
-                        style: TextStyle(
-                            color: blackColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold
-                          ),
-                      ),
-                      const SizedBox(height: 15,),
-                      Row(
-                        children: const [
-                          Text('22.22 \$',
+                      Column(
+                        children: [
+                          Text(navController.category,
                             maxLines: 2,
-                            style: TextStyle(
-                                color: Colors.red,
+                            style: const TextStyle(
+                                color: blackColor,
                                 fontSize: 15,
-                                fontWeight: FontWeight.normal
+                                fontWeight: FontWeight.bold
                               ),
                           ),
-                          SizedBox(width: 20,),
-                          Text('33.22 \$',
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: greyColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal
+                          const SizedBox(height: 15,),
+                          Row(
+                            children: [
+                              Text(navController.categoryMap[navController.category][navController.productDetailsIndex][1] + ' \$',
+                                maxLines: 2,
+                                style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal
+                                  ),
                               ),
+                              const SizedBox(width: 20,),
+                              Text(navController.categoryMap[navController.category][navController.productDetailsIndex][2] + ' \$',
+                                maxLines: 2,
+                                style: const TextStyle(
+                                    color: greyColor,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal
+                                  ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      ////////////////////
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(90),
+                          color: mainColor
+                        ),
+                        child: IconButton(
+                          onPressed: (){
+          
+                          }, 
+                          icon: const Icon(
+                            Icons.shopping_cart_sharp,
+                            color: whiteColor,
+                            size: 20,
+                            )
+                          ),
+                      ),
+
                     ],
                   ),
-                  ////////////////////
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(90),
-                      color: mainColor
-                    ),
-                    child: IconButton(
-                      onPressed: (){
-      
-                      }, 
-                      icon: const Icon(
-                        Icons.shopping_cart_sharp,
-                        color: whiteColor,
-                        size: 20,
-                        )
-                      ),
-                  ),
-
-                ],
-              ),
+                );
+            }
             ),
          Padding(
            padding: const EdgeInsets.symmetric(horizontal: 20),

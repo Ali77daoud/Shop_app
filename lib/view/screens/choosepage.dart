@@ -37,7 +37,7 @@ class ChoosePage extends StatelessWidget {
                 ),
               SizedBox(height: h*0.15,),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 25),
                 child: Container(
                   width: double.infinity,
                   height: 350,

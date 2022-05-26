@@ -302,8 +302,8 @@ class Home extends StatelessWidget {
                           radius: 2, 
                           centertext:'قمصان', 
                           img: 'assets/images/1.jpg', 
-                          price1: 30,
-                          price2: 20,
+                          price1: '30',
+                          price2: '20',
                           ),
                            Positioned(
                              top: 10,

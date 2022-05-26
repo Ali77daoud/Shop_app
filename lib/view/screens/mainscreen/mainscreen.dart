@@ -25,10 +25,6 @@ class MainScreen extends StatelessWidget {
               backgroundColor: whiteColor,
               title: Row(
                 children: [
-                // const Padding(
-                //   padding: EdgeInsets.only(right: 5),
-                //   child: Icon(Icons.menu,size: 25,color:blackColor,),
-                // ),
                 const SizedBox(width: 5,),
                 IconButton(
                   onPressed:(){} ,
@@ -68,7 +64,12 @@ class MainScreen extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(35), bottomLeft: Radius.circular(35)),
                   child: Drawer(
-                    child:customDrawer()
+                    child:customDrawer(
+                      menButton: (){
+                        
+                      }
+                      ,
+                    )
                   ),
                 ),
               ),
