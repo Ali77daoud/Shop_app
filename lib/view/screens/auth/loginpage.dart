@@ -186,7 +186,7 @@ class LoginPage extends StatelessWidget {
                                       ),
                                   TextButton(
                                     onPressed: (){
-                                      Get.toNamed(Routes.loginOTPPage);
+                                      Get.offNamed(Routes.loginOTPPage);
                                     },
                                     child: const Text(
                                       'تسجيل OTP ',
@@ -269,7 +269,7 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   child: buttomUtils(
                       ontab: (){
-                        Get.toNamed(Routes.signupPage);
+                        Get.offNamed(Routes.signupPage);
                       }, 
                       childtext: const Text('إنشاء حساب',
                                 style: TextStyle(

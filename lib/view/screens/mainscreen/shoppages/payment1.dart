@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 
 class FirstPayment extends StatelessWidget {
   FirstPayment({ Key? key }) : super(key: key);
   
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
   final TextEditingController street1 = TextEditingController();
   final TextEditingController street2 = TextEditingController();
   final TextEditingController city = TextEditingController();
@@ -23,11 +23,11 @@ class FirstPayment extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                GetBuilder<NavController>(
+                GetBuilder<PagesController>(
                   builder: (_){
                     return IconButton(
                   onPressed: (){
-                    navController.changeShopPage(0);
+                    pagesController.changeShopPage(0);
                   }, 
                   icon: const Icon(Icons.arrow_back),
                   );
@@ -293,7 +293,7 @@ class FirstPayment extends StatelessWidget {
               children: [ 
                 buttomUtils(
                 ontab: (){
-                  navController.changeShopPage(0);
+                  pagesController.changeShopPage(0);
                 }, 
                 childtext: const Text('الرجوع',
                           style: TextStyle(
@@ -312,7 +312,7 @@ class FirstPayment extends StatelessWidget {
                 ),
                 buttomUtils(
                   ontab: (){
-                    navController.changeShopPage(2);
+                    pagesController.changeShopPage(2);
                   }, 
                   childtext: const Text('التالي',
                             style: TextStyle(

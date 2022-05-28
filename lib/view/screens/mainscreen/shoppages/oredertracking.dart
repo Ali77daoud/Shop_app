@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 
 class OrederTracking extends StatelessWidget {
   OrederTracking({ Key? key }) : super(key: key);
   
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,11 @@ class OrederTracking extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                GetBuilder<NavController>(
+                GetBuilder<PagesController>(
                   builder: (_){
                     return IconButton(
                   onPressed: (){
-                    navController.changeShopPage(0);
+                    pagesController.changeShopPage(0);
                   }, 
                   icon: const Icon(Icons.arrow_back),
                   );
@@ -270,7 +270,7 @@ class OrederTracking extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            GetBuilder<NavController>(
+            GetBuilder<PagesController>(
               builder: (_){
               return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),

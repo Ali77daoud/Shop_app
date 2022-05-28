@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 
 class CategoryPage extends StatelessWidget {
   CategoryPage({ Key? key }) : super(key: key);
 
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
   
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class CategoryPage extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: (){
-                      navController.changeHomePage(0);
+                      pagesController.changeHomePage(0);
                     }, 
                     icon: const Icon(Icons.arrow_forward_rounded)
                     ),
@@ -66,31 +66,33 @@ class CategoryPage extends StatelessWidget {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return GetBuilder<NavController>(
+                      return GetBuilder<PagesController>(
                         builder:(_){
                           return SizedBox(
                           width: 100,
                           height:30,
                           child: InkWell(
                             onTap: (){
-                              navController.changeCategoryColor(index);
-                              navController.category =navController.categoryList[index];
-                              // print(navController.category);
+                              pagesController.changeCategoryColor(index);
+                              pagesController.clothesIndex = index;
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(navController.categoryList[index],
+                                Text(pagesController.categoryList[pagesController.gender][index],
                                   style: TextStyle(
-                                  color: navController.selectedIndex == index?
+                                  color: pagesController.selectedIndex == index?
                                           blackColor:greyColor,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold
                                 ),
                                 ),
-                                Text('(12)',
+                                Text('('+
+                                pagesController.clothesMap[pagesController.gender][index].length.toString()
+                                +')'
+                                ,
                                   style: TextStyle(
-                                  color: navController.selectedIndex == index?
+                                  color: pagesController.selectedIndex == index?
                                           blackColor:greyColor,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold
@@ -107,7 +109,7 @@ class CategoryPage extends StatelessWidget {
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 6,);
                     },
-                    itemCount: navController.categoryList.length,
+                    itemCount: pagesController.categoryList[pagesController.gender].length,
                     ),
                 ),
               ),
@@ -124,9 +126,8 @@ class CategoryPage extends StatelessWidget {
                 itemBuilder: (context,index){
                   return InkWell(
                     onTap: (){
-                      navController.changeHomePage(2);
-                      navController.productDetailsIndex = index;
-                      print(navController.productDetailsIndex);
+                      pagesController.changeHomePage(2);
+                      pagesController.productDetailsIndex = index;
                     },
                     child: homeCard(
                       hight: 150,
@@ -135,14 +136,14 @@ class CategoryPage extends StatelessWidget {
                       elevation: 5,
                       color: whiteColor, 
                       radius: 10, 
-                      centertext:navController.categoryMap[navController.category][index][0], 
-                      img: 'assets/images/1.jpg', 
-                      price1:navController.categoryMap[navController.category][index][1],
-                      price2: navController.categoryMap[navController.category][index][2],
+                      centertext:pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex][index],
+                      img: pagesController.photoMap[pagesController.gender][pagesController.clothesIndex][index],
+                      price1:pagesController.price1Map[pagesController.gender][pagesController.clothesIndex][index],
+                      price2: pagesController.price2Map[pagesController.gender][pagesController.clothesIndex][index],
                       ),
                   );
                 },
-                itemCount: navController.categoryMap[navController.category].length,
+                itemCount: pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex].length,
                 ),
             ],
           ),

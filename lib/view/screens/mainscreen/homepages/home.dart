@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 import 'package:shop_app/view/widget/icon_container.dart';
@@ -10,7 +10,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class Home extends StatelessWidget {
   Home({ Key? key }) : super(key: key);
 
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
   CarouselController carouselController=CarouselController();
   CarouselController carouselController2=CarouselController();
   
@@ -30,13 +30,13 @@ class Home extends StatelessWidget {
               height: h*0.35,
               child: Stack(
                 children: [
-                  GetBuilder<NavController>(
+                  GetBuilder<PagesController>(
                     builder: (_){
                       return CarouselSlider.builder(
                     itemCount: 3, 
                     carouselController: carouselController,
                     options: CarouselOptions(
-                      initialPage: navController.currentPage1 ,
+                      initialPage: pagesController.currentPage1 ,
                       height: 400,
                       autoPlay: true,
                       enlargeCenterPage: true,
@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
                       autoPlayInterval: const Duration(seconds: 3),
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
-                        navController.carouselChange1(index);
+                        pagesController.carouselChange1(index);
                       },
                     ),
                     itemBuilder: (context, index, realIndex){
@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
                     left: 20,
                     child: 
                       AnimatedSmoothIndicator(
-                          activeIndex:navController.currentPage1, 
+                          activeIndex:pagesController.currentPage1, 
                           count: 3,
                           effect:  const SlideEffect(
                               dotColor: whiteColor,
@@ -86,46 +86,71 @@ class Home extends StatelessWidget {
             SizedBox(height: h*0.02,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  InkWell(
-                    onTap: (){
-                      navController.changeHomePage(1);
-                    },
-                    child: iconContainer(
-                      icon: Image.asset('assets/images/shopping-bags.png'),
-                      text: 'الجديد في',
-                      color: mainColor,
-                      h: 5,
-                      ),
-                  ),
-                   iconContainer(
-                    icon: Image.asset('assets/images/tshirt.png'),
-                    text: 'قمصان',
-                    color: blackColor,
-                    h: 5,
-                    ),iconContainer(
-                    icon: Image.asset('assets/images/dress.png'),
-                    text: 'فساتين',
-                    color: blackColor,
-                    h: 5,
+              child: SizedBox(
+                height: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        pagesController.changeHomePage(1);
+                      },
+                      child: iconContainer(
+                        icon: Image.asset('assets/images/shopping-bags.png'),
+                        text: 'الجديد في',
+                        color: mainColor,
+                        h: 5,
+                        ),
                     ),
-                 
-                  iconContainer(
-                    icon: Image.asset('assets/images/high-heel.png'),
-                    text: 'أحذية',
-                    color: blackColor,
-                    h: 5,
+                    const SizedBox(width:20,),
+                    Expanded(
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context,index){
+                          return GetBuilder<PagesController>(
+                            builder: (_){
+                              return  iconContainer(
+                                icon: Image.asset(pagesController.clotheIconList[pagesController.gender][index]),
+                                text: pagesController.categoryList[pagesController.gender][index],
+                                color: blackColor,
+                                h: 5,
+                                );
+                            }
+                            );
+                        },
+                        separatorBuilder: (context,index){
+                          return const SizedBox(width: 15,);
+                        },
+                        itemCount:pagesController.categoryList[pagesController.gender].length
+                        ),
                     ),
-                  
-                  iconContainer(
-                    icon: Image.asset('assets/images/jeans.png'),
-                    text: 'جينز',
-                    color: blackColor,
-                    h: 5,
-                    ),
-                ],
+                    //  iconContainer(
+                    //   icon: Image.asset('assets/images/tshirt.png'),
+                    //   text: 'قمصان',
+                    //   color: blackColor,
+                    //   h: 5,
+                    //   ),iconContainer(
+                    //   icon: Image.asset('assets/images/dress.png'),
+                    //   text: 'فساتين',
+                    //   color: blackColor,
+                    //   h: 5,
+                    //   ),
+                   
+                    // iconContainer(
+                    //   icon: Image.asset('assets/images/high-heel.png'),
+                    //   text: 'أحذية',
+                    //   color: blackColor,
+                    //   h: 5,
+                    //   ),
+                    
+                    // iconContainer(
+                    //   icon: Image.asset('assets/images/jeans.png'),
+                    //   text: 'جينز',
+                    //   color: blackColor,
+                    //   h: 5,
+                    //   ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -227,13 +252,13 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  GetBuilder<NavController>(
+                  GetBuilder<PagesController>(
                       builder: (_){
                         return CarouselSlider.builder(
                             itemCount: 3, 
                             carouselController: carouselController2,
                             options: CarouselOptions(
-                              initialPage: navController.currentPage1 ,
+                              initialPage: pagesController.currentPage1 ,
                               height: 150,
                               autoPlay: true,
                               enlargeCenterPage: true,
@@ -241,7 +266,7 @@ class Home extends StatelessWidget {
                               autoPlayInterval: const Duration(seconds: 3),
                               viewportFraction: 1,
                               onPageChanged: (index, reason) {
-                                navController.carouselChange3(index);
+                                pagesController.carouselChange3(index);
                               },
                             ),
                             itemBuilder: (context, index, realIndex){
@@ -260,7 +285,7 @@ class Home extends StatelessWidget {
                   ),
                   const SizedBox(height: 15,),
                   AnimatedSmoothIndicator(
-                      activeIndex:navController.currentPage3, 
+                      activeIndex:pagesController.currentPage3, 
                       count: 3,
                       effect: const ExpandingDotsEffect(
                         expansionFactor: 3,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({ Key? key }) : super(key: key);
   final mainController = Get.put(MainController());
-
+  final pagesController = Get.find<PagesController>();
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -66,9 +67,27 @@ class MainScreen extends StatelessWidget {
                   child: Drawer(
                     child:customDrawer(
                       menButton: (){
-                        
+                        pagesController.changeGender(0);
+                        pagesController.changeCategoryColor(0);
+                        pagesController.clothesIndex = 0;
+                        pagesController.productDetailsIndex = 0;
+                        Get.back();
                       }
                       ,
+                      womenButton: (){
+                        pagesController.changeGender(1);
+                        pagesController.changeCategoryColor(0);
+                        pagesController.clothesIndex = 0;
+                        pagesController.productDetailsIndex = 0;
+                        Get.back();
+                      },
+                      kidsButton: (){
+                        pagesController.changeGender(2);
+                        pagesController.changeCategoryColor(0);
+                        pagesController.clothesIndex = 0;
+                        pagesController.productDetailsIndex = 0;
+                        Get.back();
+                      },
                     )
                   ),
                 ),

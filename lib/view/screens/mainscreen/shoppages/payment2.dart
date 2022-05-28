@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 
 class SecondPayment extends StatelessWidget {
   SecondPayment({ Key? key }) : super(key: key);
   
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
   final TextEditingController street1 = TextEditingController();
   final TextEditingController city = TextEditingController();
   final TextEditingController state = TextEditingController();
@@ -22,11 +22,11 @@ class SecondPayment extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                GetBuilder<NavController>(
+                GetBuilder<PagesController>(
                   builder: (_){
                     return IconButton(
                   onPressed: (){
-                    navController.changeShopPage(1);
+                    pagesController.changeShopPage(1);
                   }, 
                   icon: const Icon(Icons.arrow_back),
                   );
@@ -286,7 +286,7 @@ class SecondPayment extends StatelessWidget {
               children: [ 
                 buttomUtils(
                 ontab: (){
-                  navController.changeShopPage(1);
+                  pagesController.changeShopPage(1);
                 }, 
                 childtext: const Text('الرجوع',
                           style: TextStyle(
@@ -305,7 +305,7 @@ class SecondPayment extends StatelessWidget {
                 ),
                 buttomUtils(
                   ontab: (){
-                    navController.changeShopPage(3);
+                    pagesController.changeShopPage(3);
                   }, 
                   childtext: const Text('التالي',
                             style: TextStyle(

@@ -367,7 +367,7 @@ class SignupPage extends StatelessWidget {
                     width: double.infinity,
                     child: buttomUtils(
                         ontab: (){
-                          Get.toNamed(Routes.loginPage);
+                          Get.offNamed(Routes.loginPage);
                         }, 
                         childtext: const Text('تسجيل الدخول',
                                   style: TextStyle(

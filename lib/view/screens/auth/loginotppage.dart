@@ -185,27 +185,24 @@ class _LoginOtpPageState extends State<LoginOtpPage> {
                                   ),
                             ),
                             SizedBox(height:h*0.01,),
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                    onPressed: (){
-                                      Get.toNamed(Routes.loginPage);
-                                    },
-                                    child: const Text(
-                                      'تسجيل الدخول بالبريد الإلكتروني',
-                                      style: TextStyle(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  onPressed: (){
+                                    Get.offNamed(Routes.loginPage);
+                                  },
+                                  child: const Text(
+                                    'تسجيل الدخول بالبريد الإلكتروني',
+                                    style: TextStyle(
                                       color: blackColor,
                                       fontSize: 15,
-                                      fontWeight: FontWeight.normal
-                                    ),
-                                      ),
+                                      fontWeight: FontWeight.bold
                                   ),
-                                  
-                                ],
-                              ),
+                                    ),
+                                ),
+                                
+                              ],
                             ),
                             SizedBox(height:h*0.01,),
                             const Text(

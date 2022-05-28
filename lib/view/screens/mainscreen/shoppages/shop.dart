@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 import 'package:shop_app/view/widget/cartwidget.dart';
 
 class Shop extends StatelessWidget {
   Shop({ Key? key }) : super(key: key);
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
 
   final TextEditingController code = TextEditingController();
   @override
@@ -147,7 +147,7 @@ class Shop extends StatelessWidget {
           Center(
             child: buttomUtils(
               ontab: (){
-                navController.changeShopPage(1);
+                pagesController.changeShopPage(1);
               }, 
               childtext: const Text('الدفع',
                         style: TextStyle(

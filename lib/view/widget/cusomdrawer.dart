@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
-import 'package:shop_app/routes/routes.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 
 Widget customDrawer(
   {
     required var menButton,
+    required var womenButton,
+    required var kidsButton,
   }
 ){
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
   return Column(
     children: [
       Container(
@@ -76,7 +77,7 @@ Widget customDrawer(
             padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
             child: SingleChildScrollView(
               child: 
-              GetBuilder<NavController>(
+              GetBuilder<PagesController>(
                 builder: (_){
                   return Column(
                 children: [
@@ -84,10 +85,19 @@ Widget customDrawer(
                           onTap: menButton,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
-                              Icon(Icons.manage_accounts),
-                              SizedBox(width: 20,),
-                              Text('رجال',
+                            children:  [
+                              Container(
+                                width: 28,
+                                height: 28,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/images/man.png'),
+                                    fit: BoxFit.contain
+                                    )
+                                ),
+                              ),
+                              const SizedBox(width: 20,),
+                              const Text('رجال',
                                 style : TextStyle(
                                 color: whiteColor,
                                 fontSize: 18,
@@ -98,17 +108,24 @@ Widget customDrawer(
                           ),
                     ),
                   
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 15,),
                   InkWell(
-                    onTap: (){
-
-                    },
+                    onTap: womenButton,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.manage_accounts),
-                        SizedBox(width: 20,),
-                        Text('نساء',
+                      children: [
+                        Container(
+                            width: 27,
+                            height: 27,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/woman.png'),
+                                fit: BoxFit.contain
+                                )
+                            ),
+                          ),
+                        const SizedBox(width: 20,),
+                        const Text('نساء',
                           style : TextStyle(
                           color: whiteColor,
                           fontSize: 18,
@@ -118,14 +135,24 @@ Widget customDrawer(
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 15,),
                   InkWell(
+                    onTap: kidsButton ,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.manage_accounts),
-                        SizedBox(width: 20,),
-                        Text('أطفال',
+                      children:  [
+                        Container(
+                            width: 27,
+                            height: 27,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/son.png'),
+                                fit: BoxFit.contain
+                                )
+                            ),
+                          ),
+                        const SizedBox(width: 20,),
+                        const Text('أطفال',
                           style : TextStyle(
                           color: whiteColor,
                           fontSize: 18,
@@ -135,14 +162,23 @@ Widget customDrawer(
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 15,),
                   InkWell(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.manage_accounts),
-                        SizedBox(width: 20,),
-                        Text('إكسسوارات',
+                      children: [
+                        Container(
+                            width: 27,
+                            height: 27,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/jewelry.png'),
+                                fit: BoxFit.contain
+                                )
+                            ),
+                          ),
+                        const SizedBox(width: 20,),
+                        const Text('إكسسوارات',
                           style : TextStyle(
                           color: whiteColor,
                           fontSize: 18,
@@ -152,14 +188,23 @@ Widget customDrawer(
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 15,),
                   InkWell(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.manage_accounts),
-                        SizedBox(width: 20,),
-                        Text('إلكترونيات',
+                      children: [
+                        Container(
+                            width: 27,
+                            height: 27,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/electronics.png'),
+                                fit: BoxFit.contain
+                                )
+                            ),
+                          ),
+                        const SizedBox(width: 20,),
+                        const Text('إلكترونيات',
                           style : TextStyle(
                           color: whiteColor,
                           fontSize: 18,
@@ -172,7 +217,7 @@ Widget customDrawer(
                   const SizedBox(height: 60,),
                   InkWell(
                     onTap: (){
-                      navController.changeShopPage(3);
+                      pagesController.changeShopPage(3);
                       Get.back();
                     },
                     child: Row(

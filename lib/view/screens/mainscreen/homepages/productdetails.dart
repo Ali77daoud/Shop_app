@@ -1,36 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/logic/controller/navcontroller.dart';
+import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetails extends StatelessWidget {
   ProductDetails({ Key? key }) : super(key: key);
-  final navController = Get.find<NavController>();
+  final pagesController = Get.find<PagesController>();
   CarouselController carouselController=CarouselController();
-  List<Color> colorList = [
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.yellowAccent,
-    Colors.lightGreen,
-    Colors.cyan,
-    Colors.indigoAccent,
-    Colors.lightGreenAccent,
-    Colors.limeAccent,
-    Colors.greenAccent,
-    Colors.purple,
-    Colors.green,
-  ];
-
-  List<String> sizeList = [
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +23,7 @@ class ProductDetails extends StatelessWidget {
               height: h*0.35,
               child: Stack(
                 children: [
-                  GetBuilder<NavController>(
+                  GetBuilder<PagesController>(
                     builder: (_){
                       return CarouselSlider.builder(
                     itemCount: 3, 
@@ -57,16 +36,16 @@ class ProductDetails extends StatelessWidget {
                       autoPlayInterval: const Duration(seconds: 4),
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
-                        navController.carouselChange2(index);
+                        pagesController.carouselChange2(index);
                       },
                     ),
                     itemBuilder: (context, index, realIndex){
                       return Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(0),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/1.jpg'),
-                            fit: BoxFit.cover
+                          image: DecorationImage(
+                            image: AssetImage(pagesController.photoMap[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex],),
+                            fit: BoxFit.contain
                             ),
                         ),
                       );
@@ -78,9 +57,16 @@ class ProductDetails extends StatelessWidget {
                     right: 10,
                     child: IconButton(
                       onPressed:(){
-                        navController.changeHomePage(1);
+                        pagesController.changeHomePage(1);
                       },
-                      icon: const Icon(Icons.arrow_back,color: whiteColor,) 
+                      icon: Container(
+                        width: 30,
+                        height: 30,
+                        decoration:const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: blackColor,
+                        ),
+                        child: const Center(child: Icon(Icons.arrow_back,color: whiteColor,))) 
                       ),
                   ),
                   Align(
@@ -88,7 +74,7 @@ class ProductDetails extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                       child: AnimatedSmoothIndicator(
-                          activeIndex: navController.currentPage2, 
+                          activeIndex: pagesController.currentPage2, 
                           count: 3,
                           effect: SlideEffect(
                               dotColor: whiteColor,
@@ -105,7 +91,7 @@ class ProductDetails extends StatelessWidget {
                 ],
               ),
             ),
-          GetBuilder<NavController>(
+          GetBuilder<PagesController>(
             builder: (_){
               return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
@@ -114,7 +100,7 @@ class ProductDetails extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Text(navController.category,
+                          Text(pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex],
                             maxLines: 2,
                             style: const TextStyle(
                                 color: blackColor,
@@ -125,7 +111,7 @@ class ProductDetails extends StatelessWidget {
                           const SizedBox(height: 15,),
                           Row(
                             children: [
-                              Text(navController.categoryMap[navController.category][navController.productDetailsIndex][1] + ' \$',
+                              Text(pagesController.price1Map[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
                                 maxLines: 2,
                                 style: const TextStyle(
                                     color: Colors.red,
@@ -134,7 +120,7 @@ class ProductDetails extends StatelessWidget {
                                   ),
                               ),
                               const SizedBox(width: 20,),
-                              Text(navController.categoryMap[navController.category][navController.productDetailsIndex][2] + ' \$',
+                              Text(pagesController.price2Map[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
                                 maxLines: 2,
                                 style: const TextStyle(
                                     color: greyColor,
@@ -185,7 +171,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                     ),
                 const SizedBox(height: 10,),
-                GetBuilder<NavController>(
+                GetBuilder<PagesController>(
                   builder: (_){
                     return SizedBox(
                       width: double.infinity,
@@ -196,7 +182,7 @@ class ProductDetails extends StatelessWidget {
                           return InkWell(
                             splashColor: whiteColor,
                             onTap: (){
-                              navController.changeColor(index);
+                              pagesController.changeColor(index);
                             },
                             child: Stack(
                               alignment: Alignment.center,
@@ -206,7 +192,7 @@ class ProductDetails extends StatelessWidget {
                                 height: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: navController.selectedColor == index?
+                                  color: pagesController.selectedColor == index?
                                       greyColor:lightGreyColor1
                                 ),
                               ),
@@ -214,7 +200,7 @@ class ProductDetails extends StatelessWidget {
                                   width: 30,
                                   height: 30,
                                   decoration: BoxDecoration(
-                                  color: colorList[index],
+                                  color:  pagesController.colorList[index],
                                 ),
                             
                                 ),
@@ -225,7 +211,7 @@ class ProductDetails extends StatelessWidget {
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 10,);
                     }, 
-                    itemCount: colorList.length
+                    itemCount: pagesController.colorList.length
                     ),
                   );
                   }
@@ -248,7 +234,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                     ),
                 const SizedBox(height: 10,),
-                GetBuilder<NavController>(
+                GetBuilder<PagesController>(
                   builder: (_){
                     return SizedBox(
                       width: double.infinity,
@@ -259,7 +245,7 @@ class ProductDetails extends StatelessWidget {
                           return InkWell(
                             splashColor: whiteColor,
                             onTap: (){
-                              navController.changeSize(index);
+                              pagesController.changeSize(index);
                             },
                             child: Stack(
                               alignment: Alignment.center,
@@ -269,12 +255,12 @@ class ProductDetails extends StatelessWidget {
                                 height: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: navController.selectedSize == index?
+                                  color: pagesController.selectedSize == index?
                                       greyColor:lightGreyColor1
                                 ),
                               ),
                               Text(
-                                sizeList[index],
+                                 pagesController.sizeList[index],
                                 style: const TextStyle(
                                 color: blackColor,
                                 fontSize: 15,
@@ -288,7 +274,7 @@ class ProductDetails extends StatelessWidget {
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 10,);
                     }, 
-                    itemCount: sizeList.length
+                    itemCount:  pagesController.sizeList.length
                     ),
                   );
                   }
