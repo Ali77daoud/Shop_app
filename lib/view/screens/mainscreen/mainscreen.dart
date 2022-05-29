@@ -88,6 +88,20 @@ class MainScreen extends StatelessWidget {
                         pagesController.productDetailsIndex = 0;
                         Get.back();
                       },
+                      jewelleryButton: (){
+                        pagesController.changeGender(3);
+                        pagesController.changeCategoryColor(0);
+                        pagesController.clothesIndex = 0;
+                        pagesController.productDetailsIndex = 0;
+                        Get.back();
+                      },
+                      electronicButton: (){
+                        pagesController.changeGender(4);
+                        pagesController.changeCategoryColor(0);
+                        pagesController.clothesIndex = 0;
+                        pagesController.productDetailsIndex = 0;
+                        Get.back();
+                      },
                     )
                   ),
                 ),

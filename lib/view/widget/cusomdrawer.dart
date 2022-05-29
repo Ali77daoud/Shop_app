@@ -9,6 +9,8 @@ Widget customDrawer(
     required var menButton,
     required var womenButton,
     required var kidsButton,
+    required var jewelleryButton,
+    required var electronicButton,
   }
 ){
   final pagesController = Get.find<PagesController>();
@@ -164,6 +166,7 @@ Widget customDrawer(
                   ),
                   const SizedBox(height: 15,),
                   InkWell(
+                    onTap: jewelleryButton,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -190,6 +193,7 @@ Widget customDrawer(
                   ),
                   const SizedBox(height: 15,),
                   InkWell(
+                    onTap: electronicButton,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       textDirection: TextDirection.rtl,
-      initialRoute: Routes.mainScreen,
+      initialRoute: Routes.boardingScreen,
       getPages: AppRoutes.routes,
     );
   }

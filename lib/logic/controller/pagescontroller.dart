@@ -43,6 +43,8 @@ class PagesController extends GetxController{
     'رجال',
     'نساء',
     'أطفال',
+    'إكسسوارات',
+    'إلكترونيات'
   ];
 
   List<List<String>> categoryList=[
@@ -60,6 +62,14 @@ class PagesController extends GetxController{
       'ألعاب',
       'أحذية',
     ],
+    [
+      'خواتم',
+      'أساور',
+    ],
+    [
+      'برادات',
+      'شاشات',
+    ],
   ];
 
   List<List<String>> clotheIconList = [
@@ -76,6 +86,14 @@ class PagesController extends GetxController{
     [
       'assets/images/toys.png',
       'assets/images/baby-shoes.png',
+    ],
+    [
+      'assets/images/ring.png',
+      'assets/images/bracelet.png',
+    ],
+    [
+      'assets/images/fridge.png',
+      'assets/images/television.png',
     ],
   ];
 
@@ -130,6 +148,30 @@ class PagesController extends GetxController{
       'حذاء2',
      ],
    ],
+   3:[
+       [
+      'خاتم1',
+      'خاتم2',
+      'خاتم3',
+      'خاتم4',
+      ],
+     [
+      'إسوارة1',
+      'إسوارة2',
+     ],
+   ],
+   4:[
+       [
+      'براد1',
+      'براد2',
+      'براد3',
+      'براد4',
+      ],
+     [
+      'شاشة1',
+      'شاشة2',
+     ],
+   ],
   };
   
   Map<int,dynamic> price1Map = {
@@ -172,6 +214,30 @@ class PagesController extends GetxController{
    ],
 
    2:[
+       [
+      '10',
+      '30',
+      '20',
+      '40',
+      ],
+     [
+      '50',
+      '70',
+     ],
+   ],
+   3:[
+       [
+      '10',
+      '30',
+      '20',
+      '40',
+      ],
+     [
+      '50',
+      '70',
+     ],
+   ],
+   4:[
        [
       '10',
       '30',
@@ -236,6 +302,30 @@ class PagesController extends GetxController{
       '70',
      ],
    ],
+   3:[
+       [
+      '10',
+      '30',
+      '20',
+      '40',
+      ],
+     [
+      '50',
+      '70',
+     ],
+   ],
+   4:[
+       [
+      '10',
+      '30',
+      '20',
+      '40',
+      ],
+     [
+      '50',
+      '70',
+     ],
+   ],
   };
 
   Map<int,dynamic> photoMap = {
@@ -287,6 +377,30 @@ class PagesController extends GetxController{
      [
       'assets/images/baby-shoes.jpg',
       'assets/images/baby-shoes.jpg',
+     ],
+   ],
+   3:[
+       [
+      'assets/images/ringimg.jpg',
+      'assets/images/ringimg.jpg',
+      'assets/images/ringimg.jpg',
+      'assets/images/ringimg.jpg',
+      ],
+     [
+      'assets/images/braceletimg.jpg',
+      'assets/images/braceletimg.jpg',
+     ],
+   ],
+   4:[
+       [
+      'assets/images/fridgeimg.jpg',
+      'assets/images/fridgeimg.jpg',
+      'assets/images/fridgeimg.jpg',
+      'assets/images/fridgeimg.jpg',
+      ],
+     [
+      'assets/images/tvimg.jpg',
+      'assets/images/tvimg.jpg',
      ],
    ],
   };
