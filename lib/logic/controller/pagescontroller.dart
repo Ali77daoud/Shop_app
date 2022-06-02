@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PagesController extends GetxController{
-  int homePageIndex = 0;
   int shopPageIndex = 0;
   int currentPage1 = 0;
   int currentPage2 = 0;
@@ -407,12 +406,6 @@ class PagesController extends GetxController{
 
   void changeGender(index){
     gender = index;
-    update();
-  }
-
-
-  void changeHomePage(index){
-    homePageIndex = index;
     update();
   }
 

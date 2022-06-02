@@ -5,9 +5,9 @@ import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
-class MainScreen extends StatelessWidget {
-  MainScreen({ Key? key }) : super(key: key);
-  final mainController = Get.put(MainController());
+class CategoryScreen extends StatelessWidget {
+  CategoryScreen({ Key? key }) : super(key: key);
+  final mainController = Get.find<MainController>();
   final pagesController = Get.find<PagesController>();
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class MainScreen extends StatelessWidget {
                     unselectedItemColor: Colors.grey,
             
                   ) ,
-            body: mainController.screens[mainController.i],
+            body: mainController.screens2[mainController.i],
         
       );
       }

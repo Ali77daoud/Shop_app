@@ -271,7 +271,7 @@ class SignupPage extends StatelessWidget {
                                 child: buttomUtils(
                                       ontab: (){
                                         if(formKey.currentState!.validate()){
-                                          Get.offNamed(Routes.mainScreen);
+                                          Get.offNamed(Routes.homeScreen);
                                         }
                                         else{
 

@@ -5,6 +5,7 @@ import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+// ignore: must_be_immutable
 class ProductDetails extends StatelessWidget {
   ProductDetails({ Key? key }) : super(key: key);
   final pagesController = Get.find<PagesController>();
@@ -15,7 +16,9 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
+    return  GetBuilder<PagesController>(
+      builder: (_){
+      return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,9 +26,7 @@ class ProductDetails extends StatelessWidget {
               height: h*0.35,
               child: Stack(
                 children: [
-                  GetBuilder<PagesController>(
-                    builder: (_){
-                      return CarouselSlider.builder(
+                  CarouselSlider.builder(
                     itemCount: 3, 
                     carouselController: carouselController,
                     options: CarouselOptions(
@@ -50,14 +51,12 @@ class ProductDetails extends StatelessWidget {
                         ),
                       );
                     }, 
-                    );
-                    }
                     ),
                   Positioned(
                     right: 10,
                     child: IconButton(
                       onPressed:(){
-                        pagesController.changeHomePage(1);
+                        Get.back();
                       },
                       icon: Container(
                         width: 30,
@@ -91,9 +90,7 @@ class ProductDetails extends StatelessWidget {
                 ],
               ),
             ),
-          GetBuilder<PagesController>(
-            builder: (_){
-              return Padding(
+            Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,9 +151,7 @@ class ProductDetails extends StatelessWidget {
 
                     ],
                   ),
-                );
-            }
-            ),
+                ),
          Padding(
            padding: const EdgeInsets.symmetric(horizontal: 20),
            child: Column(
@@ -171,9 +166,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                     ),
                 const SizedBox(height: 10,),
-                GetBuilder<PagesController>(
-                  builder: (_){
-                    return SizedBox(
+                SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ListView.separated(
@@ -213,10 +206,7 @@ class ProductDetails extends StatelessWidget {
                     }, 
                     itemCount: pagesController.colorList.length
                     ),
-                  );
-                  }
-                  )
-                
+                  ),
              ],
            ),
          ),
@@ -234,9 +224,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                     ),
                 const SizedBox(height: 10,),
-                GetBuilder<PagesController>(
-                  builder: (_){
-                    return SizedBox(
+                SizedBox(
                       width: double.infinity,
                       height: 50,
                       child: ListView.separated(
@@ -276,15 +264,15 @@ class ProductDetails extends StatelessWidget {
                     }, 
                     itemCount:  pagesController.sizeList.length
                     ),
-                  );
-                  }
-                  )
-                
+                  ),
              ],
            ),
          ),
           ],
       ),
     );
+    });
+    
+     
   }
 }

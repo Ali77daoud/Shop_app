@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 
@@ -11,8 +12,8 @@ class CategoryPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    return Padding(
+    return GetBuilder<PagesController>(builder: (_){
+      return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: SingleChildScrollView(
           child: Column(
@@ -29,7 +30,7 @@ class CategoryPage extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: (){
-                      pagesController.changeHomePage(0);
+                      Get.back();
                     }, 
                     icon: const Icon(Icons.arrow_forward_rounded)
                     ),
@@ -66,9 +67,7 @@ class CategoryPage extends StatelessWidget {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return GetBuilder<PagesController>(
-                        builder:(_){
-                          return SizedBox(
+                      return SizedBox(
                           width: 100,
                           height:30,
                           child: InkWell(
@@ -102,9 +101,6 @@ class CategoryPage extends StatelessWidget {
                             ),
                           ),
                         );
-                        } 
-                        );
-                       
                     },
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 6,);
@@ -126,7 +122,7 @@ class CategoryPage extends StatelessWidget {
                 itemBuilder: (context,index){
                   return InkWell(
                     onTap: (){
-                      pagesController.changeHomePage(2);
+                      Get.toNamed(Routes.productScreen);
                       pagesController.productDetailsIndex = index;
                     },
                     child: homeCard(
@@ -144,10 +140,12 @@ class CategoryPage extends StatelessWidget {
                   );
                 },
                 itemCount: pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex].length,
-                ),
+              ),
             ],
           ),
         ),
     );
+    });
+      
   }
 }
