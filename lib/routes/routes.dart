@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/route_manager.dart';
 import 'package:shop_app/view/screens/auth/loginotppage.dart';
@@ -6,13 +5,14 @@ import 'package:shop_app/view/screens/auth/loginpage.dart';
 import 'package:shop_app/view/screens/auth/signuppage.dart';
 import 'package:shop_app/view/screens/auth/verificationpage.dart';
 import 'package:shop_app/view/screens/choosepage.dart';
-import 'package:shop_app/view/screens/categoryscreens/categoryscreen.dart';
-import 'package:shop_app/view/screens/homeScreens/homescreen.dart';
+import 'package:shop_app/view/screens/mainscreen/homepages/categoryscreens/categoryscreen.dart';
+import 'package:shop_app/view/screens/mainscreen/homepages/productdetailscreen/productscreen.dart';
+import 'package:shop_app/view/screens/mainscreen/mainscreen.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/orderacceptscreens/orderacceptscreen.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/ordertrackingscreens/ordertrackingscreen.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/payment1screens/payment1screen.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/payment2screens/payment2screen.dart';
 import 'package:shop_app/view/screens/on_boarding_screen.dart';
-import 'package:shop_app/view/screens/productdetailscreens/productdetailscreen.dart';
-import 'package:shop_app/view/screens/test1.dart';
-import 'package:shop_app/view/screens/test2.dart';
-import 'package:shop_app/view/test3.dart';
 
 class Routes{
   static const boardingScreen = '/boardingScreen';
@@ -21,18 +21,17 @@ class Routes{
   static const loginOTPPage = '/loginOTPPage';
   static const veriPage = '/veriPage';
   static const signupPage = '/signupPage';
+  static const mainScreen = '/mainScreen';
+
   static const homeScreen = '/homeScreen';
   static const categoryScreen = '/categoryScreen';
   static const productScreen = '/productScreen';
 
-  // static const homePage = '/homePage';
-  // static const categoryPage = '/homePage';
-  // static const productPage = '/homePage';
-
-
-  static const test1 = '/test1';
-  static const test2 = '/test2';
-  static const test3 = '/test3';
+  static const shopScreen = '/shopScreen';
+  static const payment1Screen = '/payment1Screen';
+  static const payment2Screen = '/payment2Screen';
+  static const orderAcceptScreen = '/orderAcceptScreen';
+  static const orderTrackingScreen = '/orderTrackingScreen';
 }
 
 class AppRoutes{
@@ -45,41 +44,49 @@ class AppRoutes{
       GetPage(
       name: Routes.choosePage, 
       page: ()=>  const ChoosePage(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 800),
       ),
       GetPage(
       name: Routes.loginPage, 
       page: ()=>   LoginPage(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 800),
       ),
       GetPage(
       name: Routes.loginOTPPage, 
       page: ()=>   LoginOtpPage(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 800),
       ),
       GetPage(
       name: Routes.veriPage, 
       page: ()=>   VeriPage(),
+      popGesture: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 200),
       ),
       GetPage(
       name: Routes.signupPage, 
       page: ()=>   SignupPage(),
+      transition: Transition.fade,
+      transitionDuration: const Duration(milliseconds: 800),
       ),
 
-    //homepages
       GetPage(
-      name: Routes.homeScreen, 
-      page: ()=>   HomeScreen(),
-      popGesture: true,
-      transition: Transition.cupertino,
-      curve: Curves.linear,
-      transitionDuration: const Duration(milliseconds: 400),
+      name: Routes.mainScreen,
+      page: ()=>   MainScreen(),
+      transition: Transition.native,
+      transitionDuration: const Duration(milliseconds: 200),
       ),
+    //homepages
 
       GetPage(
       name: Routes.categoryScreen, 
       page: ()=>   CategoryScreen(),
       popGesture: true,
       transition: Transition.cupertino,
-      curve: Curves.linear,
-      transitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 200),
       ),
 
       GetPage(
@@ -87,51 +94,41 @@ class AppRoutes{
       page: ()=>   ProductScreen(),
       popGesture: true,
       transition: Transition.cupertino,
-      curve: Curves.linear,
-      transitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 200),
       ),
 
-
-      
-      // GetPage(
-      // name: Routes.homePage, 
-      // page: ()=>   HomePage(),
-      // ),
-      // GetPage(
-      // name: Routes.categoryPage, 
-      // page: ()=>   CategoryPage(),
-      // ),
-      // GetPage(
-      // name: Routes.productPage, 
-      // page: ()=>   ProductDetails(),
-      // ),
-
-
-
+      //shoppages
       GetPage(
-      name: Routes.test1, 
-      page: ()=>   Test1(),
+      name: Routes.payment1Screen ,
+      page: ()=>   Payment1Screen(),
       popGesture: true,
       transition: Transition.cupertino,
-      curve: Curves.linear,
-      transitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 200),
+      ),
 
-      ),
       GetPage(
-      name: Routes.test2 ,
-      page: ()=>   Test2(),
+      name: Routes.payment2Screen ,
+      page: ()=>   Payment2Screen(),
       popGesture: true,
       transition: Transition.cupertino,
-      curve: Curves.linear,
-      transitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 200),
       ),
+
       GetPage(
-      name: Routes.test3, 
-      page: ()=>   Test3(),
+      name: Routes.orderAcceptScreen ,
+      page: ()=>   OrderAcceptScreen(),
       popGesture: true,
       transition: Transition.cupertino,
-      curve: Curves.linear,
-      transitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 200),
       ),
+
+      GetPage(
+      name: Routes.orderTrackingScreen ,
+      page: ()=>   OrderTrackingScreen(),
+      popGesture: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 200),
+      ),
+
   ];
 }

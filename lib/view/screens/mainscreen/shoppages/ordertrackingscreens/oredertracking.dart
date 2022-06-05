@@ -17,33 +17,16 @@ class OrederTracking extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GetBuilder<PagesController>(
-                  builder: (_){
-                    return IconButton(
-                  onPressed: (){
-                    pagesController.changeShopPage(0);
-                  }, 
-                  icon: const Icon(Icons.arrow_back),
-                  );
-                  }
-                  ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('تتبع الطلب',
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      SizedBox(width: 15,)
-                    ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text('تتبع الطلب',
+                  style: TextStyle(
+                    color: mainColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
+                SizedBox(width: 15,)
               ],
             ),
             const Text('طلب رقم 333333',

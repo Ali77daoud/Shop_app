@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 
@@ -15,37 +16,6 @@ class OrderAccept extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GetBuilder<PagesController>(
-                  builder: (_){
-                    return IconButton(
-                  onPressed: (){
-                    pagesController.changeShopPage(1);
-                  }, 
-                  icon: const Icon(Icons.arrow_back),
-                  );
-                  }
-                  ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('الدفع',
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      SizedBox(width: 15,)
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30),
               child: Container(
@@ -87,7 +57,7 @@ class OrderAccept extends StatelessWidget {
               width: double.infinity,
               child: buttomUtils(
                     ontab: (){  
-                      pagesController.changeShopPage(4);
+                      Get.toNamed(Routes.orderTrackingScreen);
                       },
                     childtext: const Text('تتبع الطلب'),
                     maincolor: mainColor,

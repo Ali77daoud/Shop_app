@@ -34,7 +34,7 @@ class ProductDetails extends StatelessWidget {
                       autoPlay: true,
                       enlargeCenterPage: true,
                       enableInfiniteScroll: false,
-                      autoPlayInterval: const Duration(seconds: 4),
+                      autoPlayInterval: const Duration(seconds: 2),
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
                         pagesController.carouselChange2(index);

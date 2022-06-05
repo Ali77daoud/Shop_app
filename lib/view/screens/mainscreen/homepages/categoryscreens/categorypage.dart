@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -9,7 +10,7 @@ class CategoryPage extends StatelessWidget {
   CategoryPage({ Key? key }) : super(key: key);
 
   final pagesController = Get.find<PagesController>();
-  
+  final mainController = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PagesController>(builder: (_){
@@ -124,6 +125,7 @@ class CategoryPage extends StatelessWidget {
                     onTap: (){
                       Get.toNamed(Routes.productScreen);
                       pagesController.productDetailsIndex = index;
+                      pagesController.currentPage2 = 0;
                     },
                     child: homeCard(
                       hight: 150,

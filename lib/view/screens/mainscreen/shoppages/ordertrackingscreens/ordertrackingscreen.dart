@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/orderacceptscreens/orderaccept.dart';
+import 'package:shop_app/view/screens/mainscreen/shoppages/ordertrackingscreens/oredertracking.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({ Key? key }) : super(key: key);
-  final mainController = Get.put(MainController());
+class OrderTrackingScreen extends StatelessWidget {
+  OrderTrackingScreen({ Key? key }) : super(key: key);
+  final mainController = Get.find<MainController>();
   final pagesController = Get.find<PagesController>();
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,14 @@ class HomeScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
-                        Get.back();
+                        mainController.changeScreen(0).then((value){
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.offNamed((Routes.mainScreen));
+                          Get.back();
+                        });
                       }
                       ,
                       womenButton: (){
@@ -79,28 +89,56 @@ class HomeScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
-                        Get.back();
+                        mainController.changeScreen(0).then((value){
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.offNamed((Routes.mainScreen));
+                          Get.back();
+                        });
                       },
                       kidsButton: (){
                         pagesController.changeGender(2);
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
-                        Get.back();
+                        mainController.changeScreen(0).then((value){
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.offNamed((Routes.mainScreen));
+                          Get.back();
+                        });
                       },
                       jewelleryButton: (){
                         pagesController.changeGender(3);
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
-                        Get.back();
+                        mainController.changeScreen(0).then((value){
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.offNamed((Routes.mainScreen));
+                          Get.back();
+                        });
                       },
                       electronicButton: (){
                         pagesController.changeGender(4);
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
-                        Get.back();
+                        mainController.changeScreen(0).then((value){
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.back();
+                          Get.offNamed((Routes.mainScreen));
+                          Get.back();
+                        });
                       },
                     )
                   ),
@@ -116,16 +154,21 @@ class HomeScreen extends StatelessWidget {
                           BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
                         ],
                     iconSize: 23,
-                    currentIndex: mainController.i,
                     onTap: (index){
-                      mainController.changeScreen(index);
+                      //are you sure you want to quit payment
+                      mainController.changeScreen(index).then((value){
+                        Get.back();
+                        Get.back();
+                        Get.back();
+                        Get.offNamed((Routes.mainScreen));
+                        Get.back();
+                      });
                     },
                     type: BottomNavigationBarType.fixed,
-                    fixedColor: Get.isDarkMode?blackColor:mainColor,
-                    unselectedItemColor: Colors.grey,
-            
+                    fixedColor: greyColor,
+                    unselectedItemColor: greyColor,
                   ) ,
-            body: mainController.screens1[mainController.i],
+            body:OrederTracking(),
         
       );
       }

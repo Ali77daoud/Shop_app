@@ -1,37 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:shop_app/logic/controller/pagescontroller.dart';
-// import 'package:shop_app/view/screens/mainscreen/homepages/categorypage.dart';
-// import 'package:shop_app/view/screens/mainscreen/homepages/home.dart';
-// import 'package:shop_app/view/screens/mainscreen/homepages/productdetails.dart';
-
-
-
-// class HomePage extends StatelessWidget {
-//   HomePage({ Key? key }) : super(key: key);
-
-//   final pagesController = Get.put(PagesController());
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//     GetBuilder<PagesController>(
-//       builder: (_){
-//         return 
-//         IndexedStack(
-//           index: pagesController.homePageIndex,
-//           children: [
-//             Home(),
-//             CategoryPage(),
-//             ProductDetails(),
-//           ],
-//         );  
-//       }
-//       );
-//   }
-// }
-
-
-
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -62,63 +28,64 @@ class HomePage extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: h*0.35,
-              child: Stack(
-                children: [
-                  GetBuilder<PagesController>(
-                    builder: (_){
-                      return CarouselSlider.builder(
-                    itemCount: 3, 
-                    carouselController: carouselController,
-                    options: CarouselOptions(
-                      initialPage: pagesController.currentPage1 ,
-                      height: 400,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      autoPlayInterval: const Duration(seconds: 3),
-                      viewportFraction: 1,
-                      onPageChanged: (index, reason) {
-                        pagesController.carouselChange1(index);
-                      },
-                    ),
-                    itemBuilder: (context, index, realIndex){
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/1.jpg'),
-                            fit: BoxFit.cover
-                            ),
+            GetBuilder<PagesController>(
+              builder: (_){
+                return SizedBox(
+                  height: h*0.35,
+                  child: Stack(
+                    children: [
+                      CarouselSlider.builder(
+                        itemCount: 3, 
+                        carouselController: carouselController,
+                        options: CarouselOptions(
+                          initialPage: pagesController.currentPage1 ,
+                          height: 400,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: false,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          viewportFraction: 1,
+                          onPageChanged: (index, reason) {
+                            pagesController.carouselChange1(index);
+                          },
                         ),
-                      );
-                    }, 
-                    );
-                    }
-                    ),
-                  
-                  Positioned(
-                    top: 20,
-                    left: 20,
-                    child: 
-                      AnimatedSmoothIndicator(
-                          activeIndex:pagesController.currentPage1, 
-                          count: 3,
-                          effect:  const SlideEffect(
-                              dotColor: whiteColor,
-                              activeDotColor: mainColor,
-                              dotHeight: 10,
-                              dotWidth: 10,
-                              spacing: 5, 
-                              paintStyle: PaintingStyle.stroke,
+                        itemBuilder: (context, index, realIndex){
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(0),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/1.jpg'),
+                                fit: BoxFit.cover
+                                ),
                             ),
-                      ),
-                    
-                    ),
-                ],
+                          );
+                        }, 
+                        ),
+                      
+                      Positioned(
+                        top: 20,
+                        left: 20,
+                        child: 
+                          AnimatedSmoothIndicator(
+                              activeIndex:pagesController.currentPage1, 
+                              count: 3,
+                              effect:  const SlideEffect(
+                                  dotColor: whiteColor,
+                                  activeDotColor: mainColor,
+                                  dotHeight: 10,
+                                  dotWidth: 10,
+                                  spacing: 5, 
+                                  paintStyle: PaintingStyle.stroke,
+                                ),
+                          ),
+                        
+                        ),
+                    ],
+                  ),
+                );
+              }
               ),
-            ),
+            
             SizedBox(height: h*0.02,),
             GetBuilder<PagesController>(
               builder: (_){
@@ -267,11 +234,11 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: [
-                  GetBuilder<PagesController>(
-                      builder: (_){
-                        return CarouselSlider.builder(
+              child: GetBuilder<PagesController>(
+                  builder: (_){
+                    return Column(
+                      children: [
+                        CarouselSlider.builder(
                             itemCount: 3, 
                             carouselController: carouselController2,
                             options: CarouselOptions(
@@ -297,25 +264,24 @@ class HomePage extends StatelessWidget {
                                 ),
                               );
                             }, 
-                      );
-                      }
-                  ),
-                  const SizedBox(height: 15,),
-                  AnimatedSmoothIndicator(
-                      activeIndex:pagesController.currentPage3, 
-                      count: 3,
-                      effect: const ExpandingDotsEffect(
-                        expansionFactor: 3,
-                         dotColor: greyColor,
-                         activeDotColor: darkBlueColor,
-                          dotHeight: 10,
-                          dotWidth: 10,
-                          spacing: 5, 
-                          paintStyle: PaintingStyle.fill,
-                      )  
-                ),
-                      
-                ],
+                        ),
+                        const SizedBox(height: 15,),
+                        AnimatedSmoothIndicator(
+                            activeIndex:pagesController.currentPage3, 
+                            count: 3,
+                            effect: const ExpandingDotsEffect(
+                              expansionFactor: 3,
+                              dotColor: greyColor,
+                              activeDotColor: darkBlueColor,
+                                dotHeight: 10,
+                                dotWidth: 10,
+                                spacing: 5, 
+                                paintStyle: PaintingStyle.fill,
+                            )  
+                      ),
+                      ],
+                    );
+                  }
               ),
             ),
            const Text('مختارة فقط لأجلك',

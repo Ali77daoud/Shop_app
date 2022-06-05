@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
-class CategoryScreen extends StatelessWidget {
-  CategoryScreen({ Key? key }) : super(key: key);
-  final mainController = Get.find<MainController>();
-  final pagesController = Get.find<PagesController>();
+class MainScreen extends StatelessWidget {
+  MainScreen({ Key? key }) : super(key: key);
+  final mainController = Get.put(MainController());
+  final pagesController = Get.put(PagesController());
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -71,6 +72,7 @@ class CategoryScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
+                        mainController.changeScreen(0);
                         Get.back();
                       }
                       ,
@@ -79,6 +81,7 @@ class CategoryScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
+                        mainController.changeScreen(0);
                         Get.back();
                       },
                       kidsButton: (){
@@ -86,6 +89,7 @@ class CategoryScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
+                        mainController.changeScreen(0);
                         Get.back();
                       },
                       jewelleryButton: (){
@@ -93,6 +97,7 @@ class CategoryScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
+                        mainController.changeScreen(0);
                         Get.back();
                       },
                       electronicButton: (){
@@ -100,6 +105,7 @@ class CategoryScreen extends StatelessWidget {
                         pagesController.changeCategoryColor(0);
                         pagesController.clothesIndex = 0;
                         pagesController.productDetailsIndex = 0;
+                        mainController.changeScreen(0);
                         Get.back();
                       },
                     )
@@ -116,7 +122,7 @@ class CategoryScreen extends StatelessWidget {
                           BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
                         ],
                     iconSize: 23,
-                    currentIndex: mainController.i,
+                    currentIndex: mainController.mainIndex,
                     onTap: (index){
                       mainController.changeScreen(index);
                     },
@@ -125,8 +131,7 @@ class CategoryScreen extends StatelessWidget {
                     unselectedItemColor: Colors.grey,
             
                   ) ,
-            body: mainController.screens2[mainController.i],
-        
+            body: mainController.screens1[mainController.mainIndex],
       );
       }
       )

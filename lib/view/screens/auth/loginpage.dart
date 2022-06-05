@@ -144,7 +144,7 @@ class LoginPage extends StatelessWidget {
                               child: buttomUtils(
                                     ontab: (){
                                       if(formKey.currentState!.validate()){
-                                        Get.offNamed(Routes.homeScreen);
+                                        Get.offNamed(Routes.mainScreen);
                                       }
                                       else{
 

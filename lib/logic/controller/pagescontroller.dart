@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PagesController extends GetxController{
-  int shopPageIndex = 0;
   int currentPage1 = 0;
   int currentPage2 = 0;
   int currentPage3 = 0; 
@@ -409,10 +408,6 @@ class PagesController extends GetxController{
     update();
   }
 
-  void changeShopPage(index){
-    shopPageIndex = index;
-    update();
-  }
 
   void carouselChange1(int index){
     currentPage1=index;

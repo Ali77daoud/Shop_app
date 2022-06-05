@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 
 Widget customDrawer(
@@ -221,8 +222,7 @@ Widget customDrawer(
                   const SizedBox(height: 60,),
                   InkWell(
                     onTap: (){
-                      pagesController.changeShopPage(3);
-                      Get.back();
+                      // Get.toNamed(Routes.orderTrackingScreen);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
