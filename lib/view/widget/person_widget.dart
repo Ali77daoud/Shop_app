@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shop_app/utils/theme.dart';
 
-Widget PersonWidget(
+Widget personWidget(
   {
     required double imgHight,
     required double imgWidth,
     required String img,
-    required String name,
+    required String fname,
+    required String lname,
     required String email,
   }
 ){
@@ -28,11 +29,12 @@ Widget PersonWidget(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text(name,
+          Text(lname +'  '+fname,
             style: const TextStyle(
                 color: blackColor,
                 fontSize: 13,
-                fontWeight: FontWeight.normal
+                fontWeight: FontWeight.normal,
+                overflow: TextOverflow.ellipsis,
               ),
           ),
           Text(email,

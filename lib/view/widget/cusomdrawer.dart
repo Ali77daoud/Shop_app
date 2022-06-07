@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
+import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
-import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 
 Widget customDrawer(
@@ -14,7 +16,9 @@ Widget customDrawer(
     required var electronicButton,
   }
 ){
-  final pagesController = Get.find<PagesController>();
+  final authController = Get.find<AuthController>();
+  String fName = GetStorage().read('fname');
+  String lName = GetStorage().read('lname');
   return Column(
     children: [
       Container(
@@ -42,8 +46,8 @@ Widget customDrawer(
               
               ),
             ),
-            const Text('aaa aaaa',
-              style: TextStyle(
+            Text(lName +'  '+fName,
+              style: const TextStyle(
                     color: whiteColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold
@@ -275,6 +279,9 @@ Widget customDrawer(
                   ),
                   const SizedBox(height: 15,),
                   InkWell(
+                    onTap: (){
+                      authController.logOut();
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
 import 'package:shop_app/routes/routes.dart';
+import 'package:shop_app/services/network/categoryapi.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/button_utils.dart';
 
 class ChoosePage extends StatelessWidget {
-  const ChoosePage({ Key? key }) : super(key: key);
-
+  ChoosePage({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -80,8 +81,10 @@ class ChoosePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 10,),
                           buttomUtils(
-                          ontab: (){
+                          ontab: ()async{
                             Get.offNamed(Routes.loginPage);
+                            // MainCategoryModel res = await CategoryApi.getMainCategories();
+                            // print(res.data![0].id.toString());
                           }, 
                           childtext: const Text('بائع',
                                     style: TextStyle(

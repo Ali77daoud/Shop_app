@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -11,6 +12,7 @@ class LoginPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailkey = TextEditingController();
   final TextEditingController passwordkey = TextEditingController();
+  final authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -139,15 +141,18 @@ class LoginPage extends StatelessWidget {
                             ),
                             /////////////////////
                             SizedBox(height:h*0.02,),
-                            SizedBox(
+                            GetBuilder<AuthController>(
+                              builder: (_){
+                                return SizedBox(
                               width: double.infinity,
                               child: buttomUtils(
                                     ontab: (){
                                       if(formKey.currentState!.validate()){
-                                        Get.offNamed(Routes.mainScreen);
-                                      }
-                                      else{
-
+                                        authController.showCircleDialog(context: context);
+                                        authController.loginApi(
+                                          email: emailkey.text ,
+                                          password: passwordkey.text,
+                                          );
                                       }
                                       },
 
@@ -160,6 +165,8 @@ class LoginPage extends StatelessWidget {
                                     buttompadding: 10,
                                     c: mainColor,
                                   ),
+                                );
+                              }
                             ),
                             SizedBox(height:h*0.01,),
                             Directionality(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/view/screens/mainscreen/buypage.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/homepage.dart';
 import 'package:shop_app/view/screens/mainscreen/personpage.dart';
@@ -12,6 +13,10 @@ class MainController extends GetxController{
   int mainIndex = 0;
 
   int i = 0 ;
+
+  String fName = GetStorage().read('fname');
+  String lName = GetStorage().read('lname');
+  String email = GetStorage().read('email');
 
   var currentPage = 0;
 

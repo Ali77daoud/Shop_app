@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/route_manager.dart';
 import 'package:shop_app/view/screens/auth/loginotppage.dart';
 import 'package:shop_app/view/screens/auth/loginpage.dart';
@@ -43,7 +42,7 @@ class AppRoutes{
       ),
       GetPage(
       name: Routes.choosePage, 
-      page: ()=>  const ChoosePage(),
+      page: ()=>  ChoosePage(),
       transition: Transition.fade,
       transitionDuration: const Duration(milliseconds: 800),
       ),

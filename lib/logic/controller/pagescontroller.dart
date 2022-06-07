@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
+import 'package:shop_app/services/network/categoryapi.dart';
 
 class PagesController extends GetxController{
   int currentPage1 = 0;
@@ -13,7 +15,32 @@ class PagesController extends GetxController{
 
   int clothesIndex=0;
   int gender = 0;
+
+  @override
+  void onInit() {
+    super.onInit();
+    isLoading = true;
+    getCategories();
+  }
   
+  //category
+  late List<MainCategoryDataModel> dataCategoryList ;
+  bool isLoading = false;
+  Future<void> getCategories()async{
+    try{
+      MainCategoryModel res = await CategoryApi.getMainCategories();
+      dataCategoryList = res.data!;
+      isLoading=false;
+      update();
+      print('success');
+    }catch(e){
+      isLoading=false;
+      update();
+      print(e.toString());
+    }
+    
+  }
+
   List<Color> colorList = [
     Colors.red,
     Colors.blue,

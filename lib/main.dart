@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/string.dart';
 
 
-void main() {
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       textDirection: TextDirection.rtl,
-      initialRoute: Routes.boardingScreen,
+      initialRoute: GetStorage().read<bool>('auth')==true?Routes.mainScreen:Routes.boardingScreen,
       getPages: AppRoutes.routes,
     );
   }

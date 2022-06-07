@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -12,8 +13,11 @@ class SignupPage extends StatelessWidget {
   final TextEditingController nicknamekey = TextEditingController();
   final TextEditingController emailkey = TextEditingController();
   final TextEditingController passkey = TextEditingController();
+  final TextEditingController repasskey = TextEditingController();
   final TextEditingController phonekey = TextEditingController();
-  final TextEditingController postalkey = TextEditingController();
+
+  final authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -206,6 +210,40 @@ class SignupPage extends StatelessWidget {
                               ///////////////////////
                               ///////////////////////////////
                               SizedBox(height:h*0.01,),
+                              /////////////////////re-password
+                              TextFormField(
+                                keyboardType:TextInputType.visiblePassword,
+                                controller: repasskey,
+                                cursorColor: mainColor,
+                                validator: (value){
+                                  if(value != passkey.text){
+                                    return 'كلمة المرور غير متطابقة';
+                                  }
+                                  else {
+                                    return null;
+                                  }
+                                  },
+                                decoration: InputDecoration(
+                                  hintText: 'تأكيد كلمة السر',
+                                  contentPadding: const EdgeInsets.only(top: 10),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 15
+                                  ),
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(      
+                                  borderSide: BorderSide(color: lightGreyColor2),   
+                                ),  
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: lightGreyColor2),
+                                ),
+                                ),
+                              ),
+                              ///////////////////////
+                              ///////////////////////////////
+                              SizedBox(height:h*0.01,),
                               /////////////////////phone
                               TextFormField(
                                 keyboardType:TextInputType.phone,
@@ -214,6 +252,9 @@ class SignupPage extends StatelessWidget {
                                 validator: (value){
                                    if(value!.isEmpty){
                                     return 'أدخل رقم الهاتف  من فضلك';
+                                  }
+                                  else if(value.length < 8){
+                                    return 'أدخل رقم هاتف من ثمانية أرقام';
                                   }
                                   },
                                 decoration: InputDecoration(
@@ -235,60 +276,40 @@ class SignupPage extends StatelessWidget {
                                 ),
                               ),
                               ///////////////////////
-                              SizedBox(height:h*0.01,),
-                              /////////////////////postal code
-                              TextFormField(
-                                keyboardType:TextInputType.text,
-                                controller: postalkey,
-                                cursorColor: mainColor,
-                                validator: (value){
-                                   if(value!.isEmpty){
-                                    return 'أدخل رمز البريد  من فضلك';
-                                  }
-                                  },
-                                decoration: InputDecoration(
-                                  hintText: 'الرمز البريدي',
-                                  contentPadding: const EdgeInsets.only(top: 10),
-                                  hintStyle: const TextStyle(
-                                    fontSize: 15
-                                  ),
-                                  filled: false,
-                                  enabledBorder: UnderlineInputBorder(      
-                                  borderSide: BorderSide(color: lightGreyColor2),   
-                                ),  
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: lightGreyColor2),
-                                ),
-                                border: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: lightGreyColor2),
-                                ),
-                                ),
-                              ),
-                              ///////////////////////
+                              
                               SizedBox(height:h*0.02,),
-                              SizedBox(
-                                width: double.infinity,
-                                child: buttomUtils(
-                                      ontab: (){
-                                        if(formKey.currentState!.validate()){
-                                          Get.offNamed(Routes.mainScreen);
-                                        }
-                                        else{
+                              GetBuilder<AuthController>(
+                                builder: (_){
+                                  return SizedBox(
+                                    width: double.infinity,
+                                    child:buttomUtils(
+                                          ontab: (){
+                                            if(formKey.currentState!.validate()){
+                                              authController.showCircleDialog(context: context);
+                                              authController.registerApi(
+                                                name: namekey.text, 
+                                                lastName: nicknamekey.text , 
+                                                email: emailkey.text, 
+                                                password: passkey.text, 
+                                                repassword: repasskey.text, 
+                                                number: phonekey.text
+                                                );
+                                            }
+                                            },
 
-                                        }
-
-                                        },
-
-                                      childtext: const Text('إنشاء حساب'),
-                                      maincolor: mainColor,
-                                      radius: 25, 
-                                      leftpadding: 0, 
-                                      rightpadding: 0, 
-                                      toppadding: 10, 
-                                      buttompadding: 10,
-                                      c: mainColor,
-                                    ),
+                                          childtext: const Text('إنشاء حساب'),
+                                          maincolor: mainColor,
+                                          radius: 25, 
+                                          leftpadding: 0, 
+                                          rightpadding: 0, 
+                                          toppadding: 10, 
+                                          buttompadding: 10,
+                                          c: mainColor,
+                                        ),
+                                  );
+                                }
                               ),
+                              
                               
                               SizedBox(height:h*0.01,),
                               const Text(
