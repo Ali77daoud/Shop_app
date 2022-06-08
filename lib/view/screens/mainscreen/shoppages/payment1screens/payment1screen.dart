@@ -68,57 +68,58 @@ class Payment1Screen extends StatelessWidget {
                     topLeft: Radius.circular(35), bottomLeft: Radius.circular(35)),
                   child: Drawer(
                     child:customDrawer(
-                      menButton: (){
-                        pagesController.changeGender(0);
-                        pagesController.changeCategoryColor(0);
-                        pagesController.clothesIndex = 0;
-                        pagesController.productDetailsIndex = 0;
-                        mainController.changeScreen(0).then((value){
-                        Get.offNamed((Routes.mainScreen));
-                        Get.back();
-                        });
-                      }
-                      ,
-                      womenButton: (){
-                        pagesController.changeGender(1);
-                        pagesController.changeCategoryColor(0);
-                        pagesController.clothesIndex = 0;
-                        pagesController.productDetailsIndex = 0;
-                        mainController.changeScreen(0).then((value){
-                        Get.offNamed((Routes.mainScreen));
-                        Get.back();
-                        });
-                      },
-                      kidsButton: (){
-                        pagesController.changeGender(2);
-                        pagesController.changeCategoryColor(0);
-                        pagesController.clothesIndex = 0;
-                        pagesController.productDetailsIndex = 0;
-                        mainController.changeScreen(0).then((value){
-                        Get.offNamed((Routes.mainScreen));
-                        Get.back();
-                        });
-                      },
-                      jewelleryButton: (){
-                        pagesController.changeGender(3);
-                        pagesController.changeCategoryColor(0);
-                        pagesController.clothesIndex = 0;
-                        pagesController.productDetailsIndex = 0;
-                        mainController.changeScreen(0).then((value){
-                        Get.offNamed((Routes.mainScreen));
-                        Get.back();
-                        });
-                      },
-                      electronicButton: (){
-                        pagesController.changeGender(4);
-                        pagesController.changeCategoryColor(0);
-                        pagesController.clothesIndex = 0;
-                        pagesController.productDetailsIndex = 0;
-                        mainController.changeScreen(0).then((value){
-                        Get.offNamed((Routes.mainScreen));
-                        Get.back();
-                        });
-                      },
+                      // menButton: (){
+                      //   pagesController.changeGender(0);
+                      //   pagesController.changeCategoryColor(0);
+                      //   pagesController.clothesIndex = 0;
+                      //   pagesController.productDetailsIndex = 0;
+                      //   mainController.changeScreen(0).then((value){
+                      //   Get.offNamed((Routes.mainScreen));
+                      //   Get.back();
+                      //   });
+                      // }
+                      // ,
+                      // womenButton: (){
+                      //   pagesController.changeGender(1);
+                      //   pagesController.changeCategoryColor(0);
+                      //   pagesController.clothesIndex = 0;
+                      //   pagesController.productDetailsIndex = 0;
+                      //   mainController.changeScreen(0).then((value){
+                      //   Get.offNamed((Routes.mainScreen));
+                      //   Get.back();
+                      //   });
+                      // },
+                      // kidsButton: (){
+                      //   pagesController.changeGender(2);
+                      //   pagesController.changeCategoryColor(0);
+                      //   pagesController.clothesIndex = 0;
+                      //   pagesController.productDetailsIndex = 0;
+                      //   mainController.changeScreen(0).then((value){
+                      //   Get.offNamed((Routes.mainScreen));
+                      //   Get.back();
+                      //   });
+                      // },
+                      // jewelleryButton: (){
+                      //   pagesController.changeGender(3);
+                      //   pagesController.changeCategoryColor(0);
+                      //   pagesController.clothesIndex = 0;
+                      //   pagesController.productDetailsIndex = 0;
+                      //   mainController.changeScreen(0).then((value){
+                      //   Get.offNamed((Routes.mainScreen));
+                      //   Get.back();
+                      //   });
+                      // },
+                      // electronicButton: (){
+                      //   pagesController.changeGender(4);
+                      //   pagesController.changeCategoryColor(0);
+                      //   pagesController.clothesIndex = 0;
+                      //   pagesController.productDetailsIndex = 0;
+                      //   mainController.changeScreen(0).then((value){
+                      //   Get.offNamed((Routes.mainScreen));
+                      //   Get.back();
+                      //   });
+                      // },
+                      // context: context,
                     )
                   ),
                 ),

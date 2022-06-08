@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/model/categorymodel/branchesmodel.dart';
 import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
+import 'package:shop_app/model/categorymodel/subcategorymodel.dart';
 import 'package:shop_app/services/network/categoryapi.dart';
 
 class PagesController extends GetxController{
@@ -14,29 +16,72 @@ class PagesController extends GetxController{
   int productDetailsIndex = 0;
 
   int clothesIndex=0;
-  int gender = 0;
+  
 
   @override
   void onInit() {
     super.onInit();
-    isLoading = true;
+    isLoadingMainCategory = true;
     getCategories();
   }
   
-  //category
-  late List<MainCategoryDataModel> dataCategoryList ;
-  bool isLoading = false;
+  //maincategory
+  int mainCategoryId = 0;
+  
+  void changeGender(index){
+    mainCategoryId = index;
+    update();
+  }
+
+  var dataCategoryList = <MainCategoryDataModel>[].obs;
+  bool isLoadingMainCategory = false;
+
   Future<void> getCategories()async{
     try{
       MainCategoryModel res = await CategoryApi.getMainCategories();
-      dataCategoryList = res.data!;
-      isLoading=false;
+      dataCategoryList.value = res.data!;
+      isLoadingMainCategory=false;
       update();
-      print('success');
     }catch(e){
-      isLoading=false;
       update();
-      print(e.toString());
+    }
+    
+  }
+
+  //subcategory
+  int subCategoryId = 0;
+
+  var dataSubCategoryList = <SubCategoryDataModel>[].obs;
+  bool isLoadingSubCategory = false;
+
+  Future<void> getSubCategories()async{
+    try{
+      SubCategoriesModel res = await CategoryApi.getSubCategories();
+      dataSubCategoryList.value = res.data!;
+      isLoadingSubCategory=false;
+      update();
+    }catch(e){
+      isLoadingSubCategory=false;
+      update();
+    }
+    
+  }
+
+  //barnches
+  int barnchesId = 0;
+
+  var databarnchesList = <BranchesDataModel>[].obs;
+  bool isLoadingbarnches = false;
+
+  Future<void> getBarnches()async{
+    try{
+      BranchesModel res = await CategoryApi.getBrunches();
+      databarnchesList.value = res.data!;
+      isLoadingbarnches=false;
+      update();
+    }catch(e){
+      isLoadingbarnches=false;
+      update();
     }
     
   }
@@ -430,10 +475,7 @@ class PagesController extends GetxController{
    ],
   };
 
-  void changeGender(index){
-    gender = index;
-    update();
-  }
+  
 
 
   void carouselChange1(int index){

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
+import 'package:shop_app/model/categorymodel/subcategorymodel.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/services/network/categoryapi.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -81,10 +82,8 @@ class ChoosePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 10,),
                           buttomUtils(
-                          ontab: ()async{
+                          ontab: (){
                             Get.offNamed(Routes.loginPage);
-                            // MainCategoryModel res = await CategoryApi.getMainCategories();
-                            // print(res.data![0].id.toString());
                           }, 
                           childtext: const Text('بائع',
                                     style: TextStyle(

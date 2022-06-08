@@ -45,7 +45,7 @@ class ProductDetails extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(0),
                           image: DecorationImage(
-                            image: AssetImage(pagesController.photoMap[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex],),
+                            image: AssetImage(pagesController.photoMap[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex],),
                             fit: BoxFit.contain
                             ),
                         ),
@@ -97,7 +97,7 @@ class ProductDetails extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Text(pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex],
+                          Text(pagesController.clothesMap[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex],
                             maxLines: 2,
                             style: const TextStyle(
                                 color: blackColor,
@@ -108,7 +108,7 @@ class ProductDetails extends StatelessWidget {
                           const SizedBox(height: 15,),
                           Row(
                             children: [
-                              Text(pagesController.price1Map[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
+                              Text(pagesController.price1Map[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
                                 maxLines: 2,
                                 style: const TextStyle(
                                     color: Colors.red,
@@ -117,7 +117,7 @@ class ProductDetails extends StatelessWidget {
                                   ),
                               ),
                               const SizedBox(width: 20,),
-                              Text(pagesController.price2Map[pagesController.gender][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
+                              Text(pagesController.price2Map[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
                                 maxLines: 2,
                                 style: const TextStyle(
                                     color: greyColor,

@@ -78,67 +78,61 @@ class LoginPage extends StatelessWidget {
                             ),
                             const SizedBox(height:10,),
                             /////////////////////////////
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: defualTextFormFeild(
-                                controller: emailkey, 
-                                inputtype: TextInputType.visiblePassword, 
-                                maxlines: 1, 
-                                ifobscure: false, 
-                                validate: (value){
-                                  if(value.isEmpty){
-                                    return 'أدخل البريد من فضلك';
-                                  }
-                                  else if(!RegExp(validationEmail).hasMatch(value)){
-                                    return 'أدخل بريد صحيح من فضلك';
-                                  }
-                                },  
-                                label:'البريد الإلكتروني',
-                                hint: '', 
-                                labelcolor: greyColor, 
-                                inputtextcolor: blackColor, 
-                                prifixicon:const Icon(Icons.person_pin,color: greyColor, ),
-                                sufixicon: Container(width: 0,),
-                                ontab: (){},  
-                                cursorColor:mainColor, 
-                                backgrouncolor: whiteColor,
-                                borderraduis: 20,
-                                bordercolor: Colors.grey.shade300,
-                                focusbordercolor: mainColor,
-                                padding:  const EdgeInsets.only(top: 10),
-                                ),
-                            ),
+                            defualTextFormFeild(
+                              controller: emailkey, 
+                              inputtype: TextInputType.emailAddress, 
+                              maxlines: 1, 
+                              ifobscure: false, 
+                              validate: (value){
+                                if(value.isEmpty){
+                                  return 'أدخل البريد من فضلك';
+                                }
+                                else if(!RegExp(validationEmail).hasMatch(value)){
+                                  return 'أدخل بريد صحيح من فضلك';
+                                }
+                              },  
+                              label:'البريد الإلكتروني',
+                              hint: '', 
+                              labelcolor: greyColor, 
+                              inputtextcolor: blackColor, 
+                              prifixicon:const Icon(Icons.person_pin,color: greyColor, ),
+                              sufixicon: Container(width: 0,),
+                              ontab: (){},  
+                              cursorColor:mainColor, 
+                              backgrouncolor: whiteColor,
+                              borderraduis: 20,
+                              bordercolor: Colors.grey.shade300,
+                              focusbordercolor: mainColor,
+                              padding:  const EdgeInsets.only(top: 10),
+                              ),
                             SizedBox(height:h*0.02,),
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: defualTextFormFeild(
-                                controller: passwordkey, 
-                                inputtype: TextInputType.emailAddress, 
-                                maxlines: 1, 
-                                ifobscure: false, 
-                                validate: (value){
-                                  if(value.isEmpty){
-                                    return 'أدخل كلمة المرور من فضلك';
-                                  }
-                                  else if(value.length < 8){
-                                    return 'أدخل كلمة مرور من ثمانية حرف';
-                                  }
-                                },  
-                                label:'كلمة السر',
-                                hint: '', 
-                                labelcolor: greyColor, 
-                                inputtextcolor: blackColor, 
-                                prifixicon:const Icon(Icons.lock,color: greyColor, ),
-                                sufixicon: Container(width: 0,),
-                                ontab: (){},  
-                                cursorColor:mainColor, 
-                                backgrouncolor: whiteColor,
-                                borderraduis: 20,
-                                bordercolor: Colors.grey.shade300,
-                                focusbordercolor: mainColor,
-                                padding:  const EdgeInsets.only(top: 10),
-                                ),
-                            ),
+                            defualTextFormFeild(
+                              controller: passwordkey, 
+                              inputtype: TextInputType.visiblePassword, 
+                              maxlines: 1, 
+                              ifobscure: false, 
+                              validate: (value){
+                                if(value.isEmpty){
+                                  return 'أدخل كلمة المرور من فضلك';
+                                }
+                                else if(value.length < 8){
+                                  return 'أدخل كلمة مرور من ثمانية حرف';
+                                }
+                              },  
+                              label:'كلمة السر',
+                              hint: '', 
+                              labelcolor: greyColor, 
+                              inputtextcolor: blackColor, 
+                              prifixicon:const Icon(Icons.lock,color: greyColor, ),
+                              sufixicon: Container(width: 0,),
+                              ontab: (){},  
+                              cursorColor:mainColor, 
+                              backgrouncolor: whiteColor,
+                              borderraduis: 20,
+                              bordercolor: Colors.grey.shade300,
+                              focusbordercolor: mainColor,
+                              padding:  const EdgeInsets.only(top: 10),
+                              ),
                             /////////////////////
                             SizedBox(height:h*0.02,),
                             GetBuilder<AuthController>(

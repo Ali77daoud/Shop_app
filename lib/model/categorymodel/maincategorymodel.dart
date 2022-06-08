@@ -17,7 +17,7 @@ class MainCategoryDataModel{
   String? updatedAt;
   String? categoryName;
   List<SubCategoryModel>? subcategories;
-  List<TranslationCategoryDataModel?>? translations;
+  List<TranslationCategoryDataModel>? translations;
 
   MainCategoryDataModel.fromJson(Map<String,dynamic> json){
     id = json['id'];

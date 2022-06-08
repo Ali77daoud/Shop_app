@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
+import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 import 'package:shop_app/view/widget/icon_container.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({ Key? key }) : super(key: key);
 
@@ -101,10 +103,11 @@ class HomePage extends StatelessWidget {
                             Get.toNamed(Routes.categoryScreen);
                           },
                           child: iconContainer(
-                            icon: Image.asset('assets/images/shopping-bags.png'),
+                            image: 'assets/images/shopping-bags.png',
                             text: 'الجديد في',
                             color: mainColor,
                             h: 5,
+                            ifNetwork: false,
                             ),
                         ),
                         const SizedBox(width:20,),
@@ -112,13 +115,14 @@ class HomePage extends StatelessWidget {
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context,index){
-                              return GetBuilder<PagesController>(
-                                builder: (_){
+                              return Obx(
+                                (){
                                   return  iconContainer(
-                                    icon: Image.asset(pagesController.clotheIconList[pagesController.gender][index]),
-                                    text: pagesController.categoryList[pagesController.gender][index],
+                                    image: pagesController.dataCategoryList[pagesController.mainCategoryId].subcategories![index].photoName.toString(),
+                                    text: pagesController.dataCategoryList[pagesController.mainCategoryId].subcategories![index].translations![0].subcategoryName.toString(),
                                     color: blackColor,
                                     h: 5,
+                                    ifNetwork: true
                                     );
                                 }
                                 );
@@ -126,7 +130,7 @@ class HomePage extends StatelessWidget {
                             separatorBuilder: (context,index){
                               return const SizedBox(width: 15,);
                             },
-                            itemCount:pagesController.categoryList[pagesController.gender].length
+                            itemCount:pagesController.dataCategoryList[0].subcategories!.length,
                             ),
                         ),
                       ],
@@ -134,9 +138,6 @@ class HomePage extends StatelessWidget {
                   ),
                 );
             }),
-
-            
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
               child: SizedBox(
@@ -197,10 +198,11 @@ class HomePage extends StatelessWidget {
                       ]
                         ),
                     child: iconContainer(
-                    icon: Image.asset('assets/images/money.png'),
+                    image: 'assets/images/money.png',
                     text: 'ضمان استعادة الأموال',
                     color: blackColor,
                     h: 20,
+                    ifNetwork: false,
                     ),
                   ),
                   Container(
@@ -223,10 +225,11 @@ class HomePage extends StatelessWidget {
                       ]
                         ),
                     child: iconContainer(
-                    icon: Image.asset('assets/images/cargo-truck.png'),
+                    image: 'assets/images/cargo-truck.png',
                     text: 'الشحن مجاناً',
                     color: blackColor,
                     h: 20,
+                    ifNetwork: false
                     ),
                   ),
                 ],

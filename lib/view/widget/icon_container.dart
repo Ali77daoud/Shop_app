@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 
 Widget iconContainer(
   {
-    required Widget icon,
+    required String image,
     required String text,
     required Color color,
     required double h,
+    required bool ifNetwork,
   }
 ) {
   return Column(
@@ -32,7 +34,21 @@ Widget iconContainer(
           ),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: icon,
+          child: Container(
+                width: 35,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image:ifNetwork?DecorationImage(
+                    image: NetworkImage('$baseUrl/$image'),
+                    fit: BoxFit.fill
+                  ):
+                  DecorationImage(
+                    image: AssetImage(image),
+                    fit: BoxFit.fill
+                  )
+                ),
+                ),
         ),
       ),
       SizedBox(height: h,),

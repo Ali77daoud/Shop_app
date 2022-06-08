@@ -6,23 +6,18 @@ import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
+import 'package:shop_app/view/widget/drawer_items.dart';
 
-Widget customDrawer(
-  {
-    required var menButton,
-    required var womenButton,
-    required var kidsButton,
-    required var jewelleryButton,
-    required var electronicButton,
-  }
-){
+Widget customDrawer(){
+  final pageController = Get.find<PagesController>();
   final authController = Get.find<AuthController>();
+  final mainController = Get.find<MainController>();
   String fName = GetStorage().read('fname');
   String lName = GetStorage().read('lname');
   return Column(
     children: [
       Container(
-        height: 180,
+        height: 200,
         width: double.infinity,
         decoration: const BoxDecoration(
           color: main2Color,
@@ -52,7 +47,7 @@ Widget customDrawer(
                     fontSize: 20,
                     fontWeight: FontWeight.bold
                   ),
-    )
+        )
           ],
         ),
       ),
@@ -75,234 +70,254 @@ Widget customDrawer(
         ),
       ),
       Expanded(
-        flex: 1,
         child: Container(
           decoration: const BoxDecoration(
             color: mainColor,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
-            child: SingleChildScrollView(
-              child: 
-              GetBuilder<PagesController>(
-                builder: (_){
-                  return Column(
-                children: [
-                      InkWell(
-                          onTap: menButton,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children:  [
-                              Container(
-                                width: 28,
-                                height: 28,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/images/man.png'),
-                                    fit: BoxFit.contain
-                                    )
-                                ),
-                              ),
-                              const SizedBox(width: 20,),
-                              const Text('رجال',
-                                style : TextStyle(
-                                color: whiteColor,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold
-                              ),
-                              )
-                            ],
+            child: 
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 230,
+                      child: Obx((){
+                        return ListView.separated(
+                          itemBuilder: (context,index){
+                            return drawerItems(
+                              ontap: (){
+                                pageController.changeGender(index);
+                                // pageController.changeCategoryColor(0);
+                                // pageController.clothesIndex = 0;
+                                // pageController.productDetailsIndex = 0;
+                                // mainController.changeScreen(0);
+                                Get.back();
+                              }, 
+                              title: pageController.dataCategoryList[index].translations![0].categoryname.toString(), 
+                              image: pageController.dataCategoryList[index].photoName.toString(),
+                            );
+                          }, 
+                          separatorBuilder: (context,index){
+                            return const SizedBox(height: 15,);
+                          },
+                          itemCount: pageController.dataCategoryList.length,
+                          );
+                      }),
+                    ),
+                    //////////////////////////////
+                    const SizedBox(height: 40,),
+                    InkWell(
+                      onTap: (){
+                        // Get.toNamed(Routes.orderTrackingScreen);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(Icons.track_changes,color: whiteColor,),
+                          SizedBox(width: 20,),
+                          Text('تتبع الطلب',
+                            style : TextStyle(
+                            color: whiteColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
                           ),
+                          )
+                        ],
+                      ),
                     ),
-                  
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    onTap: womenButton,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            width: 27,
-                            height: 27,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/woman.png'),
-                                fit: BoxFit.contain
-                                )
-                            ),
+                    const SizedBox(height: 15,),
+                    InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(Icons.call,color: whiteColor,),
+                          SizedBox(width: 20,),
+                          Text('اتصل بنا',
+                            style : TextStyle(
+                            color: whiteColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
                           ),
-                        const SizedBox(width: 20,),
-                        const Text('نساء',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    onTap: kidsButton ,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children:  [
-                        Container(
-                            width: 27,
-                            height: 27,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/son.png'),
-                                fit: BoxFit.contain
-                                )
-                            ),
+                    const SizedBox(height: 15,),
+                    InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(Icons.info,color: whiteColor,),
+                          SizedBox(width: 20,),
+                          Text('معلومات عنا',
+                            style : TextStyle(
+                            color: whiteColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
                           ),
-                        const SizedBox(width: 20,),
-                        const Text('أطفال',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    onTap: jewelleryButton,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            width: 27,
-                            height: 27,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/jewelry.png'),
-                                fit: BoxFit.contain
-                                )
-                            ),
+                    const SizedBox(height: 15,),
+                    InkWell(
+                      onTap: (){
+                        authController.logOut();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(Icons.logout,color: whiteColor,),
+                          SizedBox(width: 20,),
+                          Text('تسجيل الخروج',
+                            style : TextStyle(
+                            color: whiteColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
                           ),
-                        const SizedBox(width: 20,),
-                        const Text('إكسسوارات',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    onTap: electronicButton,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            width: 27,
-                            height: 27,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/images/electronics.png'),
-                                fit: BoxFit.contain
-                                )
-                            ),
-                          ),
-                        const SizedBox(width: 20,),
-                        const Text('إلكترونيات',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 60,),
-                  InkWell(
-                    onTap: (){
-                      // Get.toNamed(Routes.orderTrackingScreen);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.track_changes,color: whiteColor,),
-                        SizedBox(width: 20,),
-                        Text('تتبع الطلب',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.call,color: whiteColor,),
-                        SizedBox(width: 20,),
-                        Text('اتصل بنا',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.info,color: whiteColor,),
-                        SizedBox(width: 20,),
-                        Text('معلومات عنا',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 15,),
-                  InkWell(
-                    onTap: (){
-                      authController.logOut();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(Icons.logout,color: whiteColor,),
-                        SizedBox(width: 20,),
-                        Text('تسجيل الخروج',
-                          style : TextStyle(
-                          color: whiteColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold
-                        ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              );
-                }
-                )
-              
-            ),
+                  ],
+                ),
+                //     InkWell(
+                //         onTap: menButton,
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           children:  [
+                //             Container(
+                //               width: 28,
+                //               height: 28,
+                //               decoration: const BoxDecoration(
+                //                 image: DecorationImage(
+                //                   image: AssetImage('assets/images/man.png'),
+                //                   fit: BoxFit.contain
+                //                   )
+                //               ),
+                //             ),
+                //             const SizedBox(width: 20,),
+                //             const Text('رجال',
+                //               style : TextStyle(
+                //               color: whiteColor,
+                //               fontSize: 18,
+                //               fontWeight: FontWeight.bold
+                //             ),
+                //             )
+                //           ],
+                //         ),
+                //   ),
+                
+                // const SizedBox(height: 15,),
+                // InkWell(
+                //   onTap: womenButton,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       Container(
+                //           width: 27,
+                //           height: 27,
+                //           decoration: const BoxDecoration(
+                //             image: DecorationImage(
+                //               image: AssetImage('assets/images/woman.png'),
+                //               fit: BoxFit.contain
+                //               )
+                //           ),
+                //         ),
+                //       const SizedBox(width: 20,),
+                //       const Text('نساء',
+                //         style : TextStyle(
+                //         color: whiteColor,
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.bold
+                //       ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(height: 15,),
+                // InkWell(
+                //   onTap: kidsButton ,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children:  [
+                //       Container(
+                //           width: 27,
+                //           height: 27,
+                //           decoration: const BoxDecoration(
+                //             image: DecorationImage(
+                //               image: AssetImage('assets/images/son.png'),
+                //               fit: BoxFit.contain
+                //               )
+                //           ),
+                //         ),
+                //       const SizedBox(width: 20,),
+                //       const Text('أطفال',
+                //         style : TextStyle(
+                //         color: whiteColor,
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.bold
+                //       ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(height: 15,),
+                // InkWell(
+                //   onTap: jewelleryButton,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       Container(
+                //           width: 27,
+                //           height: 27,
+                //           decoration: const BoxDecoration(
+                //             image: DecorationImage(
+                //               image: AssetImage('assets/images/jewelry.png'),
+                //               fit: BoxFit.contain
+                //               )
+                //           ),
+                //         ),
+                //       const SizedBox(width: 20,),
+                //       const Text('إكسسوارات',
+                //         style : TextStyle(
+                //         color: whiteColor,
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.bold
+                //       ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(height: 15,),
+                // InkWell(
+                //   onTap: electronicButton,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       Container(
+                //           width: 27,
+                //           height: 27,
+                //           decoration: const BoxDecoration(
+                //             image: DecorationImage(
+                //               image: AssetImage('assets/images/electronics.png'),
+                //               fit: BoxFit.contain
+                //               )
+                //           ),
+                //         ),
+                //       const SizedBox(width: 20,),
+                //       const Text('إلكترونيات',
+                //         style : TextStyle(
+                //         color: whiteColor,
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.bold
+                //       ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+      
+                
           ),
         ),
       )

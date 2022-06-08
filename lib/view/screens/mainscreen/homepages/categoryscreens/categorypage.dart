@@ -79,7 +79,7 @@ class CategoryPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(pagesController.categoryList[pagesController.gender][index],
+                                Text(pagesController.categoryList[pagesController.mainCategoryId][index],
                                   style: TextStyle(
                                   color: pagesController.selectedIndex == index?
                                           blackColor:greyColor,
@@ -88,7 +88,7 @@ class CategoryPage extends StatelessWidget {
                                 ),
                                 ),
                                 Text('('+
-                                pagesController.clothesMap[pagesController.gender][index].length.toString()
+                                pagesController.clothesMap[pagesController.mainCategoryId][index].length.toString()
                                 +')'
                                 ,
                                   style: TextStyle(
@@ -106,7 +106,7 @@ class CategoryPage extends StatelessWidget {
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 6,);
                     },
-                    itemCount: pagesController.categoryList[pagesController.gender].length,
+                    itemCount: pagesController.categoryList[pagesController.mainCategoryId].length,
                     ),
                 ),
               ),
@@ -134,14 +134,14 @@ class CategoryPage extends StatelessWidget {
                       elevation: 5,
                       color: whiteColor, 
                       radius: 10, 
-                      centertext:pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex][index],
-                      img: pagesController.photoMap[pagesController.gender][pagesController.clothesIndex][index],
-                      price1:pagesController.price1Map[pagesController.gender][pagesController.clothesIndex][index],
-                      price2: pagesController.price2Map[pagesController.gender][pagesController.clothesIndex][index],
+                      centertext:pagesController.clothesMap[pagesController.mainCategoryId][pagesController.clothesIndex][index],
+                      img: pagesController.photoMap[pagesController.mainCategoryId][pagesController.clothesIndex][index],
+                      price1:pagesController.price1Map[pagesController.mainCategoryId][pagesController.clothesIndex][index],
+                      price2: pagesController.price2Map[pagesController.mainCategoryId][pagesController.clothesIndex][index],
                       ),
                   );
                 },
-                itemCount: pagesController.clothesMap[pagesController.gender][pagesController.clothesIndex].length,
+                itemCount: pagesController.clothesMap[pagesController.mainCategoryId][pagesController.clothesIndex].length,
               ),
             ],
           ),
