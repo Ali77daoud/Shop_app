@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/model/categorymodel/branchesmodel.dart';
 import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
+import 'package:shop_app/model/categorymodel/productmodel.dart';
 import 'package:shop_app/model/categorymodel/subcategorymodel.dart';
 import 'package:shop_app/services/network/categoryapi.dart';
 
@@ -19,14 +20,18 @@ class PagesController extends GetxController{
   
 
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
-    isLoadingMainCategory = true;
-    getCategories();
+    isLoadingCategory = true;
+    await getCategories().then((value){
+      getSubCategories();
+    });
+     
   }
   
+  bool isLoadingCategory = false;
   //maincategory
-  int mainCategoryId = 0;
+  int mainCategoryId = 1;
   
   void changeGender(index){
     mainCategoryId = index;
@@ -34,13 +39,11 @@ class PagesController extends GetxController{
   }
 
   var dataCategoryList = <MainCategoryDataModel>[].obs;
-  bool isLoadingMainCategory = false;
 
   Future<void> getCategories()async{
     try{
       MainCategoryModel res = await CategoryApi.getMainCategories();
       dataCategoryList.value = res.data!;
-      isLoadingMainCategory=false;
       update();
     }catch(e){
       update();
@@ -49,7 +52,7 @@ class PagesController extends GetxController{
   }
 
   //subcategory
-  int subCategoryId = 0;
+  int subCategoryId = 1;
 
   var dataSubCategoryList = <SubCategoryDataModel>[].obs;
   bool isLoadingSubCategory = false;
@@ -58,29 +61,46 @@ class PagesController extends GetxController{
     try{
       SubCategoriesModel res = await CategoryApi.getSubCategories();
       dataSubCategoryList.value = res.data!;
-      isLoadingSubCategory=false;
+      isLoadingCategory=false;
       update();
     }catch(e){
-      isLoadingSubCategory=false;
       update();
     }
     
   }
 
   //barnches
-  int barnchesId = 0;
+  int barnchesId = 1;
 
-  var databarnchesList = <BranchesDataModel>[].obs;
+  var dataBarnchesList = <BranchesDataModel>[].obs;
   bool isLoadingbarnches = false;
 
   Future<void> getBarnches()async{
     try{
       BranchesModel res = await CategoryApi.getBrunches();
-      databarnchesList.value = res.data!;
-      isLoadingbarnches=false;
+      dataBarnchesList.value = res.data!;
       update();
     }catch(e){
       isLoadingbarnches=false;
+      update();
+    }
+    
+  }
+
+  //products
+  int productsId = 1;
+
+  var dataproductsList = <ProductsDataModel>[].obs;
+  bool isLoadingproducts = false;
+
+  Future<void> getProduct()async{
+    try{
+      ProductsModel res = await CategoryApi.getProducts();
+      dataproductsList.value = res.data!;
+      isLoadingbarnches = false;
+      update();
+    }catch(e){
+      isLoadingbarnches = false;
       update();
     }
     

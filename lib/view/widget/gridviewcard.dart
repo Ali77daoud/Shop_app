@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 
 Widget homeCard(
@@ -13,6 +14,7 @@ Widget homeCard(
     required String img,
     required String price1,
     required String price2,
+    bool ifNetworkImage = false,
   }
 ){
   return Card(
@@ -35,7 +37,11 @@ Widget homeCard(
                 width: width,
                 height: hight,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image:ifNetworkImage? DecorationImage(
+                    image: NetworkImage('$baseUrl/$img'),
+                    fit: BoxFit.cover,
+                  ):
+                  DecorationImage(
                     image: AssetImage(img),
                     fit: BoxFit.cover,
                   )

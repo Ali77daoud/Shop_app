@@ -10,42 +10,42 @@ class SubCategoryDataModel{
   int? id;
   String? photoName;
   int? mcategoryId;
-  String? createdAt;
-  String? updatedAt;
-  String? subcategoryName;
-  List<SubCategoryBranchesModel>? branches;
+  // String? createdAt;
+  // String? updatedAt;
+  // String? subcategoryName;
+  // List<SubCategoryBranchesModel>? branches;
   List<TranslationSubCategoryModel>? translations;
 
   SubCategoryDataModel.fromJson(Map<String,dynamic> json){
     id = json['id'];
     photoName = json['photo_name'];
     mcategoryId = json['mcategory_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    subcategoryName = json['subcategory_name'];
-    branches = (json['branches'] as List).map((e) => SubCategoryBranchesModel.fromJson(e)).toList();
+    // createdAt = json['created_at'];
+    // updatedAt = json['updated_at'];
+    // subcategoryName = json['subcategory_name'];
+    // branches = (json['branches'] as List).map((e) => SubCategoryBranchesModel.fromJson(e)).toList();
     translations = (json['translations'] as List).map((e) => TranslationSubCategoryModel.fromJson(e)).toList();
   }
 }
 
-class SubCategoryBranchesModel{
-  int? id;
-  int? subcategoryId;
-  String? createdAt;
-  String? updatedAt;
-  String? branchName;
-  List<TranslationSubCategoryBranchesModel>? translations;
+// class SubCategoryBranchesModel{
+//   int? id;
+//   int? subcategoryId;
+//   String? createdAt;
+//   String? updatedAt;
+//   String? branchName;
+//   List<TranslationSubCategoryBranchesModel>? translations;
 
-  SubCategoryBranchesModel.fromJson(Map<String,dynamic> json){
-    id = json['id'];
-    subcategoryId = json['subcategory_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    branchName = json['branch_name'];
-    translations = (json['translations'] as List).map((e) => TranslationSubCategoryBranchesModel.fromJson(e)).toList();
-  }
+//   SubCategoryBranchesModel.fromJson(Map<String,dynamic> json){
+//     id = json['id'];
+//     subcategoryId = json['subcategory_id'];
+//     createdAt = json['created_at'];
+//     updatedAt = json['updated_at'];
+//     branchName = json['branch_name'];
+//     translations = (json['translations'] as List).map((e) => TranslationSubCategoryBranchesModel.fromJson(e)).toList();
+//   }
 
-}
+// }
 class TranslationSubCategoryModel{
   int? id;
   int? subcategoryId;
@@ -60,17 +60,17 @@ class TranslationSubCategoryModel{
   }
 }
 
-class TranslationSubCategoryBranchesModel{
-  int? id;
-  int? barnchId;
-  String? locale;
-  String? branchName;
+// class TranslationSubCategoryBranchesModel{
+//   int? id;
+//   int? barnchId;
+//   String? locale;
+//   String? branchName;
 
-  TranslationSubCategoryBranchesModel.fromJson(Map<String,dynamic> json){
-    id = json['id'];
-    barnchId = json['branch_id'];
-    locale = json['locale'];
-    branchName = json['branch_name'];
-  }
-}
+//   TranslationSubCategoryBranchesModel.fromJson(Map<String,dynamic> json){
+//     id = json['id'];
+//     barnchId = json['branch_id'];
+//     locale = json['locale'];
+//     branchName = json['branch_name'];
+//   }
+// }
 

@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     return GetBuilder<PagesController>(
       builder: (_){
-        return pagesController.isLoadingMainCategory?
+        return pagesController.isLoadingCategory?
         Scaffold(
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,

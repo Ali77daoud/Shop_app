@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -45,7 +46,8 @@ class ProductDetails extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(0),
                           image: DecorationImage(
-                            image: AssetImage(pagesController.photoMap[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex],),
+                            image: NetworkImage('$baseUrl/${pagesController.dataproductsList.
+                            firstWhere((e) =>e.images![0].productId==pagesController.productsId).images![index].imageName.toString()}'),
                             fit: BoxFit.contain
                             ),
                         ),
@@ -97,7 +99,9 @@ class ProductDetails extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Text(pagesController.clothesMap[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex],
+                          Text(pagesController.dataproductsList.
+                            firstWhere((e) =>e.id==pagesController.productsId).translations!.
+                            firstWhere((e) => e.locale=='ar').productName.toString(),
                             maxLines: 2,
                             style: const TextStyle(
                                 color: blackColor,
@@ -108,7 +112,8 @@ class ProductDetails extends StatelessWidget {
                           const SizedBox(height: 15,),
                           Row(
                             children: [
-                              Text(pagesController.price1Map[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
+                              Text(pagesController.dataproductsList.
+                              firstWhere((e) =>e.id==pagesController.productsId).minPrice.toString()+' \$',
                                 maxLines: 2,
                                 style: const TextStyle(
                                     color: Colors.red,
@@ -117,7 +122,8 @@ class ProductDetails extends StatelessWidget {
                                   ),
                               ),
                               const SizedBox(width: 20,),
-                              Text(pagesController.price2Map[pagesController.mainCategoryId][pagesController.clothesIndex][pagesController.productDetailsIndex]+' \$',
+                              Text(pagesController.dataproductsList.
+                              firstWhere((e) =>e.id==pagesController.productsId).maxPrice.toString()+' \$',
                                 maxLines: 2,
                                 style: const TextStyle(
                                     color: greyColor,

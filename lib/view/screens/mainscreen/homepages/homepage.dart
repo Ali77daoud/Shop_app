@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
-import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 import 'package:shop_app/view/widget/icon_container.dart';
@@ -98,18 +97,13 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        InkWell(
-                          onTap: (){
-                            Get.toNamed(Routes.categoryScreen);
-                          },
-                          child: iconContainer(
-                            image: 'assets/images/shopping-bags.png',
-                            text: 'الجديد في',
-                            color: mainColor,
-                            h: 5,
-                            ifNetwork: false,
-                            ),
-                        ),
+                        iconContainer(
+                          image: 'assets/images/shopping-bags.png',
+                          text: 'الجديد في',
+                          color: mainColor,
+                          h: 5,
+                          ifNetwork: false,
+                          ),
                         const SizedBox(width:20,),
                         Expanded(
                           child: ListView.separated(
@@ -117,20 +111,44 @@ class HomePage extends StatelessWidget {
                             itemBuilder: (context,index){
                               return Obx(
                                 (){
-                                  return  iconContainer(
-                                    image: pagesController.dataCategoryList[pagesController.mainCategoryId].subcategories![index].photoName.toString(),
-                                    text: pagesController.dataCategoryList[pagesController.mainCategoryId].subcategories![index].translations![0].subcategoryName.toString(),
-                                    color: blackColor,
-                                    h: 5,
-                                    ifNetwork: true
-                                    );
+                                  return  InkWell(
+                                    onTap: (){
+                                      pagesController.changeCategoryColor(0);
+                                      pagesController.clothesIndex = 0;
+                                      pagesController.subCategoryId = pagesController.dataSubCategoryList.
+                                      where((e) => e.mcategoryId==pagesController.mainCategoryId).toList()[index].id!.toInt();
+
+                                      print(pagesController.subCategoryId);
+                                      Get.toNamed(Routes.categoryScreen);
+                                      pagesController.isLoadingbarnches = true;
+                                      pagesController.getBarnches().then((value){
+                                        pagesController.getProduct().then((value){
+                                          pagesController.barnchesId = pagesController.dataBarnchesList.
+                                            where((e) =>e.subcategoryId == pagesController.subCategoryId).toList()[index].id!.toInt();
+                                            print('barnchesId = ''${pagesController.barnchesId}');
+                                        });
+                                        
+                                      });
+                                    },
+                                    child: iconContainer(
+                                      image: pagesController.dataSubCategoryList.
+                                      where((e) => e.mcategoryId==pagesController.mainCategoryId).toList()[index].photoName.toString(),
+                                      text: pagesController.dataSubCategoryList.
+                                      where((e) => e.mcategoryId==pagesController.mainCategoryId).
+                                      toList()[index].translations!.firstWhere((e) => e.locale=='ar').subcategoryName.toString(),
+                                      color: blackColor,
+                                      h: 5,
+                                      ifNetwork: true
+                                      ),
+                                  );
                                 }
                                 );
                             },
                             separatorBuilder: (context,index){
                               return const SizedBox(width: 15,);
                             },
-                            itemCount:pagesController.dataCategoryList[0].subcategories!.length,
+                            itemCount:pagesController.dataSubCategoryList.
+                                      where((e) => e.mcategoryId==pagesController.mainCategoryId).toList().length,
                             ),
                         ),
                       ],

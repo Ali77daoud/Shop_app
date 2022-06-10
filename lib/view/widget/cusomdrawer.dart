@@ -86,14 +86,19 @@ Widget customDrawer(){
                           itemBuilder: (context,index){
                             return drawerItems(
                               ontap: (){
-                                pageController.changeGender(index);
-                                // pageController.changeCategoryColor(0);
-                                // pageController.clothesIndex = 0;
+                                pageController.changeGender(pageController.dataCategoryList[index].id);
+                                print(pageController.mainCategoryId);
+                                pageController.subCategoryId = pageController.dataSubCategoryList.
+                                  firstWhere((e) => e.mcategoryId==pageController.mainCategoryId).id!.toInt();
+                                pageController.changeCategoryColor(0);
+                                pageController.clothesIndex = 0;
                                 // pageController.productDetailsIndex = 0;
                                 // mainController.changeScreen(0);
+                                
                                 Get.back();
                               }, 
-                              title: pageController.dataCategoryList[index].translations![0].categoryname.toString(), 
+                              title: pageController.dataCategoryList[index].translations!.
+                              firstWhere((e) => e.locale=='ar').categoryname.toString(), 
                               image: pageController.dataCategoryList[index].photoName.toString(),
                             );
                           }, 

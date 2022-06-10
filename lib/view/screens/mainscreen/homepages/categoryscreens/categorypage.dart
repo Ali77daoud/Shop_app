@@ -74,12 +74,18 @@ class CategoryPage extends StatelessWidget {
                           child: InkWell(
                             onTap: (){
                               pagesController.changeCategoryColor(index);
-                              pagesController.clothesIndex = index;
+
+                              pagesController.barnchesId = pagesController.dataBarnchesList.
+                                where((e) =>e.subcategoryId == pagesController.subCategoryId).toList()[index].id!.toInt();
+                              
+                              print(pagesController.barnchesId);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(pagesController.categoryList[pagesController.mainCategoryId][index],
+                                Text(pagesController.dataBarnchesList.
+                                where((e) =>e.subcategoryId == pagesController.subCategoryId).toList()[index].translations!.
+                                firstWhere((e) => e.locale == 'ar').branchName.toString(),
                                   style: TextStyle(
                                   color: pagesController.selectedIndex == index?
                                           blackColor:greyColor,
@@ -88,7 +94,7 @@ class CategoryPage extends StatelessWidget {
                                 ),
                                 ),
                                 Text('('+
-                                pagesController.clothesMap[pagesController.mainCategoryId][index].length.toString()
+                                '22'
                                 +')'
                                 ,
                                   style: TextStyle(
@@ -106,7 +112,8 @@ class CategoryPage extends StatelessWidget {
                     separatorBuilder: (context,index){
                       return const SizedBox(width: 6,);
                     },
-                    itemCount: pagesController.categoryList[pagesController.mainCategoryId].length,
+                    itemCount: pagesController.dataBarnchesList.
+                        where((e) =>e.subcategoryId == pagesController.subCategoryId).toList().length
                     ),
                 ),
               ),
@@ -124,24 +131,36 @@ class CategoryPage extends StatelessWidget {
                   return InkWell(
                     onTap: (){
                       Get.toNamed(Routes.productScreen);
-                      pagesController.productDetailsIndex = index;
-                      pagesController.currentPage2 = 0;
+                      pagesController.productsId = pagesController.dataproductsList.where((e) => e.branchId == pagesController.barnchesId).
+                      toList()[index].id!.toInt();
+                      print('product id = ''${pagesController.productsId}');
+                      // pagesController.productDetailsIndex = index;
+                      // pagesController.currentPage2 = 0;
                     },
                     child: homeCard(
+                      ifNetworkImage: true,
                       hight: 150,
                       width: double.infinity,
                       widthBetweenPrice: 0,
                       elevation: 5,
                       color: whiteColor, 
                       radius: 10, 
-                      centertext:pagesController.clothesMap[pagesController.mainCategoryId][pagesController.clothesIndex][index],
-                      img: pagesController.photoMap[pagesController.mainCategoryId][pagesController.clothesIndex][index],
-                      price1:pagesController.price1Map[pagesController.mainCategoryId][pagesController.clothesIndex][index],
-                      price2: pagesController.price2Map[pagesController.mainCategoryId][pagesController.clothesIndex][index],
+                      centertext: pagesController.dataproductsList.where((e) => e.branchId == pagesController.barnchesId).
+                      toList()[index].translations!.firstWhere((e) => e.locale=='ar').productName.toString(),
+
+                      img: pagesController.dataproductsList.where((e) => e.branchId == pagesController.barnchesId).
+                      toList()[index].images![0].imageName.toString(),
+
+                      price1: pagesController.dataproductsList.where((e) => e.branchId == pagesController.barnchesId).
+                      toList()[index].minPrice.toString(),
+
+                      price2: pagesController.dataproductsList.where((e) => e.branchId == pagesController.barnchesId).
+                      toList()[index].maxPrice.toString(),
                       ),
                   );
                 },
-                itemCount: pagesController.clothesMap[pagesController.mainCategoryId][pagesController.clothesIndex].length,
+                itemCount: pagesController.dataproductsList.where((e) => e.branchId == pagesController.barnchesId).
+                      toList().length,
               ),
             ],
           ),
