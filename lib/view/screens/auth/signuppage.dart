@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/string.dart';
@@ -17,6 +18,13 @@ class SignupPage extends StatelessWidget {
   final TextEditingController phonekey = TextEditingController();
 
   final authController = Get.put(AuthController());
+  
+
+    
+
+    GoogleSignInAccount? user ;
+    String? email;
+    String? name;
 
   @override
   Widget build(BuildContext context) {
@@ -323,48 +331,83 @@ class SignupPage extends StatelessWidget {
                               SizedBox(height:h*0.021,),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 5),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(90),
-                                        color: mainColor
-                                      ),
-                                      child:  const Center(
-                                        child:  Text(
-                                            'G',
-                                            style: TextStyle(
-                                            color: whiteColor,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold
+                                child:
+                                GetBuilder<AuthController>(
+                                  builder: (_){ 
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: (){
+                                            authController.signinGoogle().then((value){
+                                              authController.showCircleDialog(context: context);
+                                              authController.registerApi(
+                                                name: authController.googleUser!.displayName!.split(' ')[0], 
+                                                lastName: authController.googleUser!.displayName!.split(' ')[1] , 
+                                                email: authController.googleUser!.email, 
+                                                password: '12345678', 
+                                                repassword: '12345678', 
+                                                number: '099999999'
+                                                );
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 45,
+                                            height: 45,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(90),
+                                              color: mainColor
+                                            ),
+                                            child:  const Center(
+                                              child:  Text(
+                                                  'G',
+                                                  style: TextStyle(
+                                                  color: whiteColor,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                    const SizedBox(width:20,),
-                                    Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(90),
-                                        color: mainColor
-                                      ),
-                                      child: const Center(
-                                        child:  Text(
-                                            'f',
-                                            style: TextStyle(
-                                            color: whiteColor,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold
+                                        const SizedBox(width:20,),
+                                        InkWell(
+                                          onTap: (){
+                                            authController.signinFacebook().then((value){
+                                              authController.showCircleDialog(context: context);
+                                              authController.registerApi(
+                                                name: authController.facebookUserData!.name!.split(' ')[0], 
+                                                lastName: authController.facebookUserData!.name!.split(' ')[1] , 
+                                                email: authController.facebookUserData!.email.toString(), 
+                                                password: '12345678', 
+                                                repassword: '12345678', 
+                                                number: '099999999'
+                                                );
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 45,
+                                            height: 45,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(90),
+                                              color: mainColor
+                                            ),
+                                            child: const Center(
+                                              child:  Text(
+                                                  'f',
+                                                  style: TextStyle(
+                                                  color: whiteColor,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                      ],
+                                  );
+                                  }
+                                )
                               ),
                               ],
                             ),

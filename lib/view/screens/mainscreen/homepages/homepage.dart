@@ -195,7 +195,6 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  
                   Container(
                     width: 130,
                     height: 150,
@@ -215,14 +214,18 @@ class HomePage extends StatelessWidget {
                       )
                       ]
                         ),
-                    child: iconContainer(
-                    image: 'assets/images/money.png',
-                    text: 'ضمان استعادة الأموال',
-                    color: blackColor,
-                    h: 20,
-                    ifNetwork: false,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15,bottom: 15),
+                      child: iconContainer(
+                      image: 'assets/images/money.png',
+                      text: 'ضمان استعادة الأموال',
+                      color: blackColor,
+                      h: 20,
+                      ifNetwork: false,
+                      ),
                     ),
                   ),
+                  ///////////////////////////////////
                   Container(
                     width: 130,
                     height: 150,
@@ -242,12 +245,15 @@ class HomePage extends StatelessWidget {
                       )
                       ]
                         ),
-                    child: iconContainer(
-                    image: 'assets/images/cargo-truck.png',
-                    text: 'الشحن مجاناً',
-                    color: blackColor,
-                    h: 20,
-                    ifNetwork: false
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15,bottom: 15),
+                      child: iconContainer(
+                      image: 'assets/images/cargo-truck.png',
+                      text: 'الشحن مجاناً',
+                      color: blackColor,
+                      h: 20,
+                      ifNetwork: false
+                      ),
                     ),
                   ),
                 ],
@@ -316,7 +322,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               child: SizedBox(
                   width: double.infinity,
-                  height: 220,
+                  height: 230,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
@@ -328,11 +334,11 @@ class HomePage extends StatelessWidget {
                           widthBetweenPrice: 25,
                           elevation: 5,
                           color: whiteColor, 
-                          radius: 2, 
+                          radius: 10, 
                           centertext:'قمصان', 
                           img: 'assets/images/1.jpg', 
-                          price1: '30',
-                          price2: '20',
+                          price1: '20',
+                          price2: '30',
                           ),
                            Positioned(
                              top: 10,

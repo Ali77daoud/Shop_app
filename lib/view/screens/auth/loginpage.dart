@@ -217,39 +217,61 @@ class LoginPage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                    Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(90),
-                                        color: mainColor
-                                      ),
-                                      child:  const Center(
-                                        child:  Text(
-                                            'G',
-                                            style: TextStyle(
-                                            color: whiteColor,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold
+                                    InkWell(
+                                      onTap: (){
+                                        authController.signinGoogle().then((value){
+                                          authController.showCircleDialog(context: context);
+                                          authController.loginApi(
+                                            email: authController.googleUser!.email ,
+                                            password: '12345678',
+                                          );
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 45,
+                                        height: 45,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(90),
+                                          color: mainColor
+                                        ),
+                                        child:  const Center(
+                                          child:  Text(
+                                              'G',
+                                              style: TextStyle(
+                                              color: whiteColor,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(width:20,),
-                                    Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(90),
-                                        color: mainColor
-                                      ),
-                                      child: const Center(
-                                        child:  Text(
-                                            'f',
-                                            style: TextStyle(
-                                            color: whiteColor,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold
+                                    InkWell(
+                                      onTap: (){
+                                        authController.signinFacebook().then((value){
+                                            authController.showCircleDialog(context: context);
+                                            authController.loginApi(
+                                              email: authController.facebookUserData!.email!,
+                                              password: '12345678',
+                                            );
+                                          });
+                                      },
+                                      child: Container(
+                                        width: 45,
+                                        height: 45,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(90),
+                                          color: mainColor
+                                        ),
+                                        child: const Center(
+                                          child:  Text(
+                                              'f',
+                                              style: TextStyle(
+                                              color: whiteColor,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold
+                                            ),
                                           ),
                                         ),
                                       ),

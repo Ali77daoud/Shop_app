@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/logic/controller/auth_controller.dart';
-import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/drawer_items.dart';
@@ -11,7 +10,6 @@ import 'package:shop_app/view/widget/drawer_items.dart';
 Widget customDrawer(){
   final pageController = Get.find<PagesController>();
   final authController = Get.find<AuthController>();
-  final mainController = Get.find<MainController>();
   String fName = GetStorage().read('fname');
   String lName = GetStorage().read('lname');
   return Column(
@@ -41,7 +39,7 @@ Widget customDrawer(){
               
               ),
             ),
-            Text(lName +'  '+fName,
+            Text(fName +'  '+lName,
               style: const TextStyle(
                     color: whiteColor,
                     fontSize: 20,
@@ -80,7 +78,7 @@ Widget customDrawer(){
                 Column(
                   children: [
                     SizedBox(
-                      height: 230,
+                      height: 220,
                       child: Obx((){
                         return ListView.separated(
                           itemBuilder: (context,index){

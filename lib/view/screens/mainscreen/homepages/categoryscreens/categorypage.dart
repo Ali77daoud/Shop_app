@@ -69,7 +69,6 @@ class CategoryPage extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return SizedBox(
-                          width: 100,
                           height:30,
                           child: InkWell(
                             onTap: (){
@@ -110,7 +109,7 @@ class CategoryPage extends StatelessWidget {
                         );
                     },
                     separatorBuilder: (context,index){
-                      return const SizedBox(width: 6,);
+                      return const SizedBox(width: 15,);
                     },
                     itemCount: pagesController.dataBarnchesList.
                         where((e) =>e.subcategoryId == pagesController.subCategoryId).toList().length
@@ -122,7 +121,7 @@ class CategoryPage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      childAspectRatio: 0.75,
+                      childAspectRatio: 0.74,
                       mainAxisSpacing: 9.0,
                       crossAxisSpacing: 6.0,
                       maxCrossAxisExtent: 250,

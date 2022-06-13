@@ -44,11 +44,31 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.goldensoft.shop_app"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
+
+    // signingConfigs{
+    //     debug{
+    //         keyAlias 'androiddebugkey'
+    //         keyPassword 'android'
+    //         storeFile file('mykey.jks')
+    //         storePassword 'android'
+    //         v1SigningEnabled true
+    //         v2SigningEnabled true
+    //     }
+    //     release {
+    //         keyAlias 'androiddebugkey'
+    //         keyPassword 'android'
+    //         storeFile file('mykey.jks')
+    //         storePassword 'android'
+    //         v1SigningEnabled true
+    //         v2SigningEnabled true
+    //         // Add release keystore credentials here
+    //     }
+    // }
 
     buildTypes {
         release {
@@ -56,6 +76,10 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+        // release {
+   
+        //     signingConfig signingConfigs.release
+        // }
     }
 }
 
@@ -65,4 +89,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.facebook.android:facebook-login:latest.release'
 }

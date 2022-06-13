@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app/model/auth_models/loginmodel.dart';
 import 'package:shop_app/model/auth_models/registermodel.dart';
+import 'package:shop_app/model/facebookuserdatamodel.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/services/network/authapi.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -10,10 +13,16 @@ import 'package:shop_app/view/widget/circle_dialog.dart';
 
 class AuthController extends GetxController{
   bool isLogin = false;
-  final authBox = GetStorage();
-  final firstNameBox = GetStorage();
-  final lastNameBox = GetStorage();
-  final emailBox = GetStorage();
+
+  GetStorage authBox = GetStorage();
+  GetStorage firstNameBox = GetStorage();
+  GetStorage lastNameBox = GetStorage();
+  GetStorage emailBox = GetStorage();
+  GetStorage imgUrlBox = GetStorage();
+  GetStorage isFacebookSigninBox = GetStorage();
+
+
+  
 
   
   
@@ -62,6 +71,7 @@ class AuthController extends GetxController{
       firstNameBox.write('fname', res.user!.firstName);
       lastNameBox.write('lname', res.user!.lastName);
       emailBox.write('email', res.user!.email);
+      imgUrlBox.write('img', '');
 
       FocusManager.instance.primaryFocus?.unfocus();
       Get.snackbar(
@@ -106,6 +116,7 @@ class AuthController extends GetxController{
       firstNameBox.write('fname', res.user!.firstName);
       lastNameBox.write('lname', res.user!.lastName);
       emailBox.write('email', res.user!.email);
+
       FocusManager.instance.primaryFocus?.unfocus();
       Get.snackbar(
             'تمت العملية',
@@ -130,15 +141,90 @@ class AuthController extends GetxController{
         );
     }
   }
+  //google sign in
+  final googleSignIn = GoogleSignIn();
+  GoogleSignInAccount? googleUser;
+
+  Future<void> signinGoogle() async {
+      try {
+        await googleSignIn.isSignedIn().then((value)async{
+          if(value){
+            await googleSignIn.disconnect();
+          }
+        }); 
+        googleUser = await googleSignIn.signIn();
+        if(googleUser == null){
+          throw Exception('no google user');
+        }
+        update();
+      } catch (error) {
+        print(error);
+      }
+  }
+
+  //facebook signin
+  FacebookUserModel? facebookUserData;
+  AccessToken? accessToken;
+
+  Future<void> signinFacebook() async {
+      try {
+        final LoginResult result = await FacebookAuth.instance.login();
+        if(result.status == LoginStatus.success){
+          accessToken = result.accessToken;
+          
+          final data = await FacebookAuth.instance.getUserData();
+          facebookUserData = FacebookUserModel.fromJson(data);
+          isFacebookSigninBox.write('face',true);
+          print(facebookUserData!.email.toString());
+        }
+        else{
+          print('error');
+        }
+        update();
+      } catch (error) {
+        print(error);
+      }
+  }
   
   //logout
 
   void logOut (){
+    bool? isface = isFacebookSigninBox.read<bool>('face');
     isLogin=false;
     authBox.write('auth', isLogin);
     firstNameBox.write('fname','');
     firstNameBox.write('lname','');
     firstNameBox.write('email','');
-    Get.offAllNamed(Routes.boardingScreen);
+    imgUrlBox.write('img', '');
+    //for google sign in
+    googleSignIn.isSignedIn().then((value)async{
+      if(value){
+        await googleSignIn.disconnect();
+        Get.offAllNamed(Routes.boardingScreen);
+      }
+      else {
+        // //for facebook
+        if(isface == true)
+        {
+          isFacebookSigninBox.write('face',false);
+          await FacebookAuth.instance.logOut();
+          Get.offAllNamed(Routes.boardingScreen);
+          print('yes face book login');
+        }
+        else
+        {
+          print('no face book login');
+          Get.offAllNamed(Routes.boardingScreen);
+        }
+       
+      }
+    }); 
+    
+    
+    
+    
+    
   }
+
+  
 }

@@ -27,7 +27,7 @@ Widget homeCard(
        ),
 
     child: Padding(
-      padding: const EdgeInsets.all(0),
+      padding: const EdgeInsets.only(bottom: 10),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -37,6 +37,7 @@ Widget homeCard(
                 width: width,
                 height: hight,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(radius),topRight: Radius.circular(radius)),
                   image:ifNetworkImage? DecorationImage(
                     image: NetworkImage('$baseUrl/$img'),
                     fit: BoxFit.cover,
@@ -58,27 +59,31 @@ Widget homeCard(
                 ),
             ),
             const SizedBox(height: 7,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('$price2 \$',
-                  maxLines: 2,
-                  style: const TextStyle(
-                      color: greyColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal
-                    ),
-                ),
-                SizedBox(width: widthBetweenPrice,),
-                Text('$price1 \$',
-                  maxLines: 2,
-                  style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal
-                    ),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('$price2 \$',
+                    maxLines: 2,
+                    style: const TextStyle(
+                        color: greyColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                  ),
+                  SizedBox(width: widthBetweenPrice,),
+                  Text('$price1 \$',
+                    maxLines: 2,
+                    style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal
+                      ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

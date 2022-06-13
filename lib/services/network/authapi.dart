@@ -19,7 +19,12 @@ class AuthApi {
   )async{
     final client = http.Client();
     final uri = Uri.parse('$baseUrl/api/auth/register?first_name=$name&last_name=$lastName&email=$email&password=$password&password_confirmation=$repassword&mobile_number=$number');
-    var response = await client.post(uri);
+    var response = await client.post(
+      uri,
+      headers: {
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTY1Mzk4MDU1NiwibmJmIjoxNjUzOTgwNTU2LCJqdGkiOiJHRzl3RTNoTEZjVXFGQzN0Iiwic3ViIjo0LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.yyiytKmCzrGZlZlI1SbfuPVpnLW7LhZJyatB7WfIxhU',
+      }
+      );
 
     if(response.statusCode == 201){
       var responseData = json.decode(response.body);
@@ -39,7 +44,12 @@ class AuthApi {
   )async{
     final client = http.Client();
     final uri = Uri.parse('$baseUrl/api/auth/login?email=$email&password=$password');
-    var response = await client.post(uri);
+    var response = await client.post(
+      uri,
+      headers: {
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTY1Mzk4MDU1NiwibmJmIjoxNjUzOTgwNTU2LCJqdGkiOiJHRzl3RTNoTEZjVXFGQzN0Iiwic3ViIjo0LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.yyiytKmCzrGZlZlI1SbfuPVpnLW7LhZJyatB7WfIxhU',
+      }
+      );
 
     if(response.statusCode == 200){
       var responseData = json.decode(response.body);

@@ -29,11 +29,11 @@ Widget personWidget(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text(lname +'  '+fname,
+          Text(fname +' '+lname,
             style: const TextStyle(
                 color: blackColor,
-                fontSize: 13,
-                fontWeight: FontWeight.normal,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
                 overflow: TextOverflow.ellipsis,
               ),
           ),
