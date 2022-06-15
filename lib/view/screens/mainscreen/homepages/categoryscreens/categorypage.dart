@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
+import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/gridviewcard.dart';
 
@@ -38,6 +39,7 @@ class CategoryPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20,),
+              //brands
               SizedBox(
                 width: double.infinity,
                 height: 30,
@@ -48,15 +50,19 @@ class CategoryPage extends StatelessWidget {
                         width: 80,
                         height:30,
                         decoration: BoxDecoration(
-                          color: greyColor,
+                          color: whiteColor,
                           borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: NetworkImage('$baseUrl/${pagesController.dataBrandsList[index].logoName.toString()}'),
+                            fit: BoxFit.contain
+                            )
                         ),
                       );
                   },
                   separatorBuilder: (context,index){
                     return const SizedBox(width: 6,);
                   },
-                  itemCount: 5,
+                  itemCount: pagesController.dataBrandsList.length,
                   ),
               ),
               ////////////////////////
@@ -93,7 +99,8 @@ class CategoryPage extends StatelessWidget {
                                 ),
                                 ),
                                 Text('('+
-                                '22'
+                                '${pagesController.dataBarnchesList.
+                                where((e) =>e.subcategoryId == pagesController.subCategoryId).toList()[index].products!.length.toInt()}'
                                 +')'
                                 ,
                                   style: TextStyle(

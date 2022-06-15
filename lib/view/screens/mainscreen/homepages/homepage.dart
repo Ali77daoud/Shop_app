@@ -115,19 +115,25 @@ class HomePage extends StatelessWidget {
                                     onTap: (){
                                       pagesController.changeCategoryColor(0);
                                       pagesController.clothesIndex = 0;
+
+                                      pagesController.dataBarnchesList.clear();
+                                      pagesController.dataproductsList.clear();
+                                      pagesController.dataBrandsList.clear();
+
                                       pagesController.subCategoryId = pagesController.dataSubCategoryList.
                                       where((e) => e.mcategoryId==pagesController.mainCategoryId).toList()[index].id!.toInt();
-
                                       print(pagesController.subCategoryId);
+                                      pagesController.isLoadingproducts = true;
                                       Get.toNamed(Routes.categoryScreen);
-                                      pagesController.isLoadingbarnches = true;
                                       pagesController.getBarnches().then((value){
-                                        pagesController.getProduct().then((value){
-                                          pagesController.barnchesId = pagesController.dataBarnchesList.
-                                            where((e) =>e.subcategoryId == pagesController.subCategoryId).toList()[index].id!.toInt();
-                                            print('barnchesId = ''${pagesController.barnchesId}');
+                                        pagesController.getBrands().then((value){
+                                          print(pagesController.dataBrandsList[0].brandName.toString());
+                                          pagesController.getProduct().then((value){
+                                            pagesController.barnchesId = pagesController.dataBarnchesList.
+                                              where((e) =>e.subcategoryId == pagesController.subCategoryId).toList()[index].id!.toInt();
+                                              print('barnchesId = ''${pagesController.barnchesId}');
                                         });
-                                        
+                                        });
                                       });
                                     },
                                     child: iconContainer(

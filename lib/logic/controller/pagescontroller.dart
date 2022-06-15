@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/model/categorymodel/branchesmodel.dart';
+import 'package:shop_app/model/categorymodel/brands.dart';
 import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
 import 'package:shop_app/model/categorymodel/productmodel.dart';
 import 'package:shop_app/model/categorymodel/subcategorymodel.dart';
@@ -97,14 +98,33 @@ class PagesController extends GetxController{
     try{
       ProductsModel res = await CategoryApi.getProducts();
       dataproductsList.value = res.data!;
-      isLoadingbarnches = false;
+      isLoadingproducts = false;
       update();
     }catch(e){
-      isLoadingbarnches = false;
+      isLoadingproducts = false;
       update();
     }
     
   }
+
+
+  //brands
+  var dataBrandsList = <BrandsDataModel>[].obs;
+  bool isLoadingBrands = false;
+  int brandsId = 1;
+  Future<void> getBrands()async{
+    try{
+      BrandsModel res = await CategoryApi.getBrands();
+      dataBrandsList.value = res.data!;
+      isLoadingBrands = false;
+      update();
+    }catch(e){
+      isLoadingBrands = false;
+      update();
+    }
+    
+  }
+
 
   List<Color> colorList = [
     Colors.red,

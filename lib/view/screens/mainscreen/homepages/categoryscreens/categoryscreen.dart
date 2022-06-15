@@ -17,7 +17,7 @@ class CategoryScreen extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     return GetBuilder<PagesController>(
       builder: (_){
-        return pagesController.isLoadingbarnches?
+        return pagesController.isLoadingproducts?
         Scaffold(
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
