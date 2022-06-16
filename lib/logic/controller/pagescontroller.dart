@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/model/cartmodels/addtocartmodel.dart';
+import 'package:shop_app/model/cartmodels/getfromcart.dart';
+import 'package:shop_app/model/cartmodels/removefromcart.dart';
 import 'package:shop_app/model/categorymodel/branchesmodel.dart';
 import 'package:shop_app/model/categorymodel/brands.dart';
 import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
 import 'package:shop_app/model/categorymodel/productmodel.dart';
 import 'package:shop_app/model/categorymodel/subcategorymodel.dart';
+import 'package:shop_app/services/network/cartapi.dart';
 import 'package:shop_app/services/network/categoryapi.dart';
 
 class PagesController extends GetxController{
@@ -18,6 +22,8 @@ class PagesController extends GetxController{
   int productDetailsIndex = 0;
 
   int clothesIndex=0;
+  
+
   
 
   @override
@@ -124,7 +130,140 @@ class PagesController extends GetxController{
     }
     
   }
+  /////////////////////////////////////// cart ////////////////////////////////////
+  
+  //add to cart
 
+  AddToCartModel? addtoCart;
+  bool ifAddToCart = false;
+
+  Future<void> addToCart(
+    {
+      required int userId,
+      required int productId,
+      required int quantity,
+      required int maxPrice,
+      required String token,
+    }
+  )async{
+    try{
+      addtoCart = await CartApi.addToCartApi(
+        userId: userId,
+        productId: productId, 
+        quantity: quantity, 
+        maxPrice: maxPrice, 
+        token: token
+        );
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        addtoCart!.message.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }catch(e){
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        'there is a problem',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+    }
+    
+  }
+
+  //get from cart 
+  CartDataModel? cartData;
+  int? priceForAllProduct;
+  bool isGetCartData = false;
+
+  List<CartProductDetailsModel>? productDetails;
+
+  Future<void> getFromCart(
+    {
+      required int userId,
+      required String token,
+    }
+  )async{
+    try{
+      final res = await CartApi.getFromCartApi(
+        userId: userId,
+        token: token
+        );
+      cartData = res.data;
+      //add product count
+      priceForAllProduct = res.data!.price_for_all_thing;
+      
+      isGetCartData = false;
+      Get.snackbar(
+        '',
+        res.message.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }catch(e){
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 8)
+        );
+    }
+    
+  }
+
+  //remove from cart
+  RemoveFromCartModel? removefromCartData;
+  bool ifremovefromCart = false;
+
+  Future<void> removefromCart(
+    {
+      required int userId,
+      required int productId,
+      required String token,
+    }
+  )async{
+    try{
+      removefromCartData = await CartApi.removeFromCartApi(
+        userId: userId,
+        productId: productId,  
+        token: token
+        );
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        removefromCartData!.message.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }catch(e){
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+    }
+    
+  }
 
   List<Color> colorList = [
     Colors.red,
@@ -149,371 +288,371 @@ class PagesController extends GetxController{
     'XXL',
   ];
 
-  List<String> genderList = [
-    'رجال',
-    'نساء',
-    'أطفال',
-    'إكسسوارات',
-    'إلكترونيات'
-  ];
+  // List<String> genderList = [
+  //   'رجال',
+  //   'نساء',
+  //   'أطفال',
+  //   'إكسسوارات',
+  //   'إلكترونيات'
+  // ];
 
-  List<List<String>> categoryList=[
-    [
-      'قمصان',
-      'أحذية',
-      'جينز'
-    ],
-    [
-      'فساتين',
-      'أحذية',
-      'ساعات'
-    ],
-    [
-      'ألعاب',
-      'أحذية',
-    ],
-    [
-      'خواتم',
-      'أساور',
-    ],
-    [
-      'برادات',
-      'شاشات',
-    ],
-  ];
+  // List<List<String>> categoryList=[
+  //   [
+  //     'قمصان',
+  //     'أحذية',
+  //     'جينز'
+  //   ],
+  //   [
+  //     'فساتين',
+  //     'أحذية',
+  //     'ساعات'
+  //   ],
+  //   [
+  //     'ألعاب',
+  //     'أحذية',
+  //   ],
+  //   [
+  //     'خواتم',
+  //     'أساور',
+  //   ],
+  //   [
+  //     'برادات',
+  //     'شاشات',
+  //   ],
+  // ];
 
-  List<List<String>> clotheIconList = [
-    [
-      'assets/images/tshirt.png',
-      'assets/images/sneakers.png',
-      'assets/images/jeans.png',
-    ],
-    [
-      'assets/images/dress.png',
-      'assets/images/high-heel.png',
-      'assets/images/watch.png',
-    ],
-    [
-      'assets/images/toys.png',
-      'assets/images/baby-shoes.png',
-    ],
-    [
-      'assets/images/ring.png',
-      'assets/images/bracelet.png',
-    ],
-    [
-      'assets/images/fridge.png',
-      'assets/images/television.png',
-    ],
-  ];
+  // List<List<String>> clotheIconList = [
+  //   [
+  //     'assets/images/tshirt.png',
+  //     'assets/images/sneakers.png',
+  //     'assets/images/jeans.png',
+  //   ],
+  //   [
+  //     'assets/images/dress.png',
+  //     'assets/images/high-heel.png',
+  //     'assets/images/watch.png',
+  //   ],
+  //   [
+  //     'assets/images/toys.png',
+  //     'assets/images/baby-shoes.png',
+  //   ],
+  //   [
+  //     'assets/images/ring.png',
+  //     'assets/images/bracelet.png',
+  //   ],
+  //   [
+  //     'assets/images/fridge.png',
+  //     'assets/images/television.png',
+  //   ],
+  // ];
 
-  Map<int,dynamic> clothesMap = {
-    0:[
-       [
-      'قميص1',
-      'قميص2',
-      'قميص3',
-      ],
-     [
-      'حذاء1',
-      'حذاء2',
-     ],
-     [
-      'جينز1',
-      'جينز2',
-      'جينز3',
-      'جينز4',
-      'جينز5',
-      ],
-   ],
+  // Map<int,dynamic> clothesMap = {
+  //   0:[
+  //      [
+  //     'قميص1',
+  //     'قميص2',
+  //     'قميص3',
+  //     ],
+  //    [
+  //     'حذاء1',
+  //     'حذاء2',
+  //    ],
+  //    [
+  //     'جينز1',
+  //     'جينز2',
+  //     'جينز3',
+  //     'جينز4',
+  //     'جينز5',
+  //     ],
+  //  ],
 
-   1:[
-       [
-      'فستان1',
-      'فستان2',
-      'فستان3',
-      ],
-     [
-      'حذاء1',
-      'حذاء2',
-     ],
-     [
-      'ساعة1',
-      'ساعة2',
-      'ساعة3',
-      'ساعة4',
-      'ساعة5',
-      ],
-   ],
+  //  1:[
+  //      [
+  //     'فستان1',
+  //     'فستان2',
+  //     'فستان3',
+  //     ],
+  //    [
+  //     'حذاء1',
+  //     'حذاء2',
+  //    ],
+  //    [
+  //     'ساعة1',
+  //     'ساعة2',
+  //     'ساعة3',
+  //     'ساعة4',
+  //     'ساعة5',
+  //     ],
+  //  ],
 
-   2:[
-       [
-      'لعبة1',
-      'لعبة2',
-      'لعبة3',
-      'لعبة4',
-      ],
-     [
-      'حذاء1',
-      'حذاء2',
-     ],
-   ],
-   3:[
-       [
-      'خاتم1',
-      'خاتم2',
-      'خاتم3',
-      'خاتم4',
-      ],
-     [
-      'إسوارة1',
-      'إسوارة2',
-     ],
-   ],
-   4:[
-       [
-      'براد1',
-      'براد2',
-      'براد3',
-      'براد4',
-      ],
-     [
-      'شاشة1',
-      'شاشة2',
-     ],
-   ],
-  };
+  //  2:[
+  //      [
+  //     'لعبة1',
+  //     'لعبة2',
+  //     'لعبة3',
+  //     'لعبة4',
+  //     ],
+  //    [
+  //     'حذاء1',
+  //     'حذاء2',
+  //    ],
+  //  ],
+  //  3:[
+  //      [
+  //     'خاتم1',
+  //     'خاتم2',
+  //     'خاتم3',
+  //     'خاتم4',
+  //     ],
+  //    [
+  //     'إسوارة1',
+  //     'إسوارة2',
+  //    ],
+  //  ],
+  //  4:[
+  //      [
+  //     'براد1',
+  //     'براد2',
+  //     'براد3',
+  //     'براد4',
+  //     ],
+  //    [
+  //     'شاشة1',
+  //     'شاشة2',
+  //    ],
+  //  ],
+  // };
   
-  Map<int,dynamic> price1Map = {
-    0:[
-       [
-      '40',
-      '50',
-      '60',
-      ],
-     [
-      '20',
-      '10',
-     ],
-     [
-      '30',
-      '60',
-      '70',
-      '50',
-      '88',
-      ],
-   ],
+  // Map<int,dynamic> price1Map = {
+  //   0:[
+  //      [
+  //     '40',
+  //     '50',
+  //     '60',
+  //     ],
+  //    [
+  //     '20',
+  //     '10',
+  //    ],
+  //    [
+  //     '30',
+  //     '60',
+  //     '70',
+  //     '50',
+  //     '88',
+  //     ],
+  //  ],
 
-   1:[
-       [
-      '20',
-      '30',
-      '50',
-      ],
-     [
-      '40',
-      '50',
-     ],
-     [
-      '30',
-      '40',
-      '50',
-      '50',
-      '80',
-      ],
-   ],
+  //  1:[
+  //      [
+  //     '20',
+  //     '30',
+  //     '50',
+  //     ],
+  //    [
+  //     '40',
+  //     '50',
+  //    ],
+  //    [
+  //     '30',
+  //     '40',
+  //     '50',
+  //     '50',
+  //     '80',
+  //     ],
+  //  ],
 
-   2:[
-       [
-      '10',
-      '30',
-      '20',
-      '40',
-      ],
-     [
-      '50',
-      '70',
-     ],
-   ],
-   3:[
-       [
-      '10',
-      '30',
-      '20',
-      '40',
-      ],
-     [
-      '50',
-      '70',
-     ],
-   ],
-   4:[
-       [
-      '10',
-      '30',
-      '20',
-      '40',
-      ],
-     [
-      '50',
-      '70',
-     ],
-   ],
-  };
+  //  2:[
+  //      [
+  //     '10',
+  //     '30',
+  //     '20',
+  //     '40',
+  //     ],
+  //    [
+  //     '50',
+  //     '70',
+  //    ],
+  //  ],
+  //  3:[
+  //      [
+  //     '10',
+  //     '30',
+  //     '20',
+  //     '40',
+  //     ],
+  //    [
+  //     '50',
+  //     '70',
+  //    ],
+  //  ],
+  //  4:[
+  //      [
+  //     '10',
+  //     '30',
+  //     '20',
+  //     '40',
+  //     ],
+  //    [
+  //     '50',
+  //     '70',
+  //    ],
+  //  ],
+  // };
   
-  Map<int,dynamic> price2Map = {
-    0:[
-       [
-      '50',
-      '60',
-      '70',
-      ],
-     [
-      '30',
-      '20',
-     ],
-     [
-      '40',
-      '70',
-      '80',
-      '60',
-      '98',
-      ],
-   ],
+  // Map<int,dynamic> price2Map = {
+  //   0:[
+  //      [
+  //     '50',
+  //     '60',
+  //     '70',
+  //     ],
+  //    [
+  //     '30',
+  //     '20',
+  //    ],
+  //    [
+  //     '40',
+  //     '70',
+  //     '80',
+  //     '60',
+  //     '98',
+  //     ],
+  //  ],
 
-   1:[
-       [
-      '30',
-      '40',
-      '60',
-      ],
-     [
-      '50',
-      '60',
-     ],
-     [
-      '40',
-      '50',
-      '60',
-      '70',
-      '80',
-      ],
-   ],
+  //  1:[
+  //      [
+  //     '30',
+  //     '40',
+  //     '60',
+  //     ],
+  //    [
+  //     '50',
+  //     '60',
+  //    ],
+  //    [
+  //     '40',
+  //     '50',
+  //     '60',
+  //     '70',
+  //     '80',
+  //     ],
+  //  ],
 
-   2:[
-       [
-      '10',
-      '30',
-      '20',
-      '40',
-      ],
-     [
-      '50',
-      '70',
-     ],
-   ],
-   3:[
-       [
-      '10',
-      '30',
-      '20',
-      '40',
-      ],
-     [
-      '50',
-      '70',
-     ],
-   ],
-   4:[
-       [
-      '10',
-      '30',
-      '20',
-      '40',
-      ],
-     [
-      '50',
-      '70',
-     ],
-   ],
-  };
+  //  2:[
+  //      [
+  //     '10',
+  //     '30',
+  //     '20',
+  //     '40',
+  //     ],
+  //    [
+  //     '50',
+  //     '70',
+  //    ],
+  //  ],
+  //  3:[
+  //      [
+  //     '10',
+  //     '30',
+  //     '20',
+  //     '40',
+  //     ],
+  //    [
+  //     '50',
+  //     '70',
+  //    ],
+  //  ],
+  //  4:[
+  //      [
+  //     '10',
+  //     '30',
+  //     '20',
+  //     '40',
+  //     ],
+  //    [
+  //     '50',
+  //     '70',
+  //    ],
+  //  ],
+  // };
 
-  Map<int,dynamic> photoMap = {
-    0:[
-       [
-      'assets/images/mentshirt.png',
-      'assets/images/mentshirt.png',
-      'assets/images/mentshirt.png',
-      ],
-     [
-      'assets/images/menshoes.jpg',
-      'assets/images/menshoes.jpg',
-     ],
-     [
-      'assets/images/jeansphoto.jpg',
-      'assets/images/jeansphoto.jpg',
-      'assets/images/jeansphoto.jpg',
-      'assets/images/jeansphoto.jpg',
-      'assets/images/jeansphoto.jpg',
-      ],
-   ],
+  // Map<int,dynamic> photoMap = {
+  //   0:[
+  //      [
+  //     'assets/images/mentshirt.png',
+  //     'assets/images/mentshirt.png',
+  //     'assets/images/mentshirt.png',
+  //     ],
+  //    [
+  //     'assets/images/menshoes.jpg',
+  //     'assets/images/menshoes.jpg',
+  //    ],
+  //    [
+  //     'assets/images/jeansphoto.jpg',
+  //     'assets/images/jeansphoto.jpg',
+  //     'assets/images/jeansphoto.jpg',
+  //     'assets/images/jeansphoto.jpg',
+  //     'assets/images/jeansphoto.jpg',
+  //     ],
+  //  ],
 
-   1:[
-       [
-      'assets/images/dressphoto.jpg',
-      'assets/images/dressphoto.jpg',
-      'assets/images/dressphoto.jpg',
-      ],
-     [
-      'assets/images/heel.jpg',
-      'assets/images/heel.jpg',
-     ],
-     [
-      'assets/images/watchphoto.jpg',
-      'assets/images/watchphoto.jpg',
-      'assets/images/watchphoto.jpg',
-      'assets/images/watchphoto.jpg',
-      'assets/images/watchphoto.jpg',
-      ],
-   ],
+  //  1:[
+  //      [
+  //     'assets/images/dressphoto.jpg',
+  //     'assets/images/dressphoto.jpg',
+  //     'assets/images/dressphoto.jpg',
+  //     ],
+  //    [
+  //     'assets/images/heel.jpg',
+  //     'assets/images/heel.jpg',
+  //    ],
+  //    [
+  //     'assets/images/watchphoto.jpg',
+  //     'assets/images/watchphoto.jpg',
+  //     'assets/images/watchphoto.jpg',
+  //     'assets/images/watchphoto.jpg',
+  //     'assets/images/watchphoto.jpg',
+  //     ],
+  //  ],
 
-   2:[
-       [
-      'assets/images/toy.jpg',
-      'assets/images/toy.jpg',
-      'assets/images/toy.jpg',
-      'assets/images/toy.jpg',
-      ],
-     [
-      'assets/images/baby-shoes.jpg',
-      'assets/images/baby-shoes.jpg',
-     ],
-   ],
-   3:[
-       [
-      'assets/images/ringimg.jpg',
-      'assets/images/ringimg.jpg',
-      'assets/images/ringimg.jpg',
-      'assets/images/ringimg.jpg',
-      ],
-     [
-      'assets/images/braceletimg.jpg',
-      'assets/images/braceletimg.jpg',
-     ],
-   ],
-   4:[
-       [
-      'assets/images/fridgeimg.jpg',
-      'assets/images/fridgeimg.jpg',
-      'assets/images/fridgeimg.jpg',
-      'assets/images/fridgeimg.jpg',
-      ],
-     [
-      'assets/images/tvimg.jpg',
-      'assets/images/tvimg.jpg',
-     ],
-   ],
-  };
+  //  2:[
+  //      [
+  //     'assets/images/toy.jpg',
+  //     'assets/images/toy.jpg',
+  //     'assets/images/toy.jpg',
+  //     'assets/images/toy.jpg',
+  //     ],
+  //    [
+  //     'assets/images/baby-shoes.jpg',
+  //     'assets/images/baby-shoes.jpg',
+  //    ],
+  //  ],
+  //  3:[
+  //      [
+  //     'assets/images/ringimg.jpg',
+  //     'assets/images/ringimg.jpg',
+  //     'assets/images/ringimg.jpg',
+  //     'assets/images/ringimg.jpg',
+  //     ],
+  //    [
+  //     'assets/images/braceletimg.jpg',
+  //     'assets/images/braceletimg.jpg',
+  //    ],
+  //  ],
+  //  4:[
+  //      [
+  //     'assets/images/fridgeimg.jpg',
+  //     'assets/images/fridgeimg.jpg',
+  //     'assets/images/fridgeimg.jpg',
+  //     'assets/images/fridgeimg.jpg',
+  //     ],
+  //    [
+  //     'assets/images/tvimg.jpg',
+  //     'assets/images/tvimg.jpg',
+  //    ],
+  //  ],
+  // };
 
   
 

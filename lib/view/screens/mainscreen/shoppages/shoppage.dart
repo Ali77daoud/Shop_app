@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -8,12 +9,26 @@ import 'package:shop_app/view/widget/cartwidget.dart';
 
 class ShopPage extends StatelessWidget {
   ShopPage({ Key? key }) : super(key: key);
+
   final pagesController = Get.find<PagesController>();
+  final authController = Get.find<AuthController>();
 
   final TextEditingController code = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    int? userId = authController.userId.read<int>('id');
+    String? token = authController.token.read<String>('t');
+    return
+    GetBuilder<PagesController>(
+      builder: (_){
+        return pagesController.isGetCartData?
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Center(child: CircularProgressIndicator(color: mainColor,)),
+          ],
+        ):
+         SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
         child: Column(
@@ -38,17 +53,46 @@ class ShopPage extends StatelessWidget {
                 width: double.infinity,
                 height: 235,
                 child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  // shrinkWrap: true,
                   itemBuilder: (context,index){
-                    return CartWidget();
+                    // String productname = pagesController.cartData!.Product_detailss![index].product_Info!.translations!.
+                    //   firstWhere((e) => e.locale=='ar').product_name.toString();
+                    return cartWidget(
+                      productName: pagesController.cartData!.Product_detailss![index].product_Info!.translations!.
+                      firstWhere((e) => e.locale=='ar').product_name.toString(),
+
+                      productDescription: pagesController.cartData!.Product_detailss![index].product_Info!.translations!.
+                      firstWhere((e) => e.locale=='ar').description.toString(),
+
+                      totalPrice: pagesController.cartData!.Product_detailss![index].total_price.toString(),
+
+                      productQuantity: pagesController.cartData!.Product_detailss![index].product_quantity.toString(),
+
+                      onIncrease: (){
+                        
+                      },
+                      onDelete: (){
+                        authController.showCircleDialog(context: context);
+                        pagesController.removefromCart(
+                          userId: userId!.toInt(),
+                          productId: pagesController.cartData!.Product_detailss![index].product_Info!.id!.toInt(), 
+                          token: token.toString(),
+                          ).then((value){
+                            pagesController.getFromCart(
+                              userId: userId,
+                              token: token.toString()
+                              );
+                          });
+                      }
+                    );
                   },
                   separatorBuilder:(context,index){
                     return const SizedBox(
                       height: 15,
                     );
                   }, 
-                  itemCount: 2,
+                  itemCount: pagesController.cartData!.Product_detailss!.length.toInt(),
                   ),
               ),
             ),
@@ -62,21 +106,29 @@ class ShopPage extends StatelessWidget {
             
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('المجموع الفرعي',
+              children: [
+                const Text('المجموع الفرعي',
                 style: TextStyle(
                   color: blackColor,
                   fontSize: 15,
                   fontWeight: FontWeight.normal
                 ),
-              ),
-              Text('33.33 \$',
-                style: TextStyle(
-                  color: blackColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
+                  ),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: SizedBox(
+                    width: 180,
+                    child: Text('${pagesController.priceForAllProduct.toString()} \$',
+                      maxLines: 2,
+                      style: const TextStyle(
+                        color: blackColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
               ],
             ),
 
@@ -90,13 +142,21 @@ class ShopPage extends StatelessWidget {
                   fontWeight: FontWeight.normal
                 ),
               ),
-              Text('0 \$',
-                style: TextStyle(
-                  color: blackColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
+              Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: SizedBox(
+                    width: 180,
+                    child: Text('0 \$',
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: blackColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
               ],
             ),
 
@@ -109,7 +169,8 @@ class ShopPage extends StatelessWidget {
                 decoration: InputDecoration(
                   suffix:InkWell(
                     onTap: (){
-
+                     
+                      
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(left: 5),
@@ -148,6 +209,7 @@ class ShopPage extends StatelessWidget {
           Center(
             child: buttomUtils(
               ontab: (){
+              
                 Get.toNamed(Routes.payment1Screen);
               }, 
               childtext: const Text('الدفع',
@@ -170,5 +232,8 @@ class ShopPage extends StatelessWidget {
         ),
       ),
     );
+      }
+    );
+    
   }
 }

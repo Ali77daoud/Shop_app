@@ -221,10 +221,16 @@ class LoginPage extends StatelessWidget {
                                       onTap: (){
                                         authController.signinGoogle().then((value){
                                           authController.showCircleDialog(context: context);
-                                          authController.loginApi(
+                                          if(authController.googleUser==null){
+                                            Get.back(closeOverlays: true);
+                                          }
+                                          else{
+                                            authController.loginApi(
                                             email: authController.googleUser!.email ,
                                             password: '12345678',
                                           );
+                                          }
+                                          
                                         });
                                       },
                                       child: Container(
@@ -250,11 +256,12 @@ class LoginPage extends StatelessWidget {
                                     InkWell(
                                       onTap: (){
                                         authController.signinFacebook().then((value){
-                                            authController.showCircleDialog(context: context);
+                                            // authController.showCircleDialog(context: context);
                                             authController.loginApi(
                                               email: authController.facebookUserData!.email!,
                                               password: '12345678',
                                             );
+                                            FocusManager.instance.primaryFocus?.unfocus();
                                           });
                                       },
                                       child: Container(

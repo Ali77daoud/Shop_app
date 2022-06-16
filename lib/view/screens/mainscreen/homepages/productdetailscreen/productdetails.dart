@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
+import 'package:shop_app/model/auth_models/usermodel.dart';
 import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -10,13 +12,20 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ProductDetails extends StatelessWidget {
   ProductDetails({ Key? key }) : super(key: key);
   final pagesController = Get.find<PagesController>();
+  final authController = Get.find<AuthController>();
+
   CarouselController carouselController=CarouselController();
+  
   
 
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    int? userId = authController.userId.read<int>('id');
+    String? token = authController.token.read<String>('t');
+
     return  GetBuilder<PagesController>(
       builder: (_){
       return SingleChildScrollView(
@@ -145,7 +154,16 @@ class ProductDetails extends StatelessWidget {
                         ),
                         child: IconButton(
                           onPressed: (){
-          
+                            authController.showCircleDialog(context: context);
+                            pagesController.addToCart(
+                              userId: userId!.toInt() ,
+                              productId: pagesController.productsId, 
+                              quantity: 1, 
+                              maxPrice: int.parse(pagesController.dataproductsList.
+                              firstWhere((e) =>e.id==pagesController.productsId).maxPrice.toString()) , 
+                              token: token.toString(),
+                              );
+                            print(userId);
                           }, 
                           icon: const Icon(
                             Icons.shopping_cart_sharp,

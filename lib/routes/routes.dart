@@ -3,7 +3,6 @@ import 'package:shop_app/view/screens/auth/loginotppage.dart';
 import 'package:shop_app/view/screens/auth/loginpage.dart';
 import 'package:shop_app/view/screens/auth/signuppage.dart';
 import 'package:shop_app/view/screens/auth/verificationpage.dart';
-import 'package:shop_app/view/screens/choosepage.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/categoryscreens/categoryscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/productdetailscreen/productscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/mainscreen.dart';
@@ -40,12 +39,12 @@ class AppRoutes{
       name: Routes.boardingScreen, 
       page: ()=>  const OnBoardingScreen(),
       ),
-      GetPage(
-      name: Routes.choosePage, 
-      page: ()=>  ChoosePage(),
-      transition: Transition.fade,
-      transitionDuration: const Duration(milliseconds: 800),
-      ),
+      // GetPage(
+      // name: Routes.choosePage, 
+      // page: ()=>  ChoosePage(),
+      // transition: Transition.fade,
+      // transitionDuration: const Duration(milliseconds: 800),
+      // ),
       GetPage(
       name: Routes.loginPage, 
       page: ()=>   LoginPage(),

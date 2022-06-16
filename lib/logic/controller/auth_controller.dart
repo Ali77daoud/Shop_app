@@ -14,16 +14,18 @@ import 'package:shop_app/view/widget/circle_dialog.dart';
 class AuthController extends GetxController{
   bool isLogin = false;
 
-  GetStorage authBox = GetStorage();
+  final authBox = GetStorage();
   GetStorage firstNameBox = GetStorage();
   GetStorage lastNameBox = GetStorage();
   GetStorage emailBox = GetStorage();
+  GetStorage token = GetStorage();
   GetStorage imgUrlBox = GetStorage();
   GetStorage isFacebookSigninBox = GetStorage();
+  GetStorage userId = GetStorage();
 
 
   
-
+  
   
   
   void showCircleDialog(
@@ -44,7 +46,8 @@ class AuthController extends GetxController{
     update();
   }
 
-  //register
+  //register\
+
   Future<void> registerApi (
     {
     required String name,
@@ -64,6 +67,8 @@ class AuthController extends GetxController{
         repassword: repassword, 
         number: number
       );
+
+      userId.write('id', res.user!.id);
       Get.back(closeOverlays: true);
       isLogin = true;
 
@@ -71,6 +76,7 @@ class AuthController extends GetxController{
       firstNameBox.write('fname', res.user!.firstName);
       lastNameBox.write('lname', res.user!.lastName);
       emailBox.write('email', res.user!.email);
+      token.write('t', res.accessToken);
       imgUrlBox.write('img', '');
 
       FocusManager.instance.primaryFocus?.unfocus();
@@ -99,6 +105,7 @@ class AuthController extends GetxController{
   }
 
   //login
+
   Future<void> loginApi (
     {
     required String email,
@@ -110,12 +117,14 @@ class AuthController extends GetxController{
         email: email,
         password: password
         );
+      userId.write('id', res.user!.id);
       Get.back(closeOverlays: true);
       isLogin = true;
       authBox.write('auth', isLogin);
       firstNameBox.write('fname', res.user!.firstName);
       lastNameBox.write('lname', res.user!.lastName);
       emailBox.write('email', res.user!.email);
+      token.write('t', res.accessToken);
 
       FocusManager.instance.primaryFocus?.unfocus();
       Get.snackbar(
@@ -147,13 +156,14 @@ class AuthController extends GetxController{
 
   Future<void> signinGoogle() async {
       try {
-        await googleSignIn.isSignedIn().then((value)async{
-          if(value){
-            await googleSignIn.disconnect();
-          }
-        }); 
+        // await googleSignIn.isSignedIn().then((value)async{
+        //   if(value){
+        //     await googleSignIn.disconnect();
+        //   }
+        // }); 
         googleUser = await googleSignIn.signIn();
         if(googleUser == null){
+          Get.back(closeOverlays: true);
           throw Exception('no google user');
         }
         update();
@@ -190,11 +200,13 @@ class AuthController extends GetxController{
 
   void logOut (){
     bool? isface = isFacebookSigninBox.read<bool>('face');
+
     isLogin=false;
     authBox.write('auth', isLogin);
     firstNameBox.write('fname','');
     firstNameBox.write('lname','');
     firstNameBox.write('email','');
+    userId.write('id', '');
     imgUrlBox.write('img', '');
     //for google sign in
     googleSignIn.isSignedIn().then((value)async{

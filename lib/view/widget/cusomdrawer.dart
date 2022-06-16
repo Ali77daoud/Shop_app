@@ -130,6 +130,10 @@ Widget customDrawer(){
                     ),
                     const SizedBox(height: 15,),
                     InkWell(
+                      onTap: (){
+                        bool? isl = authController.authBox.read<bool>('auth');
+                        print(isl);
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [

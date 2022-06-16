@@ -34,7 +34,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
 
   void skipBoarding(){
-    Get.offNamed(Routes.choosePage);
+    Get.offNamed(Routes.loginPage);
   }
 
   @override

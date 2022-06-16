@@ -15,6 +15,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    int? userId = authController.userId.read<int>('id');
+    String? token = authController.token.read<String>('t');
     return GetBuilder<PagesController>(
       builder: (_){
         return pagesController.isLoadingCategory?
@@ -138,6 +141,13 @@ class MainScreen extends StatelessWidget {
                         currentIndex: mainController.mainIndex,
                         onTap: (index){
                           mainController.changeScreen(index);
+                          if(index == 1){
+                            pagesController.isGetCartData = true;
+                            pagesController.getFromCart(
+                              userId: userId!.toInt(),
+                              token: token.toString(),
+                              );
+                          }
                         },
                         type: BottomNavigationBarType.fixed,
                         fixedColor: Get.isDarkMode?blackColor:mainColor,

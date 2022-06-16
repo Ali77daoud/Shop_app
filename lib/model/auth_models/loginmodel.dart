@@ -1,5 +1,5 @@
 class LoginModel{
-  bool? accessToken;
+  String? accessToken;
   String? tokenType;
   LoginUserModel?user;
 
@@ -10,6 +10,7 @@ class LoginModel{
     user = LoginUserModel.fromJson(json['user']);
   }
 }
+
 
 class LoginUserModel{
   int?id;
@@ -31,3 +32,18 @@ class LoginUserModel{
   }
 }
 
+
+// "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9vdXRsZXNoaXAuenpnb2xkZW4ub25saW5lXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNjU1MjgxMjg3LCJuYmYiOjE2NTUyODEyODcsImp0aSI6IlZYOUFlZUE1bzdBZXZiVzciLCJzdWIiOjIwLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.SA7wS0mVCHD-ZS6mOCEv9fzpaur65z5BP-R_1lDUGEE",
+//     "token_type": "bearer",
+//     "expires_in": null,
+//     "user": {
+//         "id": 20,
+//         "first_name": "ss",
+//         "last_name": "dd",
+//         "email": "aa.mm@xxx.mm",
+//         "email_verified_at": null,
+//         "mobile_number": "0999996999",
+//         "created_at": "2022-06-07T07:46:12.000000Z",
+//         "updated_at": "2022-06-07T07:46:12.000000Z"
+//     }
+// }

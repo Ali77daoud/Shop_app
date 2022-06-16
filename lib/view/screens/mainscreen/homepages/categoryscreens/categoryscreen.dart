@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
@@ -10,11 +11,15 @@ import 'package:shop_app/view/widget/cusomdrawer.dart';
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({ Key? key }) : super(key: key);
   final mainController = Get.find<MainController>();
+  final authController = Get.find<AuthController>();
   final pagesController = Get.find<PagesController>();
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    int? userId = authController.userId.read<int>('id');
+    String? token = authController.token.read<String>('t');
     return GetBuilder<PagesController>(
       builder: (_){
         return pagesController.isLoadingproducts?
@@ -133,6 +138,14 @@ class CategoryScreen extends StatelessWidget {
                           mainController.changeScreen(index).then((value){
                             Get.offNamed((Routes.mainScreen));
                             Get.back();
+                            if(index == 1){
+                              pagesController.isGetCartData = true;
+                              pagesController.getFromCart(
+                                userId: userId!.toInt(),
+                                token: token.toString(),
+                              );
+                            }
+                            
                           });
                         },
                         type: BottomNavigationBarType.fixed,
