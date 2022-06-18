@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/model/cartmodels/addtocartmodel.dart';
+import 'package:shop_app/model/cartmodels/couponmodel.dart';
 import 'package:shop_app/model/cartmodels/getfromcart.dart';
 import 'package:shop_app/model/cartmodels/removefromcart.dart';
+import 'package:shop_app/model/cartmodels/updatecartmodel.dart';
 import 'package:shop_app/model/categorymodel/branchesmodel.dart';
 import 'package:shop_app/model/categorymodel/brands.dart';
 import 'package:shop_app/model/categorymodel/maincategorymodel.dart';
@@ -53,6 +55,14 @@ class PagesController extends GetxController{
       dataCategoryList.value = res.data!;
       update();
     }catch(e){
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
       update();
     }
     
@@ -71,6 +81,14 @@ class PagesController extends GetxController{
       isLoadingCategory=false;
       update();
     }catch(e){
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
       update();
     }
     
@@ -89,6 +107,14 @@ class PagesController extends GetxController{
       update();
     }catch(e){
       isLoadingbarnches=false;
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
       update();
     }
     
@@ -108,6 +134,14 @@ class PagesController extends GetxController{
       update();
     }catch(e){
       isLoadingproducts = false;
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
       update();
     }
     
@@ -126,6 +160,14 @@ class PagesController extends GetxController{
       update();
     }catch(e){
       isLoadingBrands = false;
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
       update();
     }
     
@@ -174,13 +216,14 @@ class PagesController extends GetxController{
         colorText: Colors.white,
         duration: const Duration(seconds: 3)
         );
+      update();
     }
     
   }
 
   //get from cart 
   CartDataModel? cartData;
-  int? priceForAllProduct;
+  double? priceForAllProduct;
   bool isGetCartData = false;
 
   List<CartProductDetailsModel>? productDetails;
@@ -197,9 +240,8 @@ class PagesController extends GetxController{
         token: token
         );
       cartData = res.data;
-      //add product count
-      priceForAllProduct = res.data!.price_for_all_thing;
-      
+
+      priceForAllProduct = res.data!.price_for_all_thing!.toDouble();
       isGetCartData = false;
       Get.snackbar(
         '',
@@ -220,6 +262,7 @@ class PagesController extends GetxController{
         colorText: Colors.white,
         duration: const Duration(seconds: 8)
         );
+      update();
     }
     
   }
@@ -241,7 +284,7 @@ class PagesController extends GetxController{
         productId: productId,  
         token: token
         );
-      Get.back(closeOverlays: true);
+      
       Get.snackbar(
         '',
         removefromCartData!.message.toString(),
@@ -261,9 +304,102 @@ class PagesController extends GetxController{
         colorText: Colors.white,
         duration: const Duration(seconds: 3)
         );
+      update();
     }
     
   }
+
+  //update from cart
+  UpdateCartModel? updateCartData;
+  bool ifupdateCart = false;
+
+  Future<void> updateCart(
+    {
+      required int userId,
+      required int productId,
+      required int quantity,
+      required int price,
+      required String token,
+    }
+  )async{
+    try{
+      updateCartData = await CartApi.updateCartApi(
+        userId: userId,
+        price: price,
+        productId: productId,
+        quantity: quantity,
+        token: token
+        );
+      
+      Get.snackbar(
+        '',
+        updateCartData!.message.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }catch(e){
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }
+    
+  }
+
+  //coupon cart
+  CouponCartModel?couponCartData;
+  bool ifcouponCart = false;
+
+  Future<void> couponCart(
+    {
+    required String code,
+    required double totalPrice,
+    required String token,
+    }
+  )async{
+    try{
+      couponCartData = await CartApi.couponCartApi(
+        code: code,
+        totalPrice: totalPrice,
+        token: token
+        );
+      
+      priceForAllProduct = couponCartData!.data;
+
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        couponCartData!.message.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+      );
+      update();
+    }catch(e){
+      Get.back(closeOverlays: true);
+      Get.snackbar(
+        '',
+        e.toString().split(':')[1],
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }
+    
+  }
+
 
   List<Color> colorList = [
     Colors.red,
@@ -288,374 +424,7 @@ class PagesController extends GetxController{
     'XXL',
   ];
 
-  // List<String> genderList = [
-  //   'رجال',
-  //   'نساء',
-  //   'أطفال',
-  //   'إكسسوارات',
-  //   'إلكترونيات'
-  // ];
-
-  // List<List<String>> categoryList=[
-  //   [
-  //     'قمصان',
-  //     'أحذية',
-  //     'جينز'
-  //   ],
-  //   [
-  //     'فساتين',
-  //     'أحذية',
-  //     'ساعات'
-  //   ],
-  //   [
-  //     'ألعاب',
-  //     'أحذية',
-  //   ],
-  //   [
-  //     'خواتم',
-  //     'أساور',
-  //   ],
-  //   [
-  //     'برادات',
-  //     'شاشات',
-  //   ],
-  // ];
-
-  // List<List<String>> clotheIconList = [
-  //   [
-  //     'assets/images/tshirt.png',
-  //     'assets/images/sneakers.png',
-  //     'assets/images/jeans.png',
-  //   ],
-  //   [
-  //     'assets/images/dress.png',
-  //     'assets/images/high-heel.png',
-  //     'assets/images/watch.png',
-  //   ],
-  //   [
-  //     'assets/images/toys.png',
-  //     'assets/images/baby-shoes.png',
-  //   ],
-  //   [
-  //     'assets/images/ring.png',
-  //     'assets/images/bracelet.png',
-  //   ],
-  //   [
-  //     'assets/images/fridge.png',
-  //     'assets/images/television.png',
-  //   ],
-  // ];
-
-  // Map<int,dynamic> clothesMap = {
-  //   0:[
-  //      [
-  //     'قميص1',
-  //     'قميص2',
-  //     'قميص3',
-  //     ],
-  //    [
-  //     'حذاء1',
-  //     'حذاء2',
-  //    ],
-  //    [
-  //     'جينز1',
-  //     'جينز2',
-  //     'جينز3',
-  //     'جينز4',
-  //     'جينز5',
-  //     ],
-  //  ],
-
-  //  1:[
-  //      [
-  //     'فستان1',
-  //     'فستان2',
-  //     'فستان3',
-  //     ],
-  //    [
-  //     'حذاء1',
-  //     'حذاء2',
-  //    ],
-  //    [
-  //     'ساعة1',
-  //     'ساعة2',
-  //     'ساعة3',
-  //     'ساعة4',
-  //     'ساعة5',
-  //     ],
-  //  ],
-
-  //  2:[
-  //      [
-  //     'لعبة1',
-  //     'لعبة2',
-  //     'لعبة3',
-  //     'لعبة4',
-  //     ],
-  //    [
-  //     'حذاء1',
-  //     'حذاء2',
-  //    ],
-  //  ],
-  //  3:[
-  //      [
-  //     'خاتم1',
-  //     'خاتم2',
-  //     'خاتم3',
-  //     'خاتم4',
-  //     ],
-  //    [
-  //     'إسوارة1',
-  //     'إسوارة2',
-  //    ],
-  //  ],
-  //  4:[
-  //      [
-  //     'براد1',
-  //     'براد2',
-  //     'براد3',
-  //     'براد4',
-  //     ],
-  //    [
-  //     'شاشة1',
-  //     'شاشة2',
-  //    ],
-  //  ],
-  // };
   
-  // Map<int,dynamic> price1Map = {
-  //   0:[
-  //      [
-  //     '40',
-  //     '50',
-  //     '60',
-  //     ],
-  //    [
-  //     '20',
-  //     '10',
-  //    ],
-  //    [
-  //     '30',
-  //     '60',
-  //     '70',
-  //     '50',
-  //     '88',
-  //     ],
-  //  ],
-
-  //  1:[
-  //      [
-  //     '20',
-  //     '30',
-  //     '50',
-  //     ],
-  //    [
-  //     '40',
-  //     '50',
-  //    ],
-  //    [
-  //     '30',
-  //     '40',
-  //     '50',
-  //     '50',
-  //     '80',
-  //     ],
-  //  ],
-
-  //  2:[
-  //      [
-  //     '10',
-  //     '30',
-  //     '20',
-  //     '40',
-  //     ],
-  //    [
-  //     '50',
-  //     '70',
-  //    ],
-  //  ],
-  //  3:[
-  //      [
-  //     '10',
-  //     '30',
-  //     '20',
-  //     '40',
-  //     ],
-  //    [
-  //     '50',
-  //     '70',
-  //    ],
-  //  ],
-  //  4:[
-  //      [
-  //     '10',
-  //     '30',
-  //     '20',
-  //     '40',
-  //     ],
-  //    [
-  //     '50',
-  //     '70',
-  //    ],
-  //  ],
-  // };
-  
-  // Map<int,dynamic> price2Map = {
-  //   0:[
-  //      [
-  //     '50',
-  //     '60',
-  //     '70',
-  //     ],
-  //    [
-  //     '30',
-  //     '20',
-  //    ],
-  //    [
-  //     '40',
-  //     '70',
-  //     '80',
-  //     '60',
-  //     '98',
-  //     ],
-  //  ],
-
-  //  1:[
-  //      [
-  //     '30',
-  //     '40',
-  //     '60',
-  //     ],
-  //    [
-  //     '50',
-  //     '60',
-  //    ],
-  //    [
-  //     '40',
-  //     '50',
-  //     '60',
-  //     '70',
-  //     '80',
-  //     ],
-  //  ],
-
-  //  2:[
-  //      [
-  //     '10',
-  //     '30',
-  //     '20',
-  //     '40',
-  //     ],
-  //    [
-  //     '50',
-  //     '70',
-  //    ],
-  //  ],
-  //  3:[
-  //      [
-  //     '10',
-  //     '30',
-  //     '20',
-  //     '40',
-  //     ],
-  //    [
-  //     '50',
-  //     '70',
-  //    ],
-  //  ],
-  //  4:[
-  //      [
-  //     '10',
-  //     '30',
-  //     '20',
-  //     '40',
-  //     ],
-  //    [
-  //     '50',
-  //     '70',
-  //    ],
-  //  ],
-  // };
-
-  // Map<int,dynamic> photoMap = {
-  //   0:[
-  //      [
-  //     'assets/images/mentshirt.png',
-  //     'assets/images/mentshirt.png',
-  //     'assets/images/mentshirt.png',
-  //     ],
-  //    [
-  //     'assets/images/menshoes.jpg',
-  //     'assets/images/menshoes.jpg',
-  //    ],
-  //    [
-  //     'assets/images/jeansphoto.jpg',
-  //     'assets/images/jeansphoto.jpg',
-  //     'assets/images/jeansphoto.jpg',
-  //     'assets/images/jeansphoto.jpg',
-  //     'assets/images/jeansphoto.jpg',
-  //     ],
-  //  ],
-
-  //  1:[
-  //      [
-  //     'assets/images/dressphoto.jpg',
-  //     'assets/images/dressphoto.jpg',
-  //     'assets/images/dressphoto.jpg',
-  //     ],
-  //    [
-  //     'assets/images/heel.jpg',
-  //     'assets/images/heel.jpg',
-  //    ],
-  //    [
-  //     'assets/images/watchphoto.jpg',
-  //     'assets/images/watchphoto.jpg',
-  //     'assets/images/watchphoto.jpg',
-  //     'assets/images/watchphoto.jpg',
-  //     'assets/images/watchphoto.jpg',
-  //     ],
-  //  ],
-
-  //  2:[
-  //      [
-  //     'assets/images/toy.jpg',
-  //     'assets/images/toy.jpg',
-  //     'assets/images/toy.jpg',
-  //     'assets/images/toy.jpg',
-  //     ],
-  //    [
-  //     'assets/images/baby-shoes.jpg',
-  //     'assets/images/baby-shoes.jpg',
-  //    ],
-  //  ],
-  //  3:[
-  //      [
-  //     'assets/images/ringimg.jpg',
-  //     'assets/images/ringimg.jpg',
-  //     'assets/images/ringimg.jpg',
-  //     'assets/images/ringimg.jpg',
-  //     ],
-  //    [
-  //     'assets/images/braceletimg.jpg',
-  //     'assets/images/braceletimg.jpg',
-  //    ],
-  //  ],
-  //  4:[
-  //      [
-  //     'assets/images/fridgeimg.jpg',
-  //     'assets/images/fridgeimg.jpg',
-  //     'assets/images/fridgeimg.jpg',
-  //     'assets/images/fridgeimg.jpg',
-  //     ],
-  //    [
-  //     'assets/images/tvimg.jpg',
-  //     'assets/images/tvimg.jpg',
-  //    ],
-  //  ],
-  // };
-
-  
-
 
   void carouselChange1(int index){
     currentPage1=index;

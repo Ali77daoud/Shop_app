@@ -11,9 +11,9 @@ class ShopPage extends StatelessWidget {
   ShopPage({ Key? key }) : super(key: key);
 
   final pagesController = Get.find<PagesController>();
-  final authController = Get.find<AuthController>();
+  final authController = Get.put(AuthController());
 
-  final TextEditingController code = TextEditingController();
+  final TextEditingController codekey = TextEditingController();
   @override
   Widget build(BuildContext context) {
     int? userId = authController.userId.read<int>('id');
@@ -56,8 +56,6 @@ class ShopPage extends StatelessWidget {
                   // physics: const NeverScrollableScrollPhysics(),
                   // shrinkWrap: true,
                   itemBuilder: (context,index){
-                    // String productname = pagesController.cartData!.Product_detailss![index].product_Info!.translations!.
-                    //   firstWhere((e) => e.locale=='ar').product_name.toString();
                     return cartWidget(
                       productName: pagesController.cartData!.Product_detailss![index].product_Info!.translations!.
                       firstWhere((e) => e.locale=='ar').product_name.toString(),
@@ -70,8 +68,55 @@ class ShopPage extends StatelessWidget {
                       productQuantity: pagesController.cartData!.Product_detailss![index].product_quantity.toString(),
 
                       onIncrease: (){
-                        
+                        int productCount = int.parse(pagesController.cartData!.
+                        Product_detailss![index].product_quantity.toString());
+                        if(productCount < 5){
+                          productCount++;
+                        }
+                        print(productCount);
+
+                        authController.showCircleDialog(context: context);
+
+                        pagesController.updateCart(
+                          userId: userId!.toInt(), 
+                          productId: pagesController.cartData!.Product_detailss![index].product_Info!.id!.toInt(), 
+                          quantity: productCount, 
+                          price: int.parse(pagesController.cartData!.
+                          Product_detailss![index].price.toString()), 
+                          token: token.toString()
+                          ).then((value){
+                            pagesController.getFromCart(
+                              userId: userId,
+                              token: token.toString()
+                              ).then((value) => Get.back(closeOverlays: true));
+                          });
                       },
+
+                      ondecrease: (){
+                        int productCount = int.parse(pagesController.cartData!.
+                        Product_detailss![index].product_quantity.toString());
+                        if(productCount > 1){
+                          productCount--;
+                        }
+                        print(productCount);
+
+                        authController.showCircleDialog(context: context);
+
+                        pagesController.updateCart(
+                          userId: userId!.toInt(), 
+                          productId: pagesController.cartData!.Product_detailss![index].product_Info!.id!.toInt(), 
+                          quantity: productCount, 
+                          price: int.parse(pagesController.cartData!.
+                          Product_detailss![index].price.toString()), 
+                          token: token.toString()
+                          ).then((value){
+                            pagesController.getFromCart(
+                              userId: userId,
+                              token: token.toString()
+                              ).then((value) => Get.back(closeOverlays: true));
+                          });
+                      },
+
                       onDelete: (){
                         authController.showCircleDialog(context: context);
                         pagesController.removefromCart(
@@ -82,7 +127,7 @@ class ShopPage extends StatelessWidget {
                             pagesController.getFromCart(
                               userId: userId,
                               token: token.toString()
-                              );
+                              ).then((value) => Get.back(closeOverlays: true));
                           });
                       }
                     );
@@ -164,12 +209,20 @@ class ShopPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
             child: TextFormField(
                 keyboardType:TextInputType.text,
-                controller: code,
+                controller: codekey,
                 cursorColor: mainColor,
                 decoration: InputDecoration(
                   suffix:InkWell(
                     onTap: (){
-                     
+                     authController.showCircleDialog(context: context);
+                     pagesController.couponCart(
+                      code: codekey.text ,
+                      totalPrice: pagesController.priceForAllProduct!, 
+                      token: token.toString(),
+                      ).then((value){
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        print(pagesController.couponCartData!.data!);
+                      });
                       
                     },
                     child: const Padding(
@@ -209,7 +262,6 @@ class ShopPage extends StatelessWidget {
           Center(
             child: buttomUtils(
               ontab: (){
-              
                 Get.toNamed(Routes.payment1Screen);
               }, 
               childtext: const Text('الدفع',

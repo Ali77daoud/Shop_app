@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/utils/theme.dart';
 
@@ -9,6 +8,7 @@ Widget cartWidget(
     required String totalPrice,
     required String productQuantity,
     required var onIncrease,
+    required var ondecrease,
     required var onDelete,
   }
 ){
@@ -33,7 +33,7 @@ Widget cartWidget(
             children: [
               Text(
                 productName,
-                maxLines: 2,
+                maxLines: 1,
                 style: const TextStyle(
                   color: blackColor,
                   fontSize: 15,
@@ -42,14 +42,17 @@ Widget cartWidget(
                 ),
               ),
 
-              Text(
-                productDescription,
-                maxLines: 2,
-                style: const TextStyle(
-                  color: blackColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
-                  overflow: TextOverflow.ellipsis,
+              SizedBox(
+                height: 42,
+                child: Text(
+                  productDescription,
+                  maxLines: 2,
+                  style: const TextStyle(
+                    color: blackColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.normal,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
 
@@ -66,18 +69,21 @@ Widget cartWidget(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
-                      onTap: (){
-                        
-                      },
-                      child: const Text(
-                        '-',
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.ellipsis,
+                      onTap: ondecrease,
+                      child: const SizedBox(
+                        width: 20,
+                        child: Center(
+                          child: Text(
+                            '-',
+                            style: TextStyle(
+                              color: blackColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            ),
                         ),
-                        ),
+                      ),
                     ),
 
                       Text(
@@ -92,13 +98,18 @@ Widget cartWidget(
 
                       InkWell(
                         onTap: onIncrease,
-                        child: const Text(
-                        '+',
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold
-                        ),
+                        child: const SizedBox(
+                          width: 20,
+                          child: Center(
+                            child: Text(
+                            '+',
+                            style: TextStyle(
+                              color: blackColor,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold
+                            ),
+                            ),
+                          ),
                         ),
                       ),
                   ],

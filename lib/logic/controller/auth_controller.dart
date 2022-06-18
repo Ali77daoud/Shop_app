@@ -156,11 +156,6 @@ class AuthController extends GetxController{
 
   Future<void> signinGoogle() async {
       try {
-        // await googleSignIn.isSignedIn().then((value)async{
-        //   if(value){
-        //     await googleSignIn.disconnect();
-        //   }
-        // }); 
         googleUser = await googleSignIn.signIn();
         if(googleUser == null){
           Get.back(closeOverlays: true);
