@@ -1,3 +1,4 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
@@ -33,21 +34,44 @@ Widget homeCard(
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 0,right: 0,),
-              child: Container(
+              child: ifNetworkImage?
+              Container(
                 width: width,
                 height: hight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(radius),topRight: Radius.circular(radius)),
-                  image:ifNetworkImage? DecorationImage(
-                    image: NetworkImage('$baseUrl/$img'),
-                    fit: BoxFit.cover,
-                  ):
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: FancyShimmerImage(
+                    imageUrl:'$baseUrl/$img' ,
+                    boxFit: BoxFit.cover,
+                    shimmerBaseColor: lightGreyColor1,  
+                    shimmerHighlightColor: mainColor,  
+                    shimmerBackColor: whiteColor,
+                    errorWidget: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: greyColor,
+                        ),
+                      child: const Center(child: Text('error in loading',style: TextStyle(fontSize: 10),)),
+                    ),
+                    ),
+                ),
+              ):
+              Container(
+                width: width,
+                height: hight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(radius),topRight: Radius.circular(radius)),
+                  image:
                   DecorationImage(
                     image: AssetImage(img),
                     fit: BoxFit.cover,
                   )
                 ),
-              ),
+              )
+              ,
             ),
             const SizedBox(height: 5,),
             Text(centertext,

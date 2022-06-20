@@ -1,3 +1,4 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/utils/string.dart';
@@ -9,7 +10,7 @@ Widget iconContainer(
     required String text,
     required Color color,
     required double h,
-    required bool ifNetwork,
+    bool ifNetwork = false,
   }
 ) {
   return Column(
@@ -21,7 +22,7 @@ Widget iconContainer(
           color: lightGreyColor1,
           borderRadius: BorderRadius.circular(10),
           boxShadow:  [
-                BoxShadow(
+              BoxShadow(
               color: lightGreyColor2,
               offset: const Offset(
                 0,
@@ -34,15 +35,30 @@ Widget iconContainer(
           ),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Container(
+          child: 
+          ifNetwork?
+          FancyShimmerImage(
+            imageUrl:'$baseUrl/$image' ,
+            width: 35,
+            height:40 ,
+            boxFit: BoxFit.fill,
+            shimmerBaseColor: lightGreyColor1,  
+            shimmerHighlightColor: mainColor,  
+            shimmerBackColor: whiteColor,
+            errorWidget: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: greyColor,
+                ),
+              child: const Center(child: Text('error in loading',style: TextStyle(fontSize: 5),)),
+            ),
+            ):
+          Container(
                 width: 35,
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  image:ifNetwork?DecorationImage(
-                    image: NetworkImage('$baseUrl/$image'),
-                    fit: BoxFit.fill
-                  ):
+                  image:
                   DecorationImage(
                     image: AssetImage(image),
                     fit: BoxFit.fill

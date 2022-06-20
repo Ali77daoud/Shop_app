@@ -37,6 +37,8 @@ dependencies:
   http:
   google_sign_in: 
   flutter_facebook_auth:
+  badges: ^2.0.3
+  fancy_shimmer_image: ^2.0.2
 
   flutter_localizations: 
     sdk: flutter

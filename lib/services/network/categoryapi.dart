@@ -10,13 +10,15 @@ import 'package:shop_app/utils/string.dart';
 
 class CategoryApi{
   //get maincategory
-  static Future<MainCategoryModel> getMainCategories()async{
+  static Future<MainCategoryModel> getMainCategories({
+    required String token,
+  })async{
     final client = http.Client();
     final uri = Uri.parse('$baseUrl/api/MainCategories');
     var response = await client.get(
       uri,
       headers: {
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTY1Mzk4MDU1NiwibmJmIjoxNjUzOTgwNTU2LCJqdGkiOiJHRzl3RTNoTEZjVXFGQzN0Iiwic3ViIjo0LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.yyiytKmCzrGZlZlI1SbfuPVpnLW7LhZJyatB7WfIxhU',
+        'Authorization': 'Bearer $token',
       }
       );
 
@@ -128,6 +130,35 @@ class CategoryApi{
       var responseData = json.decode(response.body);
       if(responseData['data'] != null){
         return BrandsModel.fromJson(responseData);
+      }
+      else{
+        return throw Exception('لا يوجد بيانات');
+      }
+    }
+    else{
+      throw Exception('مشكلة في الاتصال');
+    }
+
+  }
+
+  //last 10 products
+
+  static Future<ProductsModel> getLast10ProductsApi({
+    required String token,
+  })async{
+    final client = http.Client();
+    final uri = Uri.parse('$baseUrl/api/Last_10_products');
+    var response = await client.get(
+      uri,
+      headers: {
+        'Authorization': 'Bearer $token',
+      }
+      );
+
+    if(response.statusCode == 200){
+      var responseData = json.decode(response.body);
+      if(responseData['data'] != null){
+        return ProductsModel.fromJson(responseData);
       }
       else{
         return throw Exception('لا يوجد بيانات');

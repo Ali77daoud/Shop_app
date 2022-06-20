@@ -6,6 +6,7 @@ import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/productdetailscreen/productdetails.dart';
+import 'package:shop_app/view/widget/buttom_navigation_bar.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class ProductScreen extends StatelessWidget {
       color: whiteColor,
       child: SafeArea(
         child:
-        GetBuilder<MainController>(
+        GetBuilder<PagesController>(
           builder: (_){
             return
             Scaffold(
@@ -116,32 +117,53 @@ class ProductScreen extends StatelessWidget {
               ),
             ),
             bottomNavigationBar:
-            BottomNavigationBar(
-                    items: const [
-                          BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
-                          BottomNavigationBarItem(icon:Icon(Icons.shopping_cart_sharp),label: '' ),
-                          BottomNavigationBarItem(icon:Icon(Icons.assignment_returned),label: '' ),
-                          BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
-                        ],
-                    iconSize: 23,
-                    onTap: (index){
-                      mainController.changeScreen(index).then((value){
-                        Get.back();
-                        Get.offNamed(Routes.mainScreen);
-                        Get.back();
-                        if(index == 1){
-                            pagesController.isGetCartData = true;
-                            pagesController.getFromCart(
-                              userId: userId!.toInt(),
-                              token: token.toString(),
-                            );
-                          }
-                      });
+               CustomButtomNavBar(
+                ontap: (index){
+                        mainController.changeScreen(index).then((value){
+                          Get.back();
+                          Get.offNamed(Routes.mainScreen);
+                          Get.back();
+                          if(index == 1){
+                              pagesController.isGetCartData = true;
+                              pagesController.getFromCart(
+                                userId: userId!.toInt(),
+                                token: token.toString(),
+                              );
+                            }
+                        });
                     },
-                    type: BottomNavigationBarType.fixed,
-                    fixedColor: greyColor,
-                    unselectedItemColor: greyColor,
-                  ) ,
+                  fixedColor: greyColor ,
+                  iconSize: 23 ,
+                  unselectedColor: greyColor,
+                ),
+
+            
+            // BottomNavigationBar(
+            //         items: const [
+            //               BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
+            //               BottomNavigationBarItem(icon:Icon(Icons.shopping_cart_sharp),label: '' ),
+            //               BottomNavigationBarItem(icon:Icon(Icons.assignment_returned),label: '' ),
+            //               BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
+            //             ],
+            //         iconSize: 23,
+            //         onTap: (index){
+            //           mainController.changeScreen(index).then((value){
+            //             Get.back();
+            //             Get.offNamed(Routes.mainScreen);
+            //             Get.back();
+            //             if(index == 1){
+            //                 pagesController.isGetCartData = true;
+            //                 pagesController.getFromCart(
+            //                   userId: userId!.toInt(),
+            //                   token: token.toString(),
+            //                 );
+            //               }
+            //           });
+            //         },
+            //         type: BottomNavigationBarType.fixed,
+            //         fixedColor: greyColor,
+            //         unselectedItemColor: greyColor,
+            //       ) ,
             body: ProductDetails(),
         
       );

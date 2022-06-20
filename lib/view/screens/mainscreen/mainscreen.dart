@@ -4,6 +4,7 @@ import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/utils/theme.dart';
+import 'package:shop_app/view/widget/buttom_navigation_bar.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
 class MainScreen extends StatelessWidget {
@@ -130,16 +131,8 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
                 bottomNavigationBar:
-                BottomNavigationBar(
-                        items: const [
-                              BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
-                              BottomNavigationBarItem(icon:Icon(Icons.shopping_cart_sharp),label: '' ),
-                              BottomNavigationBarItem(icon:Icon(Icons.assignment_returned),label: '' ),
-                              BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
-                            ],
-                        iconSize: 23,
-                        currentIndex: mainController.mainIndex,
-                        onTap: (index){
+                CustomButtomNavBar(
+                  ontap: (index){
                           mainController.changeScreen(index);
                           if(index == 1){
                             pagesController.isGetCartData = true;
@@ -148,12 +141,37 @@ class MainScreen extends StatelessWidget {
                               token: token.toString(),
                               );
                           }
-                        },
-                        type: BottomNavigationBarType.fixed,
-                        fixedColor: Get.isDarkMode?blackColor:mainColor,
-                        unselectedItemColor: Colors.grey,
+                    },
+                    index: mainController.mainIndex ,
+                    fixedColor:mainColor,
+                    iconSize: 23,
+                    unselectedColor: greyColor,
+                    
+                  ),
+                // BottomNavigationBar(
+                //         items: const [
+                //               BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
+                //               BottomNavigationBarItem(icon:Icon(Icons.shopping_cart_sharp),label: '' ),
+                //               BottomNavigationBarItem(icon:Icon(Icons.assignment_returned),label: '' ),
+                //               BottomNavigationBarItem(icon:Icon(Icons.person_pin),label: '' ),
+                //             ],
+                //         iconSize: 23,
+                //         currentIndex: mainController.mainIndex,
+                //         onTap: (index){
+                //           mainController.changeScreen(index);
+                //           if(index == 1){
+                //             pagesController.isGetCartData = true;
+                //             pagesController.getFromCart(
+                //               userId: userId!.toInt(),
+                //               token: token.toString(),
+                //               );
+                //           }
+                //         },
+                //         type: BottomNavigationBarType.fixed,
+                //         fixedColor: Get.isDarkMode?blackColor:mainColor,
+                //         unselectedItemColor: Colors.grey,
                 
-                      ) ,
+                //       ) ,
                 body: mainController.screens1[mainController.mainIndex],
           );
           }

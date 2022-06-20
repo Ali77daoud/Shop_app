@@ -31,10 +31,13 @@ class AuthApi {
         return RegisterModel.fromJson(responseData);
       }
       else{
+        
         return throw Exception('لايوجد بيانات مستخدم');
       }
     }
     else{
+      var responseData = json.decode(response.body);
+      print(responseData);
       return throw Exception('خطأ في إنشاء حساب جديد');
     }
   }

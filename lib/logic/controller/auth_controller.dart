@@ -162,8 +162,15 @@ class AuthController extends GetxController{
           throw Exception('no google user');
         }
         update();
-      } catch (error) {
-        print(error);
+      } catch (e) {
+        Get.snackbar(
+          '',
+          e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 5)
+        );
       }
   }
 
@@ -183,55 +190,71 @@ class AuthController extends GetxController{
           print(facebookUserData!.email.toString());
         }
         else{
-          print('error');
+          print('not success');
         }
         update();
-      } catch (error) {
-        print(error);
+      } catch (e) {
+        Get.snackbar(
+          '',
+          e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 5)
+        );
       }
   }
   
   //logout
 
-  void logOut (){
-    bool? isface = isFacebookSigninBox.read<bool>('face');
+  Future<void> logOut ()async{
+    try{
+      bool? isface = isFacebookSigninBox.read<bool>('face');
 
-    isLogin=false;
-    authBox.write('auth', isLogin);
-    firstNameBox.write('fname','');
-    firstNameBox.write('lname','');
-    firstNameBox.write('email','');
-    userId.write('id', '');
-    imgUrlBox.write('img', '');
-    //for google sign in
-    googleSignIn.isSignedIn().then((value)async{
-      if(value){
-        await googleSignIn.disconnect();
-        Get.offAllNamed(Routes.boardingScreen);
-      }
-      else {
-        // //for facebook
-        if(isface == true)
-        {
-          isFacebookSigninBox.write('face',false);
-          await FacebookAuth.instance.logOut();
-          Get.offAllNamed(Routes.boardingScreen);
-          print('yes face book login');
-        }
-        else
-        {
-          print('no face book login');
+      isLogin=false;
+      authBox.write('auth', isLogin);
+      firstNameBox.write('fname','');
+      firstNameBox.write('lname','');
+      firstNameBox.write('email','');
+      userId.write('id', '');
+      imgUrlBox.write('img', '');
+      //for google sign in
+      await googleSignIn.isSignedIn().then((value)async{
+        if(value){
+          await googleSignIn.disconnect();
           Get.offAllNamed(Routes.boardingScreen);
         }
-       
-      }
-    }); 
-    
-    
-    
-    
-    
+        else {
+          // //for facebook
+          if(isface == true)
+          {
+            isFacebookSigninBox.write('face',false);
+            await FacebookAuth.instance.logOut();
+            Get.offAllNamed(Routes.boardingScreen);
+            print('yes face book login');
+          }
+          else
+          {
+            print('no face book login');
+            Get.offAllNamed(Routes.boardingScreen);
+          }
+        
+        }
+      }); 
+      
+  }catch(e){
+    Get.snackbar(
+          '',
+          e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 5)
+      );
   }
+  
+  }
+    
 
   
 }

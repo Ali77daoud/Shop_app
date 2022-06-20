@@ -115,11 +115,9 @@ class HomePage extends StatelessWidget {
                                     onTap: (){
                                       pagesController.changeCategoryColor(0);
                                       pagesController.clothesIndex = 0;
-
                                       pagesController.dataBarnchesList.clear();
                                       pagesController.dataproductsList.clear();
                                       pagesController.dataBrandsList.clear();
-
                                       pagesController.subCategoryId = pagesController.dataSubCategoryList.
                                       where((e) => e.mcategoryId==pagesController.mainCategoryId).toList()[index].id!.toInt();
                                       print(pagesController.subCategoryId);
@@ -324,57 +322,70 @@ class HomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: SizedBox(
-                  width: double.infinity,
-                  height: 230,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Stack(
-                        children: [
-                          homeCard(
-                          hight: 150,
-                          width: 150,
-                          widthBetweenPrice: 25,
-                          elevation: 5,
-                          color: whiteColor, 
-                          radius: 10, 
-                          centertext:'قمصان', 
-                          img: 'assets/images/1.jpg', 
-                          price1: '20',
-                          price2: '30',
-                          ),
-                           Positioned(
-                             top: 10,
-                             right: 15,
-                             child: Container(
-                              height: 25,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: mainColor,
-                                borderRadius: BorderRadius.circular(15)
-                              ),
-                              child: const Center(
-                                child: Text('30%',
-                                  style: TextStyle(
-                                    color: whiteColor
-                                  ),
-                                )
+            GetBuilder<PagesController>(builder: (_){
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                child: SizedBox(
+                    width: double.infinity,
+                    height: 230,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Stack(
+                          children: [
+                            homeCard(
+                            ifNetworkImage: true,
+                            hight: 150,
+                            width: 150,
+                            widthBetweenPrice: 25,
+                            elevation: 5,
+                            color: whiteColor, 
+                            radius: 10, 
+                            centertext: 
+                            pagesController.dataLast10productsList![index].translations!.isEmpty?
+                            '':
+                            pagesController.dataLast10productsList![index].translations!.
+                            firstWhere((element) => element.locale == 'ar').productName.toString(), 
+                            img: pagesController.dataLast10productsList![index].images!.isEmpty?
+                                  'images/The_Product/1e3572313d21c2bf591caa7d263d2f33.png':
+                                  pagesController.dataLast10productsList![index].images![0].imageName.toString(), 
+                            
+
+                            price1: pagesController.dataLast10productsList![index].minPrice.toString(),
+
+                            price2: pagesController.dataLast10productsList![index].maxPrice.toString(),
+                            ),
+                            Positioned(
+                              top: 10,
+                              right: 15,
+                              child: Container(
+                                height: 25,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: mainColor,
+                                  borderRadius: BorderRadius.circular(15)
                                 ),
-                              ),
-                           ),
-                        ],
-                      );
-                    },
-                    separatorBuilder: (context,index){
-                      return const SizedBox(width: 10,);
-                    },
-                    itemCount: 5,
-                    ),
-                ),
-            ),
+                                child: const Center(
+                                  child: Text('30%',
+                                    style: TextStyle(
+                                      color: whiteColor
+                                    ),
+                                  )
+                                  ),
+                                ),
+                            ),
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context,index){
+                        return const SizedBox(width: 10,);
+                      },
+                      itemCount: pagesController.dataLast10productsList!.length,
+                      ),
+                  ),
+              );
+            })
+            
           ],
         ),
       );

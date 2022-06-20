@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
-import 'package:shop_app/model/auth_models/usermodel.dart';
 import 'package:shop_app/utils/string.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -51,16 +51,32 @@ class ProductDetails extends StatelessWidget {
                       },
                     ),
                     itemBuilder: (context, index, realIndex){
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          image: DecorationImage(
-                            image: NetworkImage('$baseUrl/${pagesController.dataproductsList.
-                            firstWhere((e) =>e.images![0].productId==pagesController.productsId).images![index].imageName.toString()}'),
-                            fit: BoxFit.contain
+                      return FancyShimmerImage(
+                        imageUrl:'$baseUrl/${pagesController.dataproductsList.
+                            firstWhere((e) =>e.images![0].productId==pagesController.productsId).images![index].imageName.toString()}' ,
+                            
+                        boxFit: BoxFit.contain,
+                        shimmerBaseColor: lightGreyColor1,  
+                        shimmerHighlightColor: mainColor,  
+                        shimmerBackColor: whiteColor,
+                        errorWidget: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: greyColor,
                             ),
+                          child: const Center(child: Text('error in loading',style: TextStyle(fontSize: 10),)),
                         ),
-                      );
+                        );
+                      // return Container(
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(0),
+                      //     image: DecorationImage(
+                      //       image: NetworkImage('$baseUrl/${pagesController.dataproductsList.
+                      //       firstWhere((e) =>e.images![0].productId==pagesController.productsId).images![index].imageName.toString()}'),
+                      //       fit: BoxFit.contain
+                      //       ),
+                      //   ),
+                      // );
                     }, 
                     ),
                   Positioned(
@@ -162,7 +178,12 @@ class ProductDetails extends StatelessWidget {
                               maxPrice: int.parse(pagesController.dataproductsList.
                               firstWhere((e) =>e.id==pagesController.productsId).maxPrice.toString()) , 
                               token: token.toString(),
-                              );
+                              ).then((value){
+                                pagesController.getFromCart(
+                                  userId: userId,
+                                  token: token.toString()
+                                  ).then((value) => Get.back(closeOverlays: true));
+                              });
                             print(userId);
                           }, 
                           icon: const Icon(

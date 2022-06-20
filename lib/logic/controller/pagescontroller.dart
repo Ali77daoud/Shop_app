@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/model/cartmodels/addtocartmodel.dart';
 import 'package:shop_app/model/cartmodels/couponmodel.dart';
 import 'package:shop_app/model/cartmodels/getfromcart.dart';
@@ -26,14 +27,17 @@ class PagesController extends GetxController{
   int clothesIndex=0;
   
 
-  
+  final authController = Get.put(AuthController());
 
   @override
   void onInit() async{
     super.onInit();
+    String? token = authController.token.read<String>('t');
     isLoadingCategory = true;
-    await getCategories().then((value){
-      getSubCategories();
+    await getCategories(token:token.toString()).then((value)async{
+      await getLast10Products(token: token.toString()).then((value)async{
+        await getSubCategories();
+      });
     });
      
   }
@@ -49,9 +53,11 @@ class PagesController extends GetxController{
 
   var dataCategoryList = <MainCategoryDataModel>[].obs;
 
-  Future<void> getCategories()async{
+  Future<void> getCategories({
+    required String token,
+  })async{
     try{
-      MainCategoryModel res = await CategoryApi.getMainCategories();
+      MainCategoryModel res = await CategoryApi.getMainCategories(token: token);
       dataCategoryList.value = res.data!;
       update();
     }catch(e){
@@ -172,6 +178,36 @@ class PagesController extends GetxController{
     }
     
   }
+//last 10 product
+  List<ProductsDataModel>? dataLast10productsList ;
+
+  Future<void> getLast10Products(
+    {
+      required String token,
+    }
+  )async{
+    try{
+      ProductsModel res = await CategoryApi.getLast10ProductsApi(
+        token: token
+      );
+
+      dataLast10productsList = res.data!;
+
+      
+      update();
+    }catch(e){
+      isLoadingproducts = false;
+      Get.snackbar(
+        '',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3)
+        );
+      update();
+    }
+  }
   /////////////////////////////////////// cart ////////////////////////////////////
   
   //add to cart
@@ -196,7 +232,7 @@ class PagesController extends GetxController{
         maxPrice: maxPrice, 
         token: token
         );
-      Get.back(closeOverlays: true);
+      // Get.back(closeOverlays: true);
       Get.snackbar(
         '',
         addtoCart!.message.toString(),
@@ -224,6 +260,7 @@ class PagesController extends GetxController{
   //get from cart 
   CartDataModel? cartData;
   double? priceForAllProduct;
+  int cartProductNumber = 0;
   bool isGetCartData = false;
 
   List<CartProductDetailsModel>? productDetails;
@@ -242,6 +279,7 @@ class PagesController extends GetxController{
       cartData = res.data;
 
       priceForAllProduct = res.data!.price_for_all_thing!.toDouble();
+      cartProductNumber = res.data!.Product_detailss!.length.toInt();
       isGetCartData = false;
       Get.snackbar(
         '',
