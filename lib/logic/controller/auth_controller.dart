@@ -18,9 +18,12 @@ class AuthController extends GetxController{
   GetStorage firstNameBox = GetStorage();
   GetStorage lastNameBox = GetStorage();
   GetStorage emailBox = GetStorage();
-  GetStorage token = GetStorage();
+  GetStorage phoneNumberBox = GetStorage();
   GetStorage imgUrlBox = GetStorage();
-  GetStorage isFacebookSigninBox = GetStorage();
+
+
+  GetStorage token = GetStorage();
+  GetStorage ifFacebookSigninBox = GetStorage();
   GetStorage userId = GetStorage();
 
 
@@ -76,6 +79,7 @@ class AuthController extends GetxController{
       firstNameBox.write('fname', res.user!.firstName);
       lastNameBox.write('lname', res.user!.lastName);
       emailBox.write('email', res.user!.email);
+      phoneNumberBox.write('phone', res.user!.mobileNumber);
       token.write('t', res.accessToken);
       imgUrlBox.write('img', '');
 
@@ -124,6 +128,7 @@ class AuthController extends GetxController{
       firstNameBox.write('fname', res.user!.firstName);
       lastNameBox.write('lname', res.user!.lastName);
       emailBox.write('email', res.user!.email);
+      phoneNumberBox.write('phone', res.user!.mobileNumber);
       token.write('t', res.accessToken);
 
       FocusManager.instance.primaryFocus?.unfocus();
@@ -186,7 +191,7 @@ class AuthController extends GetxController{
           
           final data = await FacebookAuth.instance.getUserData();
           facebookUserData = FacebookUserModel.fromJson(data);
-          isFacebookSigninBox.write('face',true);
+          ifFacebookSigninBox.write('face',true);
           print(facebookUserData!.email.toString());
         }
         else{
@@ -204,18 +209,29 @@ class AuthController extends GetxController{
         );
       }
   }
+
+  //update profile
+
+  bool ifUpdateProfile = false;
+
+  void changeUpdateProfile(bool val){
+    ifUpdateProfile = val;
+    update();
+  }
   
   //logout
 
   Future<void> logOut ()async{
     try{
-      bool? isface = isFacebookSigninBox.read<bool>('face');
+      bool? isface = ifFacebookSigninBox.read<bool>('face');
 
       isLogin=false;
       authBox.write('auth', isLogin);
       firstNameBox.write('fname','');
-      firstNameBox.write('lname','');
-      firstNameBox.write('email','');
+      lastNameBox.write('lname','');
+      emailBox.write('email','');
+      phoneNumberBox.write('phone','');
+      token.write('t', '');
       userId.write('id', '');
       imgUrlBox.write('img', '');
       //for google sign in
@@ -228,7 +244,7 @@ class AuthController extends GetxController{
           // //for facebook
           if(isface == true)
           {
-            isFacebookSigninBox.write('face',false);
+            ifFacebookSigninBox.write('face',false);
             await FacebookAuth.instance.logOut();
             Get.offAllNamed(Routes.boardingScreen);
             print('yes face book login');

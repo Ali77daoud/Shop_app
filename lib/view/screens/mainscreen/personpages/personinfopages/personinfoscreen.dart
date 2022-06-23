@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/mainscreen_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
-import 'package:shop_app/view/screens/mainscreen/shoppages/payment1screens/payment1.dart';
+import 'package:shop_app/view/screens/mainscreen/personpages/personinfopages/personinfopage.dart';
 import 'package:shop_app/view/widget/buttom_navigation_bar.dart';
 import 'package:shop_app/view/widget/cusomdrawer.dart';
 
-class Payment1Screen extends StatelessWidget {
-  Payment1Screen({ Key? key }) : super(key: key);
-
+class PersonInfoScreen extends StatelessWidget {
+  PersonInfoScreen({ Key? key }) : super(key: key);
   final mainController = Get.find<MainController>();
+  final authController = Get.find<AuthController>();
   final pagesController = Get.find<PagesController>();
-
-  var street1 = TextEditingController();
-  var street2 = TextEditingController();
-  var city = TextEditingController();
-  var state = TextEditingController();
-  var country = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    int? userId = authController.userId.read<int>('id');
+    String? token = authController.token.read<String>('t');
     return Container(
       color: whiteColor,
       child: SafeArea(
         child:
-        GetBuilder<MainController>(
+        GetBuilder<PagesController>(
           builder: (_){
             return
             Scaffold(
@@ -83,10 +79,7 @@ class Payment1Screen extends StatelessWidget {
                       //   pagesController.changeCategoryColor(0);
                       //   pagesController.clothesIndex = 0;
                       //   pagesController.productDetailsIndex = 0;
-                      //   mainController.changeScreen(0).then((value){
-                      //   Get.offNamed((Routes.mainScreen));
                       //   Get.back();
-                      //   });
                       // }
                       // ,
                       // womenButton: (){
@@ -94,40 +87,28 @@ class Payment1Screen extends StatelessWidget {
                       //   pagesController.changeCategoryColor(0);
                       //   pagesController.clothesIndex = 0;
                       //   pagesController.productDetailsIndex = 0;
-                      //   mainController.changeScreen(0).then((value){
-                      //   Get.offNamed((Routes.mainScreen));
                       //   Get.back();
-                      //   });
                       // },
                       // kidsButton: (){
                       //   pagesController.changeGender(2);
                       //   pagesController.changeCategoryColor(0);
                       //   pagesController.clothesIndex = 0;
                       //   pagesController.productDetailsIndex = 0;
-                      //   mainController.changeScreen(0).then((value){
-                      //   Get.offNamed((Routes.mainScreen));
                       //   Get.back();
-                      //   });
                       // },
                       // jewelleryButton: (){
                       //   pagesController.changeGender(3);
                       //   pagesController.changeCategoryColor(0);
                       //   pagesController.clothesIndex = 0;
                       //   pagesController.productDetailsIndex = 0;
-                      //   mainController.changeScreen(0).then((value){
-                      //   Get.offNamed((Routes.mainScreen));
                       //   Get.back();
-                      //   });
                       // },
                       // electronicButton: (){
                       //   pagesController.changeGender(4);
                       //   pagesController.changeCategoryColor(0);
                       //   pagesController.clothesIndex = 0;
                       //   pagesController.productDetailsIndex = 0;
-                      //   mainController.changeScreen(0).then((value){
-                      //   Get.offNamed((Routes.mainScreen));
                       //   Get.back();
-                      //   });
                       // },
                       // context: context,
                     )
@@ -136,17 +117,26 @@ class Payment1Screen extends StatelessWidget {
               ),
             ),
             bottomNavigationBar:
-            CustomButtomNavBar(
-              ontap: (index){
-                mainController.changeScreen(index).then((value){
-                    Get.offNamed((Routes.mainScreen));
-                    Get.back();
-                  });
-              },
-              fixedColor: greyColor ,
-              iconSize: 23 ,
-              unselectedColor: greyColor,
-            ),
+               CustomButtomNavBar(
+                ontap: (index){
+                        mainController.changeScreen(index).then((value){
+                          Get.offNamed(Routes.mainScreen);
+                          Get.back();
+                          if(index == 1){
+                              pagesController.isGetCartData = true;
+                              pagesController.getFromCart(
+                                userId: userId!.toInt(),
+                                token: token.toString(),
+                              );
+                            }
+                        });
+                    },
+                  fixedColor: greyColor ,
+                  iconSize: 23 ,
+                  unselectedColor: greyColor,
+                ),
+
+            
             // BottomNavigationBar(
             //         items: const [
             //               BottomNavigationBarItem(icon:Icon(Icons.home),label: '' ),
@@ -157,22 +147,23 @@ class Payment1Screen extends StatelessWidget {
             //         iconSize: 23,
             //         onTap: (index){
             //           mainController.changeScreen(index).then((value){
-            //             Get.offNamed((Routes.mainScreen));
             //             Get.back();
+            //             Get.offNamed(Routes.mainScreen);
+            //             Get.back();
+            //             if(index == 1){
+            //                 pagesController.isGetCartData = true;
+            //                 pagesController.getFromCart(
+            //                   userId: userId!.toInt(),
+            //                   token: token.toString(),
+            //                 );
+            //               }
             //           });
             //         },
             //         type: BottomNavigationBarType.fixed,
             //         fixedColor: greyColor,
             //         unselectedItemColor: greyColor,
             //       ) ,
-            body:FirstPayment(
-              street1: street1,
-              street2: street2,
-              city: city,
-              country: country,
-              state: state,
-              formKey: formKey,
-            ),
+            body: PersonInfoPage(),
         
       );
       }

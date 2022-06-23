@@ -5,7 +5,7 @@ import 'package:shop_app/logic/controller/auth_controller.dart';
 import 'package:shop_app/logic/controller/pagescontroller.dart';
 import 'package:shop_app/view/screens/mainscreen/buypage.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/homepage.dart';
-import 'package:shop_app/view/screens/mainscreen/personpage.dart';
+import 'package:shop_app/view/screens/mainscreen/personpages/personpage.dart';
 import 'package:shop_app/view/screens/mainscreen/shoppages/shoppage.dart';
 
 

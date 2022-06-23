@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/logic/controller/auth_controller.dart';
+import 'package:shop_app/routes/routes.dart';
 import 'package:shop_app/utils/theme.dart';
 import 'package:shop_app/view/widget/options_item.dart';
 import 'package:shop_app/view/widget/person_widget.dart';
@@ -15,6 +16,7 @@ class PersonPage extends StatelessWidget {
   String fName = GetStorage().read('fname');
   String lName = GetStorage().read('lname');
   String email = GetStorage().read('email');
+  
   
   List<IconData> iconsList = [
     Icons.file_copy_outlined,
@@ -67,6 +69,11 @@ class PersonPage extends StatelessWidget {
                   child: optionItem(
                   text: nameList[index],
                   onTap: (){
+                    if(nameList[index]=='معلومات الحساب'){
+                      authController.changeUpdateProfile(false);
+                      Get.toNamed(Routes.personInfo);
+                    }
+
                     if(nameList[index]=='تسجيل الخروج'){
                       authController.logOut();
                     }

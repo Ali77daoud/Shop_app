@@ -6,6 +6,7 @@ import 'package:shop_app/view/screens/auth/verificationpage.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/categoryscreens/categoryscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/homepages/productdetailscreen/productscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/mainscreen.dart';
+import 'package:shop_app/view/screens/mainscreen/personpages/personinfopages/personinfoscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/shoppages/orderacceptscreens/orderacceptscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/shoppages/ordertrackingscreens/ordertrackingscreen.dart';
 import 'package:shop_app/view/screens/mainscreen/shoppages/payment1screens/payment1screen.dart';
@@ -30,6 +31,8 @@ class Routes{
   static const payment2Screen = '/payment2Screen';
   static const orderAcceptScreen = '/orderAcceptScreen';
   static const orderTrackingScreen = '/orderTrackingScreen';
+
+  static const personInfo = '/personInfo';
 }
 
 class AppRoutes{
@@ -123,6 +126,16 @@ class AppRoutes{
       GetPage(
       name: Routes.orderTrackingScreen ,
       page: ()=>   OrderTrackingScreen(),
+      popGesture: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 200),
+      ),
+
+      //person pages
+
+      GetPage(
+      name: Routes.personInfo ,
+      page: ()=>   PersonInfoScreen(),
       popGesture: true,
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 200),

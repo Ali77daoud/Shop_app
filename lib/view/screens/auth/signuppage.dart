@@ -56,7 +56,7 @@ class SignupPage extends StatelessWidget {
                      
                   ],
                 ),
-                SizedBox(height: h*0.07,),
+                SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
@@ -81,7 +81,7 @@ class SignupPage extends StatelessWidget {
                         key: formKey,
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20 ),
                             child: Column(
                               children: [
                                 const Text('إنشاء حساب',

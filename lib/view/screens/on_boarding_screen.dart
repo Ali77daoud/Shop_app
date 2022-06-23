@@ -53,6 +53,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     width: double.infinity,
                     child: Stack(
                       children: [
+                        
                       PageView.builder(
                         onPageChanged: (index){
                           if(index == boardingItems.length-1){

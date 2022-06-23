@@ -73,14 +73,18 @@ Widget homeCard(
               )
               ,
             ),
-            const SizedBox(height: 5,),
-            Text(centertext,
-              maxLines: 2,
-              style: const TextStyle(
-                  color: blackColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal
-                ),
+            const SizedBox(height: 2,),
+            SizedBox(
+              height: 22,
+              child: Text(
+                centertext,
+                maxLines: 2,
+                style: const TextStyle(
+                    color: blackColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal
+                  ),
+              ),
             ),
             const SizedBox(height: 7,),
             Padding(

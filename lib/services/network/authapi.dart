@@ -70,4 +70,41 @@ class AuthApi {
     }
   }
 
+  //update info
+  static Future<LoginModel> updateUserApi(
+    {
+      required int userId,
+      required String fName,
+      required String lName,
+      required String email,
+      required String password,
+      required String rePassword,
+      required String mobileNum,
+      required String token,
+    }
+  )async{
+    final client = http.Client();
+    final uri = Uri.parse('$baseUrl/api/auth/user-update-profile?user_id=$userId&first_name=$fName&last_name=$lName&email=$email&password=$password&password_confirmation=$rePassword&mobile_number=$mobileNum');
+    var response = await client.post(
+      uri,
+      headers: {
+        'Authorization': 'Bearer $token',
+      }
+      );
+
+    if(response.statusCode == 201){
+      var responseData = json.decode(response.body);
+      if(responseData['user'] !=null ){
+        print('not null');
+        return LoginModel.fromJson(responseData);
+      }
+      else{
+        return throw Exception('لايوجد بيانات مستخدم');
+      }
+    }
+    else{
+      return throw Exception('خطأ في تسجيل الدخول');
+    }
+  }
+
 }

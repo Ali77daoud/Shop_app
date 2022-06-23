@@ -41,12 +41,12 @@ class LoginPage extends StatelessWidget {
                      
                   ],
                 ),
-              SizedBox(height: h*0.15,),
+              const SizedBox(height: 70,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
                   width: double.infinity,
-                  height: 400,
+                  height: 450,
                   decoration: BoxDecoration(
                     color: whiteColor,
                     borderRadius: BorderRadius.circular(30),
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                       key: formKey,
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20 , vertical: 12),
                           child: Column(
                             children: [
                               const Text('تسجيل الدخول',
@@ -162,13 +162,13 @@ class LoginPage extends StatelessWidget {
                                 );
                               }
                             ),
-                            SizedBox(height:h*0.01,),
+                            SizedBox(height:h*0.04,),
                             Directionality(
                               textDirection: TextDirection.rtl,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
+                                children: const [
+                                  Text(
                                       ' هل نسيت كلمة السر؟',
                                       style: TextStyle(
                                       color: blackColor,
@@ -177,27 +177,27 @@ class LoginPage extends StatelessWidget {
                                     ),
                                       ),
                                     
-                                  const Text(
-                                      '|',
-                                      style: TextStyle(
-                                      color: blackColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal
-                                    ),
-                                      ),
-                                  TextButton(
-                                    onPressed: (){
-                                      Get.offNamed(Routes.loginOTPPage);
-                                    },
-                                    child: const Text(
-                                      'تسجيل OTP ',
-                                      style: TextStyle(
-                                      color: blackColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal
-                                    ),
-                                      ),
-                                  ),
+                                  // const Text(
+                                  //     '|',
+                                  //     style: TextStyle(
+                                  //     color: blackColor,
+                                  //     fontSize: 15,
+                                  //     fontWeight: FontWeight.normal
+                                  //   ),
+                                  //     ),
+                                  // TextButton(
+                                  //   onPressed: (){
+                                  //     Get.offNamed(Routes.loginOTPPage);
+                                  //   },
+                                  //   child: const Text(
+                                  //     'تسجيل OTP ',
+                                  //     style: TextStyle(
+                                  //     color: blackColor,
+                                  //     fontSize: 15,
+                                  //     fontWeight: FontWeight.normal
+                                  //   ),
+                                  //     ),
+                                  // ),
                                   
                                 ],
                               ),
@@ -294,7 +294,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 50),
                 child: SizedBox(
                   width: double.infinity,
                   child: buttomUtils(

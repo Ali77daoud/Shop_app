@@ -21,7 +21,15 @@ Widget boarderItems(
           ),
           borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(45),bottomRight:Radius.circular(45) ),
       ),
+    ),
+    Container(
+        width: double.infinity,
+        height:MediaQuery.of(context).size.height*0.77 ,
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.2),
+          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(45),bottomRight:Radius.circular(45) ),
         ),
+    ),
     Padding(
       padding: const EdgeInsets.only(left: 15,top: 15),
       child: Align(
@@ -89,6 +97,6 @@ Widget boarderItems(
         ],
       ),
     ),
-
+    
     ],
   );

@@ -12,6 +12,12 @@ class Payment2Screen extends StatelessWidget {
   Payment2Screen({ Key? key }) : super(key: key);
   final mainController = Get.find<MainController>();
   final pagesController = Get.find<PagesController>();
+
+  TextEditingController street1 = TextEditingController();
+  TextEditingController city = TextEditingController();
+  TextEditingController state = TextEditingController();
+  TextEditingController country = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -170,7 +176,12 @@ class Payment2Screen extends StatelessWidget {
             //         fixedColor: greyColor,
             //         unselectedItemColor: greyColor,
             //       ) ,
-            body:SecondPayment(),
+            body:SecondPayment(
+              street1: street1,
+              state: state,
+              city: city,
+              country: country,
+            ),
         
       );
       }

@@ -15,29 +15,16 @@ Widget drawerItems(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children:[
-              Container(
-                width: 35,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: lightGreyColor1,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow:  [
-                      BoxShadow(
-                      color: lightGreyColor2,
-                      offset: const Offset(
-                        0,
-                        0,
-                      ),
-                      blurRadius: 1.0,
-                      spreadRadius: 1.0,
-                    )
-                    ]
-                  ),
-                child: Padding(
+              Stack(
+                children: [
+                  
+                  Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: FancyShimmerImage(
                     imageUrl:'$baseUrl/$image' ,
                     boxFit: BoxFit.fill,
+                    height: 35,
+                    width: 33,
                     shimmerBaseColor: lightGreyColor1,  
                     shimmerHighlightColor: mainColor,  
                     shimmerBackColor: whiteColor,
@@ -50,7 +37,56 @@ Widget drawerItems(
                     ),
                     ),
                 ),
+
+                Positioned(
+                  right: 1,
+                  bottom: 1,
+                  child: Container(
+                      width: 39,
+                      height: 41,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: mainColor,
+                          width: 3
+                          )
+                      ),
+                    ),
+                ),
+                ],
               ),
+
+              // Container(
+              //   width: 38,
+              //   height: 40,
+              //   decoration: BoxDecoration(
+              //     color: lightGreyColor1,
+              //     borderRadius: BorderRadius.circular(10),
+              //     border: Border.all(
+              //             color: mainColor,
+              //             width: 3
+              //             )
+              //     ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(4.0),
+              //     child: FancyShimmerImage(
+              //       imageUrl:'$baseUrl/$image' ,
+              //       boxFit: BoxFit.fill,
+              //       shimmerBaseColor: lightGreyColor1,  
+              //       shimmerHighlightColor: mainColor,  
+              //       shimmerBackColor: whiteColor,
+              //       errorWidget: Container(
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(15),
+              //           color: greyColor,
+              //           ),
+              //         child: const Center(child: Text('error in loading',style: TextStyle(fontSize: 5),)),
+              //       ),
+              //       ),
+              //   ),
+              // ),
+
+
               // Container(
               //   width: 35,
               //   height: 40,
