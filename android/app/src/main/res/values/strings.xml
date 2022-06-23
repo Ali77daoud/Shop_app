@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="facebook_app_id">699462014686788</string>
-    <string name="fb_login_protocol_scheme">fb699462014686788</string>
-    <string name="facebook_client_token">fde2f298a390158b0a91bf675a7a8ab9</string>
+    <string name="facebook_app_id">facebook_id</string>
+    <string name="fb_login_protocol_scheme">fbfacebook_id</string>
+    <string name="facebook_client_token">token</string>
     <string name="app_name">OutLetShip</string>
 </resources>
